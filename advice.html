@@ -29,30 +29,32 @@
             text-shadow: 0 0 15px #9D0208;
         }
 
+        /* GRID SYSTEM */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* 320px is safe for mobile */
+            gap: 30px; /* Space between cards */
             max-width: 1000px;
             margin: 0 auto;
+            align-items: stretch; /* Makes all cards same height */
         }
 
-        /* CARD STYLES */
+        /* CARD DESIGN */
         .guide-card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 15px;
-            padding: 30px; /* Increased padding for safety */
+            padding: 25px;
             text-align: center;
             transition: 0.3s;
             
-            /* FLEX SETTINGS TO PREVENT OVERLAP */
+            /* THE FIX: Flex Layout */
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 15px; /* Safe space between elements */
-            height: 100%; /* Forces equal height */
+            justify-content: space-between; /* Pushes content apart */
+            gap: 15px; /* Minimum safe space between elements */
+            min-height: 320px; /* Ensures cards are tall enough */
         }
 
         .guide-card:hover {
@@ -62,11 +64,18 @@
             box-shadow: 0 5px 20px rgba(157, 2, 8, 0.2);
         }
 
-        .icon { font-size: 3rem; display: block; line-height: 1; }
+        /* CONTENT STYLES */
+        .card-top {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .icon { font-size: 3rem; margin-bottom: 10px; display: block; line-height: 1; }
         
         h3 { 
             color: #fff; 
-            margin: 0; 
+            margin: 0 0 10px 0; 
             font-size: 1.2rem; 
             line-height: 1.4; 
         }
@@ -84,13 +93,22 @@
             color: #aaa; 
             font-size: 0.9rem; 
             line-height: 1.6; 
-            margin: 0; 
-            flex-grow: 1; /* Allows text to take available space */
+            margin: 0;
+            margin-bottom: 10px;
         }
 
-        /* ICONS CONTAINER (Pushed to bottom) */
+        /* BOTTOM ACTION AREA */
+        .card-bottom {
+            margin-top: auto; /* Pushes this section to the very bottom */
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* ICONS CONTAINER */
         .app-icons-container {
-            margin-top: auto; /* Pushes to bottom */
             display: flex;
             justify-content: center;
             gap: 15px;
@@ -113,20 +131,14 @@
             display: inline-block;
             color: #9D0208;
             border: 1px solid #9D0208;
-            padding: 8px 20px;
+            padding: 8px 25px;
             border-radius: 20px;
             text-decoration: none;
             font-size: 0.9rem;
             transition: 0.3s;
             width: fit-content;
-            cursor: pointer;
         }
         .web-link-btn:hover { background: #9D0208; color: white; }
-
-        /* Helper class to push single buttons to bottom */
-        .push-bottom {
-            margin-top: auto;
-        }
 
         .back-link {
             display: inline-block;
@@ -147,71 +159,86 @@
     <div class="grid-container">
         
         <div class="guide-card" style="border-color: #9D0208; background: rgba(157, 2, 8, 0.1);">
-            <span class="icon">📱</span>
-            <h3>
-                تطبيق الجامعة 
-                <span class="en-subtitle">(MyASU App)</span>
-            </h3>
-            <p>روابط تحميل التطبيق وشرح استخدامه.</p>
+            <div class="card-top">
+                <span class="icon">📱</span>
+                <h3>
+                    تطبيق الجامعة 
+                    <span class="en-subtitle">(MyASU App)</span>
+                </h3>
+                <p>روابط تحميل التطبيق وشرح استخدامه.</p>
+            </div>
             
-            <a href="https://drive.google.com/drive/folders/13AtCBkkqbdaAbhxQ9QYUGQB8i4GQiYZF?usp=sharing" target="_blank" class="web-link-btn">
-                🎥 شرح التطبيق (Video)
-            </a>
+            <div class="card-bottom">
+                <a href="https://drive.google.com/drive/folders/13AtCBkkqbdaAbhxQ9QYUGQB8i4GQiYZF?usp=sharing" target="_blank" class="web-link-btn">
+                    🎥 شرح التطبيق (Video)
+                </a>
 
-            <div class="app-icons-container">
-                <a href="https://play.google.com/store/apps/details?id=com.kivocsa99.asu" target="_blank" title="Google Play">
-                    <img src="Google Play.jfif" alt="Play Store" class="tiny-icon">
+                <div class="app-icons-container">
+                    <a href="https://play.google.com/store/apps/details?id=com.kivocsa99.asu" target="_blank" title="Google Play">
+                        <img src="Google Play.jfif" alt="Play Store" class="tiny-icon">
+                    </a>
+                    <a href="https://apps.apple.com/app/id6745174615" target="_blank" title="App Store">
+                        <img src="App store.jfif" alt="App Store" class="tiny-icon">
+                    </a>
+                    <a href="https://apkpure.com/my-asu-app/com.kivocsa99.asu" target="_blank" title="Download APK">
+                        <img src="APK.png" alt="APK" class="tiny-icon">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="guide-card">
+            <div class="card-top">
+                <span class="icon">🏛️</span>
+                <h3>
+                    جولة وبوابة الجامعة 
+                    <span class="en-subtitle">(MyASU Web)</span>
+                </h3>
+                <p>استكشف المرافق أو ادخل للبوابة الإلكترونية.</p>
+            </div>
+
+            <div class="card-bottom">
+                <a href="https://my.asu.edu.jo" target="_blank" class="web-link-btn">
+                    🌐 بوابة الطالب (Web Portal)
                 </a>
-                <a href="https://apps.apple.com/app/id6745174615" target="_blank" title="App Store">
-                    <img src="App store.jfif" alt="App Store" class="tiny-icon">
-                </a>
-                <a href="https://apkpure.com/my-asu-app/com.kivocsa99.asu" target="_blank" title="Download APK">
-                    <img src="APK.png" alt="APK" class="tiny-icon">
+                <a href="https://drive.google.com/drive/folders/1WX5n3sISbgAxGWv9ZrUYWlTXiHs3uZBz?usp=sharing" target="_blank" class="web-link-btn">
+                    🚀 ابدأ الجولة (Start Tour)
                 </a>
             </div>
         </div>
 
         <div class="guide-card">
-            <span class="icon">🏛️</span>
-            <h3>
-                جولة وبوابة الجامعة 
-                <span class="en-subtitle">(MyASU Web)</span>
-            </h3>
-            <p>استكشف المرافق أو ادخل للبوابة الإلكترونية.</p>
-            
-            <a href="https://my.asu.edu.jo" target="_blank" class="web-link-btn">
-                🌐 بوابة الطالب (Web Portal)
-            </a>
+            <div class="card-top">
+                <span class="icon">🤝</span>
+                <h3>
+                    نقاط خدمة المجتمع 
+                    <span class="en-subtitle">(Community Points)</span>
+                </h3>
+                <p>كيفية تجميع الـ 10 نقاط المطلوبة للتخرج والأنشطة المعتمدة.</p>
+            </div>
 
-            <a href="https://drive.google.com/drive/folders/1WX5n3sISbgAxGWv9ZrUYWlTXiHs3uZBz?usp=sharing" target="_blank" class="web-link-btn push-bottom">
-                🚀 ابدأ الجولة (Start Tour)
-            </a>
+            <div class="card-bottom">
+                <a href="community.html" class="web-link-btn">
+                    📝 عرض الخطوات (View Steps)
+                </a>
+            </div>
         </div>
 
         <div class="guide-card">
-            <span class="icon">🤝</span>
-            <h3>
-                نقاط خدمة المجتمع 
-                <span class="en-subtitle">(Community Points)</span>
-            </h3>
-            <p>كيفية تجميع الـ 10 نقاط المطلوبة للتخرج والأنشطة المعتمدة.</p>
+            <div class="card-top">
+                <span class="icon">📍</span>
+                <h3>
+                    مكاتب الدكاترة
+                    <span class="en-subtitle">(Doctors' Offices)</span>
+                </h3>
+                <p>البحث عن مواقع وأرقام مكاتب أعضاء الهيئة التدريسية.</p>
+            </div>
             
-            <a href="community.html" class="web-link-btn push-bottom">
-                📝 عرض الخطوات (View Steps)
-            </a>
-        </div>
-
-        <div class="guide-card">
-            <span class="icon">📍</span>
-            <h3>
-                مكاتب الدكاترة
-                <span class="en-subtitle">(Doctors' Offices)</span>
-            </h3>
-            <p>البحث عن مواقع وأرقام مكاتب أعضاء الهيئة التدريسية.</p>
-            
-            <a href="offices.html" class="web-link-btn push-bottom">
-                🔍 ابحث عن دكتور (Find Doctor)
-            </a>
+            <div class="card-bottom">
+                <a href="offices.html" class="web-link-btn">
+                    🔍 ابحث عن دكتور (Find Doctor)
+                </a>
+            </div>
         </div>
 
     </div>
