@@ -60,7 +60,24 @@
         }
 
         .icon { font-size: 3rem; margin-bottom: 15px; display: block; }
-        h3 { color: #fff; margin: 10px 0; font-size: 1.2rem; }
+        
+        h3 { 
+            color: #fff; 
+            margin: 10px 0; 
+            font-size: 1.2rem; 
+            line-height: 1.4; /* Better spacing for two lines */
+        }
+
+        /* Style for the English Subtitle in Headers */
+        .en-subtitle {
+            display: block; /* Forces new line */
+            font-size: 0.9rem;
+            color: #ccc;
+            font-weight: normal;
+            margin-top: 2px;
+            direction: ltr; /* Ensures brackets look correct */
+        }
+
         p { color: #aaa; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px;}
 
         /* ICONS CONTAINER */
@@ -114,13 +131,16 @@
 </head>
 <body>
 
-    <h1>نصائح وإرشادات عامة (Helpful Guides)</h1>
+    <h1>نصائح وإرشادات عامة <br> <span class="en-subtitle" style="font-size: 1.2rem;">(Helpful Guides)</span></h1>
 
     <div class="grid-container">
         
         <div class="guide-card" style="border-color: #9D0208; background: rgba(157, 2, 8, 0.1);">
             <span class="icon">📱</span>
-            <h3>تطبيق الجامعة (MyASU App)</h3>
+            <h3>
+                تطبيق الجامعة 
+                <span class="en-subtitle">(MyASU App)</span>
+            </h3>
             <p>روابط تحميل التطبيق وشرح استخدامه.</p>
             
             <a href="https://drive.google.com/drive/folders/13AtCBkkqbdaAbhxQ9QYUGQB8i4GQiYZF?usp=sharing" target="_blank" class="web-link-btn" style="margin-bottom: 10px;">
@@ -142,7 +162,10 @@
 
         <div class="guide-card">
             <span class="icon">🏛️</span>
-            <h3>جولة وبوابة الجامعة (MyASU Web)</h3>
+            <h3>
+                جولة وبوابة الجامعة 
+                <span class="en-subtitle">(MyASU Web)</span>
+            </h3>
             <p>استكشف المرافق أو ادخل للبوابة الإلكترونية.</p>
             
             <a href="https://my.asu.edu.jo" target="_blank" class="web-link-btn">
@@ -156,7 +179,10 @@
 
         <div class="guide-card">
             <span class="icon">🤝</span>
-            <h3>نقاط خدمة المجتمع (Community Points)</h3>
+            <h3>
+                نقاط خدمة المجتمع 
+                <span class="en-subtitle">(Community Points)</span>
+            </h3>
             <p>كيفية تجميع الـ 10 نقاط المطلوبة للتخرج والأنشطة المعتمدة.</p>
             
             <a href="community.html" class="web-link-btn">
