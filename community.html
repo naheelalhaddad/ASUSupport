@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <title>خدمة المجتمع</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { 
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            text-align: center;
+            background: linear-gradient(-45deg, #000000, #1a1a1a, #2b0000, #000000);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            padding: 40px 20px;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: white;
+            text-shadow: 0 0 15px #9D0208;
+        }
+
+        .subtitle { color: #ccc; margin-bottom: 40px; font-size: 1.1rem; }
+
+        /* INFO BOXES (Internal/External) */
+        .info-grid {
+            display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 50px;
+        }
+        .info-card {
+            background: rgba(255,255,255,0.05); border: 1px solid #444; border-radius: 10px; padding: 20px; width: 300px;
+        }
+        .info-card h3 { color: #9D0208; border-bottom: 1px solid #444; padding-bottom: 10px; }
+
+        /* TIMELINE (Process) */
+        .timeline-section {
+            max-width: 700px; margin: 0 auto; text-align: right; position: relative; padding: 20px 0; z-index: 1; 
+        }
+        .timeline-section::after {
+            content: ''; position: absolute; width: 2px; background-color: #444; z-index: -1; top: 0; bottom: 0; right: 30px; 
+        }
+
+        .timeline-item {
+            padding: 10px 60px 40px 10px; position: relative; opacity: 0; animation: slideIn 0.6s forwards; z-index: 2; 
+        }
+        .timeline-item:nth-child(1) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.5s; }
+
+        @keyframes slideIn {
+            from { transform: translateX(-30px); opacity: 0; } to { transform: translateX(0); opacity: 1; }
+        }
+
+        .timeline-item::after {
+            content: ''; position: absolute; width: 20px; height: 20px; right: 21px; top: 25px;
+            background-color: #000; border: 3px solid #9D0208; border-radius: 50%; z-index: 10;
+        }
+        .timeline-item:hover::after { background-color: #9D0208; box-shadow: 0 0 15px #9D0208; }
+
+        .timeline-content {
+            padding: 20px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
+            border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .timeline-content h3 { margin-top: 0; color: #fff; font-size: 1.2rem; }
+        .timeline-content p { color: #ccc; font-size: 0.95rem; line-height: 1.6; }
+
+        .note { font-size: 0.8rem; color: #aaa; margin-top: 5px; font-style: italic; }
+
+        .back-link {
+            display: inline-block; margin-top: 50px; color: #888; text-decoration: none;
+            border-bottom: 1px solid transparent; transition: 0.3s;
+        }
+        .back-link:hover { color: #fff; border-color: #fff; }
+    </style>
+</head>
+<body>
+
+    <h1>نقاط خدمة المجتمع</h1>
+    <p class="subtitle">متطلب إجباري للتخرج: 10 نقاط (Required: 10 Points)</p>
+
+    <div class="info-grid">
+        <div class="info-card">
+            <h3>النشاطات الداخلية (Internal)</h3>
+            <p>ورشات عمل، مسابقات، وأنشطة عامة.</p>
+            <p class="note">تعلن على فريق "Fiters" في Microsoft Teams.</p>
+        </div>
+        <div class="info-card">
+            <h3>النشاطات الخارجية (External)</h3>
+            <p>أي نشاط تطوعي خارج الجامعة.</p>
+            <p class="note" style="color: #ff4444;">⚠ يجب الحصول على موافقة مسبقة.</p>
+        </div>
+    </div>
+
+    <h2 style="margin-bottom: 30px;">خطوات احتساب النقاط (Internal Process)</h2>
+
+    <div class="timeline-section">
+
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <h3>1. حضور النشاط (Attend Event)</h3>
+                <p>تابع قناة <b>Fiters Channel</b> على التيمز، واحضر الورشات أو المسابقات المعلن عنها.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <h3>2. تعبئة النموذج الإلكتروني (Online Form)</h3>
+                <p>في نهاية كل فعالية، سيتم نشر رابط (Form). يجب تعبئته لإثبات الحضور.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <h3>3. استلام النموذج الورقي (Paperwork)</h3>
+                <p>توجه إلى <b>الطابق الثاني</b> في كلية الـ IT. قم بتعبئة النموذج الورقي الموجود عند "طاولة الأوراق المهمة".</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <h3>4. تسليم النموذج (Submit)</h3>
+                <p>سلم الورقة إلى <b>رئيس القسم (HOD)</b> الخاص بتخصصك لاعتماد النقاط رسمياً.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <a href="advice.html" class="back-link">← العودة لصفحة النصائح</a>
+
+</body>
+</html>
