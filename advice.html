@@ -31,25 +31,28 @@
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
             max-width: 1000px;
             margin: 0 auto;
         }
 
+        /* CARD STYLES */
         .guide-card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 15px;
-            padding: 30px 20px;
+            padding: 30px; /* Increased padding for safety */
             text-align: center;
             transition: 0.3s;
-            position: relative;
+            
+            /* FLEX SETTINGS TO PREVENT OVERLAP */
             display: flex;
             flex-direction: column;
             align-items: center;
-            height: 100%;
+            gap: 15px; /* Safe space between elements */
+            height: 100%; /* Forces equal height */
         }
 
         .guide-card:hover {
@@ -59,11 +62,11 @@
             box-shadow: 0 5px 20px rgba(157, 2, 8, 0.2);
         }
 
-        .icon { font-size: 3rem; margin-bottom: 15px; display: block; }
+        .icon { font-size: 3rem; display: block; line-height: 1; }
         
         h3 { 
             color: #fff; 
-            margin: 10px 0; 
+            margin: 0; 
             font-size: 1.2rem; 
             line-height: 1.4; 
         }
@@ -73,14 +76,21 @@
             font-size: 0.9rem;
             color: #ccc;
             font-weight: normal;
-            margin-top: 2px;
+            margin-top: 5px;
             direction: ltr; 
         }
 
-        p { color: #aaa; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px;}
+        p { 
+            color: #aaa; 
+            font-size: 0.9rem; 
+            line-height: 1.6; 
+            margin: 0; 
+            flex-grow: 1; /* Allows text to take available space */
+        }
 
+        /* ICONS CONTAINER (Pushed to bottom) */
         .app-icons-container {
-            margin-top: auto; 
+            margin-top: auto; /* Pushes to bottom */
             display: flex;
             justify-content: center;
             gap: 15px;
@@ -96,24 +106,27 @@
             transition: 0.2s;
             opacity: 0.8;
         }
-
         .tiny-icon:hover { transform: scale(1.2); opacity: 1; }
 
+        /* BUTTONS */
         .web-link-btn {
             display: inline-block;
-            margin-top: auto; 
             color: #9D0208;
             border: 1px solid #9D0208;
-            padding: 5px 15px;
+            padding: 8px 20px;
             border-radius: 20px;
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             transition: 0.3s;
             width: fit-content;
             cursor: pointer;
-            margin-bottom: 5px;
         }
         .web-link-btn:hover { background: #9D0208; color: white; }
+
+        /* Helper class to push single buttons to bottom */
+        .push-bottom {
+            margin-top: auto;
+        }
 
         .back-link {
             display: inline-block;
@@ -141,7 +154,7 @@
             </h3>
             <p>روابط تحميل التطبيق وشرح استخدامه.</p>
             
-            <a href="https://drive.google.com/drive/folders/13AtCBkkqbdaAbhxQ9QYUGQB8i4GQiYZF?usp=sharing" target="_blank" class="web-link-btn" style="margin-bottom: 15px;">
+            <a href="https://drive.google.com/drive/folders/13AtCBkkqbdaAbhxQ9QYUGQB8i4GQiYZF?usp=sharing" target="_blank" class="web-link-btn">
                 🎥 شرح التطبيق (Video)
             </a>
 
@@ -170,7 +183,7 @@
                 🌐 بوابة الطالب (Web Portal)
             </a>
 
-            <a href="https://drive.google.com/drive/folders/1WX5n3sISbgAxGWv9ZrUYWlTXiHs3uZBz?usp=sharing" target="_blank" class="web-link-btn" style="margin-top: 8px;">
+            <a href="https://drive.google.com/drive/folders/1WX5n3sISbgAxGWv9ZrUYWlTXiHs3uZBz?usp=sharing" target="_blank" class="web-link-btn push-bottom">
                 🚀 ابدأ الجولة (Start Tour)
             </a>
         </div>
@@ -183,7 +196,7 @@
             </h3>
             <p>كيفية تجميع الـ 10 نقاط المطلوبة للتخرج والأنشطة المعتمدة.</p>
             
-            <a href="community.html" class="web-link-btn">
+            <a href="community.html" class="web-link-btn push-bottom">
                 📝 عرض الخطوات (View Steps)
             </a>
         </div>
@@ -196,7 +209,7 @@
             </h3>
             <p>البحث عن مواقع وأرقام مكاتب أعضاء الهيئة التدريسية.</p>
             
-            <a href="offices.html" class="web-link-btn">
+            <a href="offices.html" class="web-link-btn push-bottom">
                 🔍 ابحث عن دكتور (Find Doctor)
             </a>
         </div>
