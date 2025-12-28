@@ -27,7 +27,6 @@
 
         h1 { font-size: 2.2rem; margin-bottom: 40px; text-shadow: 0 0 15px #9D0208; }
 
-        
         .search-container {
             width: 100%;
             max-width: 500px;
@@ -54,7 +53,6 @@
             background: rgba(0,0,0,0.8);
         }
 
-        
         #resultCard {
             display: none; 
             background: rgba(255, 255, 255, 0.1);
@@ -76,7 +74,6 @@
         .prof-office { font-size: 1.4rem; margin-bottom: 5px; }
         .prof-location { color: #ccc; font-size: 1rem; }
 
-        
         .not-found {
             color: #ff6b6b;
             font-size: 1.2rem;
@@ -84,13 +81,32 @@
             display: none;
         }
 
-        .back-link {
+        .nav-links {
             margin-top: auto;
-            color: #888;
-            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
             padding-bottom: 20px;
         }
-        .back-link:hover { color: #fff; }
+
+        .back-link {
+            color: #888;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: 0.3s;
+        }
+        .back-link:hover { color: #fff; border-color: #fff; }
+        
+        .home-link {
+            color: #9D0208;
+            font-weight: bold;
+            text-decoration: none;
+            border: 1px solid #9D0208;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+        .home-link:hover { background: #9D0208; color: white; }
 
     </style>
 </head>
@@ -112,11 +128,13 @@
         ⚠️ لم يتم العثور على هذا الاسم (Not Found)
     </div>
 
-    <a href="advice.html" class="back-link">← العودة لصفحة النصائح</a>
+    <div class="nav-links">
+        <a href="index.html" class="home-link">🏠 القائمة الرئيسية (Main Menu)</a>
+        <a href="advice.html" class="back-link">← العودة لصفحة النصائح</a>
+    </div>
 
     <script>
         const professors = [
-            // IT Faculty
             { name: "د. أنس شرينة", office: "1B10", location: "تكنولوجيا المعلومات" },
             { name: "د. محمود بني عطا", office: "1B10", location: "تكنولوجيا المعلومات" },
             { name: "د. حكمت عبد الجابر", office: "1G08", location: "تكنولوجيا المعلومات" },
@@ -175,8 +193,6 @@
             { name: "سكرتاريا علم البيانات والذكاء الاصطناعي", office: "1228", location: "تكنولوجيا المعلومات" },
             { name: "مكتب العمادة", office: "1229", location: "تكنولوجيا المعلومات" },
             { name: "د. يوسف القصراوي", office: "1230", location: "تكنولوجيا المعلومات" },
-
-            // Dentistry & Other
             { name: "د. ليلى بن خليفة", office: "21G07", location: "كلية طب الاسنان" },
             { name: "د. سلام حمدان", office: "21G07", location: "كلية طب الاسنان" },
             { name: "د. شريفة مراد", office: "21G08", location: "كلية طب الاسنان" },
@@ -210,13 +226,10 @@
             { name: "لينا القضاة", office: "مكتب خدمات طلابية الطابق 2", location: "كلية طب الاسنان" }
         ];
 
-        
-
         const input = document.getElementById('searchInput');
         const card = document.getElementById('resultCard');
         const errorMsg = document.getElementById('notFoundMsg');
 
-        
         const pName = document.getElementById('pName');
         const pOffice = document.getElementById('pOffice');
         const pLoc = document.getElementById('pLoc');
@@ -224,18 +237,15 @@
         input.addEventListener('input', function() {
             const query = input.value.toLowerCase().trim();
 
-            
             if (query === "") {
                 card.style.display = "none";
                 errorMsg.style.display = "none";
                 return;
             }
 
-            
             const result = professors.find(prof => prof.name.toLowerCase().includes(query));
 
             if (result) {
-
                 card.style.display = "block";
                 errorMsg.style.display = "none";
                 
@@ -243,7 +253,6 @@
                 pOffice.textContent = "مكتب رقم: " + result.office;
                 pLoc.textContent = result.location;
             } else {
-                
                 card.style.display = "none";
                 errorMsg.style.display = "block";
             }
