@@ -50,7 +50,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-decoration: none; /* For the cards that are direct links */
+            text-decoration: none; 
         }
 
         .guide-card:hover {
@@ -64,9 +64,9 @@
         h3 { color: #fff; margin: 10px 0; font-size: 1.2rem; }
         p { color: #aaa; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px;}
 
-        /* SPECIAL STYLES FOR MyASU CARD ICONS */
+        /* ICONS CONTAINER */
         .app-icons-container {
-            margin-top: auto; /* Pushes to bottom */
+            margin-top: auto; 
             display: flex;
             justify-content: center;
             gap: 15px;
@@ -76,7 +76,7 @@
         }
 
         .tiny-icon {
-            width: 30px; /* Very tiny as requested */
+            width: 30px; 
             height: 30px;
             border-radius: 5px;
             transition: 0.2s;
@@ -85,7 +85,7 @@
 
         .tiny-icon:hover { transform: scale(1.2); opacity: 1; }
 
-        /* BUTTON FOR WEB PORTAL */
+        /* BUTTONS */
         .web-link-btn {
             display: inline-block;
             margin-top: 10px;
@@ -96,6 +96,7 @@
             text-decoration: none;
             font-size: 0.85rem;
             transition: 0.3s;
+            width: fit-content;
         }
         .web-link-btn:hover { background: #9D0208; color: white; }
 
@@ -119,14 +120,10 @@
         
         <div class="guide-card" style="border-color: #9D0208; background: rgba(157, 2, 8, 0.1);">
             <span class="icon">📱</span>
-            <h3>تطبيق وبوابة الجامعة (MyASU)</h3>
-            <p>روابط التطبيق والبوابة الإلكترونية.</p>
+            <h3>تطبيق الجامعة (MyASU App)</h3>
+            <p>روابط تحميل التطبيق وشرح استخدامه.</p>
             
-            <a href="https://my.asu.edu.jo" target="_blank" class="web-link-btn">
-                🌐 الدخول للبوابة (Web Portal)
-            </a>
-
-            <a href="https://drive.google.com/drive/folders/13AtCBkkqbdaAbhxQ9QYUGQB8i4GQiYZF?usp=sharing" target="_blank" class="web-link-btn" style="margin-top: 8px;">
+            <a href="https://drive.google.com/drive/folders/13AtCBkkqbdaAbhxQ9QYUGQB8i4GQiYZF?usp=sharing" target="_blank" class="web-link-btn" style="margin-bottom: 10px;">
                 🎥 شرح التطبيق (Video)
             </a>
 
@@ -143,11 +140,19 @@
             </div>
         </div>
 
-        <a href="https://drive.google.com/drive/folders/1WX5n3sISbgAxGWv9ZrUYWlTXiHs3uZBz?usp=sharing" class="guide-card" target="_blank">
+        <div class="guide-card">
             <span class="icon">🏛️</span>
-            <h3>جولة في الجامعة (MyASU Tour)</h3>
-            <p>استكشف القاعات والمختبرات والمرافق عبر جولة افتراضية.</p>
-        </a>
+            <h3>جولة وبوابة الجامعة</h3>
+            <p>استكشف المرافق أو ادخل للبوابة الإلكترونية.</p>
+            
+            <a href="https://my.asu.edu.jo" target="_blank" class="web-link-btn">
+                🌐 بوابة الطالب (Web Portal)
+            </a>
+
+            <a href="https://drive.google.com/drive/folders/1WX5n3sISbgAxGWv9ZrUYWlTXiHs3uZBz?usp=sharing" target="_blank" class="web-link-btn" style="margin-top: 8px;">
+                🚀 ابدأ الجولة (Start Tour)
+            </a>
+        </div>
 
         <a href="community.html" class="guide-card">
             <span class="icon">🤝</span>
