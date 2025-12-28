@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <title>البحث عن دكتور</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { 
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            text-align: center;
+            background: linear-gradient(-45deg, #000000, #1a1a1a, #2b0000, #000000);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 { font-size: 2.2rem; margin-bottom: 40px; text-shadow: 0 0 15px #9D0208; }
+
+        
+        .search-container {
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        input {
+            width: 100%;
+            padding: 20px;
+            border-radius: 50px;
+            border: 2px solid #9D0208;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            font-size: 1.1rem;
+            text-align: center;
+            outline: none;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(157, 2, 8, 0.2);
+        }
+
+        input:focus {
+            box-shadow: 0 0 25px rgba(157, 2, 8, 0.6);
+            background: rgba(0,0,0,0.8);
+        }
+
+        
+        #resultCard {
+            display: none; 
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid #9D0208;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 400px;
+            width: 90%;
+            animation: popIn 0.4s ease;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .prof-name { font-size: 1.8rem; color: #9D0208; margin-bottom: 10px; font-weight: bold; }
+        .prof-office { font-size: 1.4rem; margin-bottom: 5px; }
+        .prof-location { color: #ccc; font-size: 1rem; }
+
+        
+        .not-found {
+            color: #ff6b6b;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .back-link {
+            margin-top: auto;
+            color: #888;
+            text-decoration: none;
+            padding-bottom: 20px;
+        }
+        .back-link:hover { color: #fff; }
+
+    </style>
+</head>
+<body>
+
+    <h1>ابحث عن مكتب الدكتور <br> <span style="font-size: 1rem; color: #ccc; font-weight: normal;">(Search for Professor)</span></h1>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="اكتب اسم الدكتور هنا... (Type Name)" autocomplete="off">
+    </div>
+
+    <div id="resultCard">
+        <div class="prof-name" id="pName"></div>
+        <div class="prof-office" id="pOffice"></div>
+        <div class="prof-location" id="pLoc"></div>
+    </div>
+
+    <div id="notFoundMsg" class="not-found">
+        ⚠️ لم يتم العثور على هذا الاسم (Not Found)
+    </div>
+
+    <a href="advice.html" class="back-link">← العودة لصفحة النصائح</a>
+
+    <script>
+        const professors = [
+            // IT Faculty
+            { name: "د. أنس شرينة", office: "1B10", location: "تكنولوجيا المعلومات" },
+            { name: "د. محمود بني عطا", office: "1B10", location: "تكنولوجيا المعلومات" },
+            { name: "د. حكمت عبد الجابر", office: "1G08", location: "تكنولوجيا المعلومات" },
+            { name: "د. براء نزال", office: "1G08", location: "تكنولوجيا المعلومات" },
+            { name: "د. نيفين حجازي", office: "1G09", location: "تكنولوجيا المعلومات" },
+            { name: "أ. أسماء الموسى", office: "1G09", location: "تكنولوجيا المعلومات" },
+            { name: "د. وريف المناصير", office: "1G10", location: "تكنولوجيا المعلومات" },
+            { name: "د. نور أبو الرب", office: "1G10", location: "تكنولوجيا المعلومات" },
+            { name: "د. جبر الوديان", office: "1104", location: "تكنولوجيا المعلومات" },
+            { name: "د. خالد الحشاش", office: "1104", location: "تكنولوجيا المعلومات" },
+            { name: "د. سهير الحاج حسن", office: "1105", location: "تكنولوجيا المعلومات" },
+            { name: "أ. سهام أبو حيمور", office: "1105", location: "تكنولوجيا المعلومات" },
+            { name: "أ. هديل أحمد", office: "1106", location: "تكنولوجيا المعلومات" },
+            { name: "أ. جمانة خويلة", office: "1106", location: "تكنولوجيا المعلومات" },
+            { name: "د. خالد معايرة", office: "1203", location: "تكنولوجيا المعلومات" },
+            { name: "غرفة التصوير", office: "1204", location: "تكنولوجيا المعلومات" },
+            { name: "د. وليد مقابلة", office: "1205", location: "تكنولوجيا المعلومات" },
+            { name: "د. عصمت الضمور", office: "1206", location: "تكنولوجيا المعلومات" },
+            { name: "د. ليث الزبون", office: "1207", location: "تكنولوجيا المعلومات" },
+            { name: "د. بشار الشوحه", office: "1207", location: "تكنولوجيا المعلومات" },
+            { name: "د. باسل بني اسماعيل", office: "1207", location: "تكنولوجيا المعلومات" },
+            { name: "أ. قيس أيمن", office: "1208", location: "تكنولوجيا المعلومات" },
+            { name: "أ. براء قدومي", office: "1208", location: "تكنولوجيا المعلومات" },
+            { name: "د. منال مزهر", office: "1209", location: "تكنولوجيا المعلومات" },
+            { name: "أ. حنان حردان", office: "1209", location: "تكنولوجيا المعلومات" },
+            { name: "د. صبا قواس", office: "1210", location: "تكنولوجيا المعلومات" },
+            { name: "د. جعفر عطوان", office: "1212", location: "تكنولوجيا المعلومات" },
+            { name: "د. محمد خصاونه", office: "1212", location: "تكنولوجيا المعلومات" },
+            { name: "د. موفق أبو الهيجاء", office: "1213", location: "تكنولوجيا المعلومات" },
+            { name: "د. حسان يونس الطراونه", office: "1213", location: "تكنولوجيا المعلومات" },
+            { name: "أ. عاتكة الشياب", office: "1214", location: "تكنولوجيا المعلومات" },
+            { name: "أ. غدير البيساني", office: "1214", location: "تكنولوجيا المعلومات" },
+            { name: "أ. حازم أبو ادعيق", office: "1215", location: "تكنولوجيا المعلومات" },
+            { name: "د. محمود محمد الجوارنه", office: "1215", location: "تكنولوجيا المعلومات" },
+            { name: "د. أيهم العمري", office: "1216", location: "تكنولوجيا المعلومات" },
+            { name: "د. فادي بطة", office: "1216", location: "تكنولوجيا المعلومات" },
+            { name: "د. محمود البشايرة", office: "1217", location: "تكنولوجيا المعلومات" },
+            { name: "د. احمد العتوم", office: "1217", location: "تكنولوجيا المعلومات" },
+            { name: "د. رضوان بطيحة", office: "1218", location: "تكنولوجيا المعلومات" },
+            { name: "د. علاء الزعبي", office: "1218", location: "تكنولوجيا المعلومات" },
+            { name: "د. وليد الاحمد", office: "1219", location: "تكنولوجيا المعلومات" },
+            { name: "د. فارس مصطفى الطويل", office: "1219", location: "تكنولوجيا المعلومات" },
+            { name: "د. يوسف الشيخ", office: "1220", location: "تكنولوجيا المعلومات" },
+            { name: "د. صالح التكروري", office: "1220", location: "تكنولوجيا المعلومات" },
+            { name: "د. عمر الشيخ سالم", office: "1221", location: "تكنولوجيا المعلومات" },
+            { name: "د. صلاح صافي", office: "1221", location: "تكنولوجيا المعلومات" },
+            { name: "د. وسام عباسي", office: "1222", location: "تكنولوجيا المعلومات" },
+            { name: "د. نور العايدي", office: "1222", location: "تكنولوجيا المعلومات" },
+            { name: "د. منصور الهلالات", office: "1223", location: "تكنولوجيا المعلومات" },
+            { name: "د. زياد حمحاوي", office: "1223", location: "تكنولوجيا المعلومات" },
+            { name: "أ. ايمان الناجي", office: "1224", location: "تكنولوجيا المعلومات" },
+            { name: "أ. هند طلافحة", office: "1224", location: "تكنولوجيا المعلومات" },
+            { name: "سكرتاريا الامن السيبراني", office: "1225", location: "تكنولوجيا المعلومات" },
+            { name: "د. مروان الأخرس", office: "1226", location: "تكنولوجيا المعلومات" },
+            { name: "د. فاطمة الحاج", office: "1227", location: "تكنولوجيا المعلومات" },
+            { name: "سكرتاريا علم البيانات والذكاء الاصطناعي", office: "1228", location: "تكنولوجيا المعلومات" },
+            { name: "مكتب العمادة", office: "1229", location: "تكنولوجيا المعلومات" },
+            { name: "د. يوسف القصراوي", office: "1230", location: "تكنولوجيا المعلومات" },
+
+            // Dentistry & Other
+            { name: "د. ليلى بن خليفة", office: "21G07", location: "كلية طب الاسنان" },
+            { name: "د. سلام حمدان", office: "21G07", location: "كلية طب الاسنان" },
+            { name: "د. شريفة مراد", office: "21G08", location: "كلية طب الاسنان" },
+            { name: "أ. حنين الزعبي", office: "21G08", location: "كلية طب الاسنان" },
+            { name: "أ. ملاك المشاقبة", office: "21G08", location: "كلية طب الاسنان" },
+            { name: "د. عبدالله الطراد", office: "21G14", location: "كلية طب الاسنان" },
+            { name: "د. احمد عفافرة", office: "21G14", location: "كلية طب الاسنان" },
+            { name: "د. معتصم الجراح", office: "21G14", location: "كلية طب الاسنان" },
+            { name: "أ.د. محمد حجاوي", office: "21S02", location: "كلية طب الاسنان" },
+            { name: "د. محمد بني دومي", office: "21S02", location: "كلية طب الاسنان" },
+            { name: "أ.د. محمد شكركاني", office: "21S03", location: "كلية طب الاسنان" },
+            { name: "د. ابراهيم المنهراوي", office: "21S04", location: "كلية طب الاسنان" },
+            { name: "د. عبدالله ابو رمان", office: "21S04", location: "كلية طب الاسنان" },
+            { name: "د. احمد عزازي", office: "21S05", location: "كلية طب الاسنان" },
+            { name: "د. ناجي البطاينه", office: "21S05", location: "كلية طب الاسنان" },
+            { name: "أ. لهيب العبادي", office: "21S06", location: "كلية طب الاسنان" },
+            { name: "أ. امجاد البشايرة", office: "21S06", location: "كلية طب الاسنان" },
+            { name: "د. محمد خضر", office: "21S07", location: "كلية طب الاسنان" },
+            { name: "د. مسعود شاهين", office: "21S07", location: "كلية طب الاسنان" },
+            { name: "د. هيثم الوحش", office: "21S08", location: "كلية طب الاسنان" },
+            { name: "د. احمد اللطيف", office: "21S08", location: "كلية طب الاسنان" },
+            { name: "مكتب اكاديمية التطبيقية", office: "21S09", location: "كلية طب الاسنان" },
+            { name: "د. مها السعودي", office: "21S17", location: "كلية طب الاسنان" },
+            { name: "أ. اسراء أبو السعود", office: "21S17", location: "كلية طب الاسنان" },
+            { name: "د. أسماء سالم", office: "21S18", location: "كلية طب الاسنان" },
+            { name: "أ. آمنة شعبان", office: "21S18", location: "كلية طب الاسنان" },
+            { name: "د. معاذ العلي", office: "21S19", location: "كلية طب الاسنان" },
+            { name: "أ. أحمد الويسي", office: "مكتب خدمات طلابية GF", location: "كلية طب الاسنان" },
+            { name: "أ. عمر مسودة", office: "مكتب خدمات طلابية GF", location: "كلية طب الاسنان" },
+            { name: "أ. روان جرار", office: "مكتب خدمات طلابية الطابق 2", location: "كلية طب الاسنان" },
+            { name: "لينا القضاة", office: "مكتب خدمات طلابية الطابق 2", location: "كلية طب الاسنان" }
+        ];
+
+        
+
+        const input = document.getElementById('searchInput');
+        const card = document.getElementById('resultCard');
+        const errorMsg = document.getElementById('notFoundMsg');
+
+        
+        const pName = document.getElementById('pName');
+        const pOffice = document.getElementById('pOffice');
+        const pLoc = document.getElementById('pLoc');
+
+        input.addEventListener('input', function() {
+            const query = input.value.toLowerCase().trim();
+
+            
+            if (query === "") {
+                card.style.display = "none";
+                errorMsg.style.display = "none";
+                return;
+            }
+
+            
+            const result = professors.find(prof => prof.name.toLowerCase().includes(query));
+
+            if (result) {
+
+                card.style.display = "block";
+                errorMsg.style.display = "none";
+                
+                pName.textContent = result.name;
+                pOffice.textContent = "مكتب رقم: " + result.office;
+                pLoc.textContent = result.location;
+            } else {
+                
+                card.style.display = "none";
+                errorMsg.style.display = "block";
+            }
+        });
+    </script>
+
+</body>
+</html>
