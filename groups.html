@@ -27,14 +27,33 @@
 
         h1 { font-size: 2.2rem; margin-bottom: 40px; text-shadow: 0 0 15px #9D0208; }
 
-        /* GRID SYSTEM */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        /* SECTION STYLES */
+        .section-title {
+            color: #ccc;
+            font-size: 1.2rem;
+            margin: 30px 0 15px 0;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background: #9D0208;
+            margin: 5px auto 0;
+        }
+
+        /* FLEX CONTAINER (Better than Grid for centering specific numbers of items) */
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Centers items on the line */
             gap: 20px;
-            max-width: 1000px;
             width: 100%;
-            margin-bottom: 40px;
+            max-width: 1000px;
+            margin-bottom: 20px;
         }
 
         /* CARD DESIGN */
@@ -51,6 +70,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            width: 260px; /* Fixed width for consistent alignment */
         }
 
         .group-card:hover {
@@ -106,62 +126,80 @@
 
     <h1>مجموعات واتساب الرسمية <br> <span style="font-size: 1rem; color: #ccc;">(Official WhatsApp Groups)</span></h1>
 
-    <div class="grid-container">
+    <div class="section-title">مجموعات الكلية (Faculty)</div>
+    <div class="flex-container">
         
-        <a href="https://chat.whatsapp.com/Hb1jON8CrpoK6nrG0TCO8z" target="_blank" class="group-card" style="border-color: #9D0208; background: rgba(157, 2, 8, 0.05);">
+        <a href="https://chat.whatsapp.com/Hb1jON8CrpoK6nrG0TCO8z" target="_blank" class="group-card">
             <span class="icon">🏢</span>
             <h3>كلية تكنولوجيا المعلومات</h3>
             <span class="sub-text">IT Faculty (General)</span>
-            <span class="join-btn">انضم للمجموعة (Join)</span>
+            <span class="join-btn">انضم للمجموعة</span>
         </a>
 
-        <a href="https://chat.whatsapp.com/KmTeJjk5a9uAV6cHct3SZ5" target="_blank" class="group-card" style="border-color: #9D0208; background: rgba(157, 2, 8, 0.05);">
+        <a href="https://chat.whatsapp.com/KmTeJjk5a9uAV6cHct3SZ5" target="_blank" class="group-card">
             <span class="icon">👩‍🎓</span>
             <h3>طالبات الكلية</h3>
             <span class="sub-text">IT Faculty (Girls Only)</span>
-            <span class="join-btn">انضم للمجموعة (Join)</span>
+            <span class="join-btn">انضم للمجموعة</span>
         </a>
+
+    </div>
+
+    <div class="section-title">التخصصات (Majors)</div>
+    <div class="flex-container">
 
         <a href="https://chat.whatsapp.com/DDRN4vkegzhEYTadtodJoT" target="_blank" class="group-card">
             <span class="icon">💻</span>
             <h3>علم الحاسوب</h3>
             <span class="sub-text">Computer Science</span>
-            <span class="join-btn">انضم للمجموعة (Join)</span>
+            <span class="join-btn">انضم للمجموعة</span>
         </a>
 
         <a href="https://chat.whatsapp.com/KX4pGRzrkSf3rhcpDA9alM" target="_blank" class="group-card">
             <span class="icon">🔒</span>
             <h3>الأمن السيبراني</h3>
             <span class="sub-text">Cyber Security</span>
-            <span class="join-btn">انضم للمجموعة (Join)</span>
+            <span class="join-btn">انضم للمجموعة</span>
         </a>
 
         <a href="https://chat.whatsapp.com/LH3fvJyEomELbgprJGj8Wr" target="_blank" class="group-card">
             <span class="icon">🤖</span>
             <h3>الذكاء الاصطناعي</h3>
             <span class="sub-text">Artificial Intelligence</span>
-            <span class="join-btn">انضم للمجموعة (Join)</span>
+            <span class="join-btn">انضم للمجموعة</span>
         </a>
 
         <a href="https://chat.whatsapp.com/EnVe9jIEJZFIN2bIQMf3SQ?mode=hqrt2" target="_blank" class="group-card">
             <span class="icon">⚙️</span>
             <h3>هندسة البرمجيات</h3>
             <span class="sub-text">Software Engineering</span>
-            <span class="join-btn">انضم للمجموعة (Join)</span>
+            <span class="join-btn">انضم للمجموعة</span>
         </a>
 
         <a href="https://chat.whatsapp.com/DTvlc3X0yB3LekC5pZlrCC" target="_blank" class="group-card">
             <span class="icon">🎮</span>
             <h3>الواقع الرقمي والألعاب</h3>
             <span class="sub-text">Digital Reality & Gaming</span>
-            <span class="join-btn">انضم للمجموعة (Join)</span>
+            <span class="join-btn">انضم للمجموعة</span>
+        </a>
+
+    </div>
+
+    <div class="section-title">خدمات أخرى (Services)</div>
+    <div class="flex-container">
+
+        <a href="https://chat.whatsapp.com/LS92JgjO26Y5SZK9SVJ9FJ" target="_blank" class="group-card">
+            <span class="icon">📚</span>
+            <h3>ASU Bank</h3>
+            <span class="sub-text">بنك أسئلة وملخصات</span>
+            <span class="join-btn">انضم للمجموعة</span>
         </a>
 
         <a href="https://chat.whatsapp.com/GrPfNbuHJFi35hdlhf3S2d" target="_blank" class="group-card">
             <span class="icon">🚌</span>
             <h3>باصات الجامعة</h3>
             <span class="sub-text">University Buses</span>
-            <span class="join-btn">انضم للمجموعة (Join)</span>
+            <span class="join-btn">انضم للمجموعة</span>
         </a>
 
     </div>
