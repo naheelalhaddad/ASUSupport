@@ -31,7 +31,7 @@
             width: 100%;
             max-width: 500px;
             position: relative;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
         }
 
         input {
@@ -53,6 +53,7 @@
             background: rgba(0,0,0,0.8);
         }
 
+        /* RESULT CARD */
         #resultCard {
             display: none; 
             background: rgba(255, 255, 255, 0.1);
@@ -63,6 +64,7 @@
             max-width: 400px;
             width: 90%;
             animation: popIn 0.4s ease;
+            margin-bottom: 30px;
         }
 
         @keyframes popIn {
@@ -87,6 +89,7 @@
         }
         .hours-btn:hover { background: #ba0209; transform: scale(1.05); }
 
+        /* MODAL */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -139,6 +142,27 @@
         .hours-table td { color: #ddd; direction: ltr; text-align: right; }
 
         .not-found { color: #ff6b6b; font-size: 1.2rem; margin-top: 20px; display: none; }
+        
+        /* REPORT PROBLEM SECTION */
+        .report-box {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px dashed #555;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #aaa;
+            font-size: 0.9rem;
+            max-width: 500px;
+            width: 90%;
+            line-height: 1.6;
+        }
+        .report-box span {
+            color: #9D0208;
+            font-weight: bold;
+            direction: ltr;
+            display: inline-block;
+        }
+
         .nav-links { margin-top: auto; display: flex; flex-direction: column; gap: 15px; padding-bottom: 20px; }
         .back-link { color: #888; text-decoration: none; border-bottom: 1px solid transparent; transition: 0.3s; }
         .back-link:hover { color: #fff; border-color: #fff; }
@@ -165,6 +189,11 @@
         ⚠️ لم يتم العثور على هذا الاسم (Not Found)
     </div>
 
+    <div class="report-box">
+        ⚠️ في حال وجود خطأ في الساعات أو اسم مفقود، يرجى التواصل عبر <b>Teams</b> مع:<br>
+        <span>202411124@students.asu.edu.jo</span>
+    </div>
+
     <div id="hoursModal" class="modal-overlay">
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal()">✕</button>
@@ -189,7 +218,7 @@
     <script>
         const professors = [
     {
-        "name": "د. يوسف القصراوي (عميد الكلية)",
+        "name": "أ.د. يوسف القصراوي (عميد الكلية)",
         "office": "1229",
         "location": "إدارة الكلية",
         "hours": null
@@ -1178,6 +1207,7 @@
 
         function openModal() {
             if (!currentProf) return;
+
             mName.textContent = currentProf.name;
 
             if (currentProf.hours) {
@@ -1193,6 +1223,7 @@
                 hWed.textContent = "غير متوفر";
                 hThu.textContent = "غير متوفر";
             }
+
             modal.style.display = "flex";
         }
 
