@@ -13,7 +13,7 @@
     <title>اختر التخصص</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* ANIMATED GRADIENT BACKGROUND */
+        
         body { 
             margin: 0;
             min-height: 100vh;
@@ -22,7 +22,6 @@
             text-align: center;
             padding: 40px 20px;
             
-            /* The Deep Red/Black Gradient */
             background: linear-gradient(-45deg, #000000, #1a1a1a, #2b0000, #000000);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
@@ -39,22 +38,19 @@
             margin-bottom: 50px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            /* Glowing Red Title */
             text-shadow: 0 0 15px #9D0208; 
             animation: fadeIn 1.5s ease;
         }
 
-        /* FLEX CONTAINER (Centers the bottom items) */
         .grid-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center; /* This centers the "orphans" in the last row */
+            justify-content: center; 
             gap: 30px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* GLASS CARDS */
         .major-card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
@@ -66,22 +62,19 @@
             position: relative;
             overflow: hidden;
             
-            /* Sizing constraints for the Flexbox layout */
-            flex: 1 1 300px; /* Grow, Shrink, Base Width */
+            flex: 1 1 300px;
             max-width: 380px; 
             
             opacity: 0;
             animation: slideIn 0.5s forwards;
         }
 
-        /* Animation Delays */
         .major-card:nth-child(1) { animation-delay: 0.1s; }
         .major-card:nth-child(2) { animation-delay: 0.2s; }
         .major-card:nth-child(3) { animation-delay: 0.3s; }
         .major-card:nth-child(4) { animation-delay: 0.4s; }
         .major-card:nth-child(5) { animation-delay: 0.5s; }
 
-        /* Card Hover */
         .major-card:hover {
             transform: translateY(-10px);
             border-color: #9D0208;
@@ -98,7 +91,6 @@
             line-height: 1.4;
         }
 
-        /* BUTTONS */
         .download-btn {
             display: inline-block;
             width: 100%;
