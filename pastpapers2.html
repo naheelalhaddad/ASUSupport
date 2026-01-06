@@ -35,7 +35,7 @@
 
         h1 { margin-bottom: 20px; text-shadow: 0 0 10px #9D0208; }
 
-        /* --- SEARCH BOX --- */
+        /* --- SEARCH & CONTROLS --- */
         .search-container {
             width: 100%;
             max-width: 600px;
@@ -58,7 +58,7 @@
         }
         .search-box:focus { box-shadow: 0 0 25px rgba(157, 2, 8, 0.5); }
 
-        /* --- ACCORDION STYLES --- */
+        /* --- MAJOR ACCORDIONS --- */
         .accordion-container {
             width: 100%;
             max-width: 1000px;
@@ -82,14 +82,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
-            overflow: hidden;
         }
 
-        .accordion-btn:hover, .accordion-btn.active {
+        .accordion-btn.active, .accordion-btn:hover {
             background: rgba(157, 2, 8, 0.2);
             border-color: #9D0208;
-            box-shadow: 0 0 15px rgba(157, 2, 8, 0.3);
         }
 
         .major-icon { margin-left: 15px; font-size: 1.5rem; }
@@ -105,17 +102,15 @@
             border-radius: 0 0 15px 15px;
             margin-top: -10px;
             margin-bottom: 5px;
-            border-left: 1px solid transparent;
-            border-right: 1px solid transparent;
-            border-bottom: 1px solid transparent;
         }
 
         .panel.open {
-            border-color: #9D0208;
             padding: 20px 15px;
+            border: 1px solid #9D0208;
+            border-top: none;
         }
 
-        /* --- COURSE CARD STYLES --- */
+        /* --- COURSE GRID --- */
         .courses-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -168,7 +163,7 @@
             text-transform: uppercase;
         }
 
-        /* --- COURSE MENU MODAL --- */
+        /* --- MODAL & DROPDOWNS --- */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -187,57 +182,14 @@
             border-radius: 20px;
             border: 1px solid #9D0208;
             width: 90%;
-            max-width: 450px;
+            max-width: 500px;
             text-align: center;
             position: relative;
+            max-height: 80vh; /* Scroll if content is too long */
+            overflow-y: auto;
             box-shadow: 0 0 40px rgba(157, 2, 8, 0.3);
             animation: slideUp 0.3s ease;
         }
-
-        /* --- PDF VIEWER MODAL --- */
-        #pdfViewerModal {
-            z-index: 3000; 
-        }
-        
-        #pdfViewerContent {
-            width: 95%;
-            height: 90%;
-            max-width: 1000px;
-            padding: 0;
-            background: #000;
-            display: flex;
-            flex-direction: column;
-        }
-
-        #pdfFrame {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background: white;
-        }
-
-        .pdf-header {
-            padding: 10px;
-            background: #9D0208;
-            color: white;
-            text-align: right;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .btn-close-pdf {
-            background: white;
-            color: #9D0208;
-            border: none;
-            padding: 5px 15px;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
         .close-modal {
             position: absolute;
@@ -250,6 +202,7 @@
         .modal-title { color: #9D0208; font-size: 1.4rem; margin-bottom: 5px; font-weight: bold; direction: ltr; }
         .modal-subtitle { color: #ccc; font-size: 1rem; margin-bottom: 25px; direction: rtl; }
 
+        /* Standard Button */
         .resource-btn {
             display: flex;
             align-items: center;
@@ -267,14 +220,58 @@
             box-sizing: border-box;
             cursor: pointer;
         }
+        .resource-btn:hover { background: #9D0208; border-color: #9D0208; transform: translateY(-2px); }
 
-        .resource-btn:hover {
-            background: #9D0208;
-            border-color: #9D0208;
-            transform: translateY(-2px);
+        /* Dropdown Button (Accordion) */
+        .dropdown-btn {
+            background: rgba(157, 2, 8, 0.1);
+            border: 1px solid #9D0208;
+            color: #fff;
+            padding: 15px;
+            width: 100%;
+            text-align: right;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+        .dropdown-btn:hover { background: rgba(157, 2, 8, 0.3); }
+        .dropdown-btn.active { background: #9D0208; color: white; }
+
+        .dropdown-content {
+            display: none;
+            background-color: rgba(255,255,255,0.05);
+            padding: 10px;
+            border-radius: 0 0 10px 10px;
+            margin-bottom: 15px;
+            margin-top: -5px;
+            text-align: right;
         }
         
-        .resource-icon { font-size: 1.3rem; opacity: 0.9; }
+        .file-link {
+            display: block;
+            padding: 10px;
+            color: #ddd;
+            text-decoration: none;
+            border-bottom: 1px solid #333;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+        .file-link:last-child { border-bottom: none; }
+        .file-link:hover { color: #9D0208; padding-right: 10px; }
+
+        /* --- PDF VIEWER --- */
+        #pdfViewerModal { z-index: 3000; }
+        #pdfViewerContent { width: 95%; height: 90%; max-width: 1000px; padding: 0; background: #000; display: flex; flex-direction: column; }
+        #pdfFrame { width: 100%; height: 100%; border: none; background: white; }
+        .pdf-header { padding: 10px; background: #9D0208; color: white; display: flex; justify-content: space-between; align-items: center; }
+        .btn-close-pdf { background: white; color: #9D0208; border: none; padding: 5px 15px; font-weight: bold; cursor: pointer; border-radius: 5px; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
     </style>
 </head>
@@ -289,27 +286,8 @@
     <div id="accordionWrapper" class="accordion-container"></div>
 
     <div id="resourceModal" class="modal-overlay">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeModal()">✕</button>
-            <h2 id="modalTitle" class="modal-title">Course Name</h2>
-            <div id="modalSubtitle" class="modal-subtitle">Arabic Name</div>
-            
-            <button id="btnSlides" class="resource-btn" onclick="openPdf('slides')">
-                <span>ملفات الشرح (Slides)</span> <span class="resource-icon">📄</span>
-            </button>
-            
-            <button id="btnPastPapers" class="resource-btn" onclick="openPdf('papers')">
-                <span>أسئلة سنوات (Past Papers)</span> <span class="resource-icon">📝</span>
-            </button>
-            
-            <button id="btnMidterms" class="resource-btn" onclick="openPdf('midterms')">
-                <span>امتحانات نصفية (Midterms)</span> <span class="resource-icon">🎓</span>
-            </button>
-            
-            <button id="btnSummaries" class="resource-btn" style="border-color: #9D0208; font-weight: bold;" onclick="openPdf('summaries')">
-                <span>الملخصات (Summaries)</span> <span class="resource-icon">📚</span>
-            </button>
-        </div>
+        <div class="modal-content" id="modalBodyContent">
+            </div>
     </div>
 
     <div id="pdfViewerModal" class="modal-overlay">
@@ -334,15 +312,57 @@
             { id: "gaming", title: "الواقع الرقمي والألعاب (Gaming)", icon: "🎮" }
         ];
 
-        /* IMPORTANT: 
-           The 'file' property is currently set to '#'. 
-           To make the PDF viewer work, you must upload a PDF file 
-           to your GitHub and change '#' to the file name (e.g., "files/math.pdf").
+        /* NOTE:
+           - Generic courses use 'file: "#"'
+           - Java uses 'detailedContent' for the dropdowns.
         */
         const courses = [
-            // --- Shared / First Year / General ---
+            // === SPECIAL: JAVA (Detailed) ===
+            { 
+                name: "Object-Oriented Programming (1)", 
+                arabic: "البرمجة الكينونية (1)", 
+                tags: ["cs", "se", "cyber", "ai", "gaming"], 
+                detailedContent: {
+                    slides: [
+                        { label: "Chapter 1: Intro to Java", file: "files/java/slides/ch1.pdf" },
+                        { label: "Chapter 2: Fundamental Structures", file: "files/java/slides/ch2.pdf" },
+                        { label: "Chapter 3: Predefined & User Classes", file: "files/java/slides/ch3.pdf" },
+                        { label: "Chapter 4: Classes and Objects", file: "files/java/slides/ch4.pdf" },
+                        { label: "Chapter 5 & 6: Classes and Objects (2)", file: "files/java/slides/ch5_6.pdf" },
+                        { label: "Chapter 7: Composition and Aggregation", file: "files/java/slides/ch7.pdf" },
+                        { label: "Chapter 8 & 9: Inheritance", file: "files/java/slides/ch8_9.pdf" },
+                        { label: "Chapter 10: Abstraction", file: "files/java/slides/ch10.pdf" },
+                        { label: "Chapter 11: Interface", file: "files/java/slides/ch11.pdf" },
+                        { label: "Chapter 12: Array of Primitives", file: "files/java/slides/ch12.pdf" },
+                        { label: "Chapter 13: Array of Objects", file: "files/java/slides/ch13.pdf" },
+                        { label: "Chapter 14: Polymorphism", file: "files/java/slides/ch14.pdf" },
+                        { label: "Chapter 15: Exception Handling", file: "files/java/slides/ch15.pdf" }
+                    ],
+                    midterms: [
+                        { label: "First Semester 2023", file: "files/java/midterms/2023_1.pdf" },
+                        { label: "Second Semester 2023", file: "files/java/midterms/2023_2.pdf" },
+                        { label: "Second Semester 2024", file: "files/java/midterms/2024_2.pdf" },
+                        { label: "First Semester 2025", file: "files/java/midterms/2025_1.pdf" }
+                    ],
+                    quizzes: [
+                        { label: "Assignment - First Sem 2025", file: "files/java/quizzes/assign_2025_1.pdf" },
+                        { label: "Quiz - First Sem 2025", file: "files/java/quizzes/quiz_2025_1.pdf" },
+                        { label: "Quiz - Second Sem 2024", file: "files/java/quizzes/quiz_2024_2.pdf" },
+                        { label: "Quiz - Summer Sem 2024", file: "files/java/quizzes/quiz_2024_3.pdf" },
+                        { label: "Quiz - Second Sem 2023", file: "files/java/quizzes/quiz_2023_2.pdf" },
+                        { label: "Final Lab - Second Sem 2024", file: "files/java/quizzes/final_lab_2024_2.pdf" },
+                        { label: "Final Lab - Summer Sem 2024", file: "files/java/quizzes/final_lab_2024_3.pdf" },
+                        { label: "Final Lab - Second Sem 2023", file: "files/java/quizzes/final_lab_2023_2.pdf" }
+                    ],
+                    summaries: [
+                        { label: "Java Notebook", file: "files/java/summaries/notebook.pdf" },
+                        { label: "Java Summary", file: "files/java/summaries/summary.pdf" }
+                    ]
+                }
+            },
+
+            // === GENERIC COURSES ===
             { name: "Structured Programming (C++)", arabic: "البرمجة المهيكلة", tags: ["cs", "se", "cyber", "ai", "gaming"], file: "#" },
-            { name: "Object-Oriented Programming (1)", arabic: "البرمجة الكينونية (1)", tags: ["cs", "se", "cyber", "ai", "gaming"], file: "#" },
             { name: "Data Structures & Algorithms", arabic: "تراكيب البيانات والخوارزميات", tags: ["cs", "se", "cyber", "ai", "gaming"], file: "#" },
             { name: "Database & Applications", arabic: "قواعد البيانات وتطبيقاتها", tags: ["cs", "se", "cyber", "ai", "gaming"], file: "#" },
             { name: "Linear Algebra", arabic: "الجبر الخطي", tags: ["cs", "se", "cyber", "ai", "gaming"], file: "#" },
@@ -432,7 +452,7 @@
         ];
 
         // ==========================================
-        // UI GENERATION
+        // UI LOGIC
         // ==========================================
         const wrapper = document.getElementById('accordionWrapper');
 
@@ -492,7 +512,7 @@
         }
 
         // ==========================================
-        // SEARCH LOGIC
+        // SEARCH
         // ==========================================
         document.getElementById('searchInput').addEventListener('input', function() {
             const query = this.value.toLowerCase();
@@ -525,19 +545,67 @@
         });
 
         // ==========================================
-        // MODAL & PDF LOGIC
+        // MODAL & FILE VIEWER
         // ==========================================
         const menuModal = document.getElementById('resourceModal');
+        const modalBody = document.getElementById('modalBodyContent');
         const pdfModal = document.getElementById('pdfViewerModal');
         const pdfFrame = document.getElementById('pdfFrame');
         
         let currentCourseFile = "";
 
         function openMenuModal(course) {
-            document.getElementById('modalTitle').innerText = course.name;
-            document.getElementById('modalSubtitle').innerText = course.arabic;
-            currentCourseFile = course.file; // Load the file path
+            // Build Modal HTML dynamically based on content type
+            let html = `
+                <button class="close-modal" onclick="closeModal()">✕</button>
+                <h2 id="modalTitle" class="modal-title">${course.name}</h2>
+                <div id="modalSubtitle" class="modal-subtitle">${course.arabic}</div>
+            `;
+
+            if (course.detailedContent) {
+                // RENDER DROPDOWNS FOR JAVA
+                html += generateAccordion("slides", "ملفات الشرح (Slides)", "📄", course.detailedContent.slides);
+                html += generateAccordion("papers", "أسئلة سنوات (Past Papers)", "📝", course.detailedContent.quizzes); // Renamed label but kept key flexibility
+                html += generateAccordion("midterms", "امتحانات نصفية (Midterms)", "🎓", course.detailedContent.midterms);
+                html += generateAccordion("summaries", "الملخصات (Summaries)", "📚", course.detailedContent.summaries);
+            } else {
+                // RENDER STANDARD BUTTONS
+                currentCourseFile = course.file;
+                html += `
+                    <button class="resource-btn" onclick="openPdf('slides')"><span>ملفات الشرح (Slides)</span> <span class="resource-icon">📄</span></button>
+                    <button class="resource-btn" onclick="openPdf('papers')"><span>أسئلة سنوات (Past Papers)</span> <span class="resource-icon">📝</span></button>
+                    <button class="resource-btn" onclick="openPdf('midterms')"><span>امتحانات نصفية (Midterms)</span> <span class="resource-icon">🎓</span></button>
+                    <button class="resource-btn" style="border-color: #9D0208; font-weight: bold;" onclick="openPdf('summaries')"><span>الملخصات (Summaries)</span> <span class="resource-icon">📚</span></button>
+                `;
+            }
+
+            modalBody.innerHTML = html;
             menuModal.style.display = 'flex';
+        }
+
+        function generateAccordion(id, title, icon, items) {
+            if(!items || items.length === 0) return "";
+            
+            let linksHtml = items.map(item => `<a href="#" class="file-link" onclick="viewSpecificFile('${item.file}', '${item.label}')">${item.label}</a>`).join('');
+            
+            return `
+                <button class="dropdown-btn" onclick="toggleDropdown('${id}')">
+                    <span>${title} <span class="resource-icon">${icon}</span></span>
+                    <span>▼</span>
+                </button>
+                <div id="drop-${id}" class="dropdown-content">
+                    ${linksHtml}
+                </div>
+            `;
+        }
+
+        function toggleDropdown(id) {
+            const drop = document.getElementById('drop-' + id);
+            if (drop.style.display === "block") {
+                drop.style.display = "none";
+            } else {
+                drop.style.display = "block";
+            }
         }
 
         function closeModal() {
@@ -549,8 +617,16 @@
                 alert("عذراً، الملف غير متوفر حالياً.\nSorry, file not available yet.");
                 return;
             }
-            document.getElementById('pdfHeaderTitle').innerText = "Viewing: " + type.toUpperCase();
-            pdfFrame.src = currentCourseFile;
+            viewSpecificFile(currentCourseFile, type.toUpperCase());
+        }
+
+        function viewSpecificFile(url, title) {
+            if (!url || url === "#") {
+                alert("File not uploaded yet.");
+                return;
+            }
+            document.getElementById('pdfHeaderTitle').innerText = "Viewing: " + title;
+            pdfFrame.src = url;
             menuModal.style.display = 'none';
             pdfModal.style.display = 'flex';
         }
