@@ -194,9 +194,9 @@
             animation: slideUp 0.3s ease;
         }
 
-        /* --- NEW: PDF VIEWER MODAL --- */
+        /* --- PDF VIEWER MODAL --- */
         #pdfViewerModal {
-            z-index: 3000; /* Higher than normal modal */
+            z-index: 3000; 
         }
         
         #pdfViewerContent {
@@ -334,17 +334,101 @@
             { id: "gaming", title: "الواقع الرقمي والألعاب (Gaming)", icon: "🎮" }
         ];
 
-        /* HOW TO ADD FILES:
-           1. Upload your PDF to a folder named 'files' in your GitHub.
-           2. Change 'file: "#"' to 'file: "files/calculus1.pdf"' 
+        /* IMPORTANT: 
+           The 'file' property is currently set to '#'. 
+           To make the PDF viewer work, you must upload a PDF file 
+           to your GitHub and change '#' to the file name (e.g., "files/math.pdf").
         */
         const courses = [
             // --- Shared / First Year / General ---
             { name: "Structured Programming (C++)", arabic: "البرمجة المهيكلة", tags: ["cs", "se", "cyber", "ai", "gaming"], file: "#" },
             { name: "Object-Oriented Programming (1)", arabic: "البرمجة الكينونية (1)", tags: ["cs", "se", "cyber", "ai", "gaming"], file: "#" },
-            // ... (Your full list remains here, I shortened it for brevity but use your full list) ...
-             { name: "Calculus (1)", arabic: "تفاضل وتكامل (1)", tags: ["cs", "se", "cyber", "ai", "gaming"], file: "#" },
-             { name: "Linear Algebra", arabic: "الجبر الخطي", tags: ["cs", "se", "cyber", "ai", "gaming"], file: "#" }
+            { name: "Data Structures & Algorithms", arabic: "تراكيب البيانات والخوارزميات", tags: ["cs", "se", "cyber", "ai", "gaming"], file: "#" },
+            { name: "Database & Applications", arabic: "قواعد البيانات وتطبيقاتها", tags: ["cs", "se", "cyber", "ai", "gaming"], file: "#" },
+            { name: "Linear Algebra", arabic: "الجبر الخطي", tags: ["cs", "se", "cyber", "ai", "gaming"], file: "#" },
+            { name: "Calculus (1)", arabic: "تفاضل وتكامل (1)", tags: ["cs", "se", "cyber", "ai", "gaming"], file: "#" },
+            { name: "Discrete Structures (1)", arabic: "تراكيب منفصلة (1)", tags: ["cs", "se", "ai", "gaming", "cyber"], file: "#" },
+            { name: "Probability & Statistics", arabic: "الاحتمالات والإحصاء", tags: ["cs", "se", "ai", "gaming", "cyber"], file: "#" },
+            { name: "Numerical Analysis", arabic: "التحليل العددي", tags: ["cs", "se", "ai", "gaming", "cyber"], file: "#" },
+            { name: "Technical Writing", arabic: "مهارات الكتابة الفنية والاتصال", tags: ["cs", "se", "ai", "gaming", "cyber"], file: "#" },
+            { name: "Computing Ethics", arabic: "أخلاقيات الحاسوب", tags: ["se", "gaming", "cyber"], file: "#" },
+            { name: "Web-Based Programming", arabic: "برمجة تطبيقات الويب", tags: ["cs", "se", "cyber", "gaming"], file: "#" },
+            { name: "Digital Systems", arabic: "النظم الرقمية", tags: ["cs", "cyber", "gaming"], file: "#" },
+            { name: "Comp. Org. & Architecture", arabic: "تنظيم وعمارة الحاسوب", tags: ["cs", "cyber", "gaming"], file: "#" },
+            { name: "Assembly Language", arabic: "لغة التجميع", tags: ["cs", "cyber", "gaming"], file: "#" },
+
+            // --- Cybersecurity Specific ---
+            { name: "Introduction to Cybersecurity", arabic: "مقدمة في الأمن السيبراني", tags: ["cyber"], file: "#" },
+            { name: "Cybersecurity Programming", arabic: "البرمجة للأمن السيبراني", tags: ["cyber"], file: "#" },
+            { name: "Operating Systems for Cyber", arabic: "نظم التشغيل للأمن السيبراني", tags: ["cyber"], file: "#" },
+            { name: "Secure Comm. Protocols", arabic: "بروتوكولات الاتصال الآمن", tags: ["cyber"], file: "#" },
+            { name: "Advanced Cloud Computing", arabic: "الحوسبة السحابية المتقدمة", tags: ["cyber"], file: "#" },
+            { name: "Analysis & Design for Cyber", arabic: "تحليل وتصميم النظم للأمن", tags: ["cyber"], file: "#" },
+            { name: "Infra. Security (Linux)", arabic: "أمن البنية التحتية (لينكس)", tags: ["cyber"], file: "#" },
+            { name: "Data & Mobile Security", arabic: "أمن البيانات والتطبيقات المتنقلة", tags: ["cyber"], file: "#" },
+            { name: "Encryption & Authentication", arabic: "نظرية التشفير والتحقق", tags: ["cyber"], file: "#" },
+            { name: "Digital Forensics", arabic: "التحقيق الرقمي والجرائم الإلكترونية", tags: ["cyber"], file: "#" },
+            { name: "Cloud Computing Security", arabic: "أمن الحوسبة السحابية", tags: ["cyber"], file: "#" },
+            { name: "Penetration Testing", arabic: "اختبار الاختراق", tags: ["cyber"], file: "#" },
+            { name: "Data Analytics in Cyber", arabic: "تحليل البيانات في الأمن السيبراني", tags: ["cyber"], file: "#" },
+            { name: "Advanced Internet Computing", arabic: "حوسبة الإنترنت المتقدمة", tags: ["cyber", "cs"], file: "#" },
+            { name: "Ethical Hacking", arabic: "القرصنة الأخلاقية", tags: ["cyber"], file: "#" },
+            { name: "Risk Management", arabic: "إدارة المخاطر وتحليل الثغرات", tags: ["cyber"], file: "#" },
+            { name: "Security Ops & Incident", arabic: "عمليات الأمن والاستجابة للحوادث", tags: ["cyber"], file: "#" },
+            { name: "Data Comm. & Networks", arabic: "تراسل البيانات والشبكات", tags: ["cyber", "cs"], file: "#" },
+            { name: "Network Security", arabic: "أمن الشبكات", tags: ["cyber"], file: "#" },
+            { name: "Principles of Cloud Comp.", arabic: "مبادئ الحوسبة السحابية", tags: ["cyber"], file: "#" },
+
+            // --- Gaming Specific ---
+            { name: "AI Programming for Gaming", arabic: "برمجة الذكاء الاصطناعي للألعاب", tags: ["gaming"], file: "#" },
+            { name: "Animate 2D and 3D Models", arabic: "تحريك النماذج ثنائية وثلاثية الأبعاد", tags: ["gaming"], file: "#" },
+            { name: "Computer Drawing Principles", arabic: "مبادئ الرسم الحاسوبي", tags: ["gaming"], file: "#" },
+            { name: "AR Systems Development", arabic: "تطوير نظم الواقع المعزز", tags: ["gaming"], file: "#" },
+            { name: "VR Systems Development", arabic: "تطوير نظم الواقع الافتراضي", tags: ["gaming"], file: "#" },
+            { name: "Design of 2D/3D Models", arabic: "تصميم النماذج ثنائية وثلاثية الأبعاد", tags: ["gaming"], file: "#" },
+            { name: "Developing Electronic Games", arabic: "تطوير الألعاب الإلكترونية", tags: ["gaming"], file: "#" },
+            { name: "XR & Game Principles", arabic: "مبادئ الواقع الممتد والألعاب", tags: ["gaming"], file: "#" },
+            { name: "Game Design Theories", arabic: "نظريات تصميم الألعاب", tags: ["gaming"], file: "#" },
+            { name: "Game Theory Applications", arabic: "تطبيقات نظرية الألعاب", tags: ["gaming"], file: "#" },
+            { name: "Multimedia Systems", arabic: "نظم الوسائط المتعددة", tags: ["gaming"], file: "#" },
+            { name: "Storyboard Design", arabic: "تصميم القصص المصورة للألعاب", tags: ["gaming"], file: "#" },
+
+            // --- AI Specific ---
+            { name: "AI Programming", arabic: "برمجة الذكاء الاصطناعي", tags: ["ai"], file: "#" },
+            { name: "Neural Networks & Deep Learning", arabic: "الشبكات العصبية والتعلم العميق", tags: ["ai"], file: "#" },
+            { name: "Big Data Analysis", arabic: "تحليل البيانات الضخمة", tags: ["ai"], file: "#" },
+            { name: "Business Intelligence", arabic: "ذكاء الأعمال", tags: ["ai"], file: "#" },
+            { name: "Computing Systems for AI", arabic: "أنظمة الحوسبة للذكاء الاصطناعي", tags: ["ai"], file: "#" },
+            { name: "Data Engineering", arabic: "هندسة وتحليل البيانات", tags: ["ai"], file: "#" },
+            { name: "Data Mining", arabic: "التنقيب في البيانات", tags: ["ai"], file: "#" },
+            { name: "Data Modeling & Simulation", arabic: "نمذجة ومحاكاة البيانات", tags: ["ai"], file: "#" },
+            { name: "Data Science (R)", arabic: "برمجة علم البيانات (R)", tags: ["ai"], file: "#" },
+            { name: "Knowledge Representation", arabic: "تمثيل المعرفة والاستنتاج", tags: ["ai"], file: "#" },
+            { name: "Machine Learning", arabic: "تعلم الآلة", tags: ["ai"], file: "#" },
+            { name: "NLP & Pattern Recog.", arabic: "معالجة اللغات وتمييز الأنماط", tags: ["ai"], file: "#" },
+            { name: "Info Retrieval Principles", arabic: "مبادئ استرجاع المعلومات", tags: ["ai"], file: "#" },
+            { name: "Smart Mobile Robots", arabic: "الروبوتات المتنقلة الذكية", tags: ["ai"], file: "#" },
+            { name: "Basics of Data Science", arabic: "أساسيات علم البيانات والذكاء الاصطناعي", tags: ["ai"], file: "#" },
+            { name: "VR and AR Technology", arabic: "تكنولوجيا الواقع الافتراضي والمعزز", tags: ["ai"], file: "#" },
+            { name: "Visual Data", arabic: "البيانات المرئية", tags: ["ai"], file: "#" },
+            
+            // --- CS Specific ---
+            { name: "Visual Programming (Flutter)", arabic: "البرمجة المرئية", tags: ["cs", "ai", "gaming"], file: "#" },
+            { name: "Algorithms (Algo)", arabic: "تصميم وتحليل الخوارزميات", tags: ["cs", "ai", "gaming"], file: "#" },
+            { name: "Theory of Computation", arabic: "نظرية الحوسبة", tags: ["cs"], file: "#" },
+            { name: "Compiler Design", arabic: "تصميم المترجمات", tags: ["cs"], file: "#" },
+            { name: "Parallel Programming", arabic: "البرمجة المتوازية", tags: ["cs"], file: "#" },
+            { name: "Operating Systems (OS)", arabic: "نظم التشغيل", tags: ["cs", "se"], file: "#" },
+
+            // --- SE Specific ---
+            { name: "Intro to Software Eng.", arabic: "مقدمة في هندسة البرمجيات", tags: ["se"], file: "#" },
+            { name: "Software Architecture", arabic: "عمارة البرمجيات", tags: ["se"], file: "#" },
+            { name: "Software Testing", arabic: "فحص البرمجيات", tags: ["se"], file: "#" },
+            { name: "Software Requirements", arabic: "هندسة المتطلبات", tags: ["se"], file: "#" },
+            { name: "Software Analysis & Design", arabic: "تحليل وتصميم البرمجيات", tags: ["se"], file: "#" },
+            { name: "Software Maintenance", arabic: "صيانة البرمجيات", tags: ["se"], file: "#" },
+            { name: "Software Project Mgmt", arabic: "إدارة مشاريع البرمجيات", tags: ["se"], file: "#" },
+            { name: "Software Quality", arabic: "جودة البرمجيات", tags: ["se"], file: "#" }
         ];
 
         // ==========================================
@@ -447,12 +531,12 @@
         const pdfModal = document.getElementById('pdfViewerModal');
         const pdfFrame = document.getElementById('pdfFrame');
         
-        let currentCourseFile = ""; // Stores the PDF link for the selected course
+        let currentCourseFile = "";
 
         function openMenuModal(course) {
             document.getElementById('modalTitle').innerText = course.name;
             document.getElementById('modalSubtitle').innerText = course.arabic;
-            currentCourseFile = course.file; // Load the file path from data
+            currentCourseFile = course.file; // Load the file path
             menuModal.style.display = 'flex';
         }
 
@@ -460,28 +544,21 @@
             menuModal.style.display = 'none';
         }
 
-        // Opens the PDF Viewer
         function openPdf(type) {
-            // Check if a file link exists
             if (!currentCourseFile || currentCourseFile === "#") {
                 alert("عذراً، الملف غير متوفر حالياً.\nSorry, file not available yet.");
                 return;
             }
-            
-            // In a real scenario, you might have different files for slides vs papers.
-            // For now, this opens the main file associated with the course.
             document.getElementById('pdfHeaderTitle').innerText = "Viewing: " + type.toUpperCase();
             pdfFrame.src = currentCourseFile;
-            
-            // Hide menu, Show PDF
             menuModal.style.display = 'none';
             pdfModal.style.display = 'flex';
         }
 
         function closePdfViewer() {
             pdfModal.style.display = 'none';
-            pdfFrame.src = ""; // Stop loading
-            menuModal.style.display = 'flex'; // Go back to menu
+            pdfFrame.src = "";
+            menuModal.style.display = 'flex';
         }
 
         window.onclick = function(e) {
