@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
+<head>   
     <title>ASU Bank - المواد الدراسية</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* --- VISUAL STYLE (Dark Mode / Red Accents) --- */
+        /* --- VISUAL STYLE --- */
         body { 
             margin: 0;
             min-height: 100vh;
@@ -63,7 +63,7 @@
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid #555;
             color: #ddd;
-            padding: 8px 16px; /* Slightly smaller padding */
+            padding: 8px 16px;
             border-radius: 25px;
             cursor: pointer;
             transition: 0.3s;
@@ -81,7 +81,7 @@
         .search-box {
             width: 100%;
             max-width: 400px;
-            padding: 12px 15px; /* Slightly smaller padding */
+            padding: 12px 15px;
             border-radius: 50px;
             border: 2px solid #9D0208;
             background: rgba(0, 0, 0, 0.6);
@@ -96,40 +96,40 @@
         /* --- GRID --- */
         .courses-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* Slightly smaller minimum width */
-            gap: 15px; /* Reduced gap */
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 15px;
             width: 100%;
             max-width: 1200px;
         }
 
-        /* --- FIX 1: SMALLER COURSE CARDS --- */
         .course-card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px; /* Slightly smaller radius */
-            padding: 15px; /* Reduced padding */
+            border-radius: 12px;
+            padding: 15px;
             text-align: center;
             cursor: pointer;
             transition: 0.3s;
             display: flex; 
             flex-direction: column;
             justify-content: center;
-            min-height: 90px; /* Reduced height significantly */
+            min-height: 110px; /* Slight increase to fit Arabic name */
             position: relative;
             overflow: hidden;
         }
 
         .course-card:hover {
-            transform: translateY(-3px); /* Smaller hover lift */
+            transform: translateY(-3px);
             background: rgba(157, 2, 8, 0.15);
             border-color: #9D0208;
             box-shadow: 0 4px 15px rgba(157, 2, 8, 0.2);
         }
 
-        .course-name { font-weight: bold; font-size: 1rem; margin-bottom: 5px; line-height: 1.3; }
+        .course-name { font-weight: bold; font-size: 1rem; margin-bottom: 2px; line-height: 1.3; color: #fff; }
+        .course-arabic { font-size: 0.85rem; color: #aaa; margin-bottom: 8px; }
         
-        .tags { margin-top: 8px; display: flex; justify-content: center; gap: 4px; flex-wrap: wrap; }
+        .tags { margin-top: auto; display: flex; justify-content: center; gap: 4px; flex-wrap: wrap; }
         .tag { font-size: 0.6rem; padding: 2px 6px; border-radius: 8px; background: rgba(255,255,255,0.1); color: #ccc; }
 
         /* --- MODAL --- */
@@ -169,15 +169,15 @@
         }
         .close-modal:hover { color: white; }
 
-        .modal-title { color: #9D0208; font-size: 1.4rem; margin-bottom: 25px; font-weight: bold;}
+        .modal-title { color: #9D0208; font-size: 1.4rem; margin-bottom: 5px; font-weight: bold;}
+        .modal-subtitle { color: #ccc; font-size: 1rem; margin-bottom: 25px; }
 
-        /* --- FIX 2: ALIGNED MODAL BUTTONS --- */
         .resource-btn {
             display: block;
             width: 100%;
             padding: 12px 15px;
             margin: 10px 0;
-            background: rgba(255, 255, 255, 0.05); /* Slight background for better visibility */
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid #444;
             color: white;
             border-radius: 12px;
@@ -186,7 +186,6 @@
             font-size: 1rem;
             display: flex;
             align-items: center;
-            /* Changed from space-between to flex-start with gap for proper alignment */
             justify-content: flex-start; 
             gap: 15px; 
             text-align: right;
@@ -195,8 +194,7 @@
         .resource-btn:hover {
             background: #9D0208;
             border-color: #9D0208;
-            /* Removed padding-left shift as it conflicts with the new alignment */
-             transform: scale(1.02);
+            transform: scale(1.02);
         }
         
         .resource-icon { font-size: 1.2rem; opacity: 0.8; }
@@ -237,6 +235,7 @@
         <div class="modal-content">
             <button class="close-modal" onclick="closeModal()">✕</button>
             <h2 id="modalTitle" class="modal-title">Course Name</h2>
+            <div id="modalSubtitle" class="modal-subtitle">Arabic Name</div>
             
             <a href="#" id="btnSlides" target="_blank" class="resource-btn">
                 <span>ملفات الشرح (Slides)</span> <span class="resource-icon">📄</span>
@@ -259,79 +258,95 @@
         // ==========================================
         
         const courses = [
-            // --- Shared Common Courses ---
-            { name: "Structured Programming (C++)", tags: ["cs", "se", "cyber", "ai", "gaming"], drive: "#" },
-            { name: "Object-Oriented Programming (Java1)", tags: ["cs", "se", "cyber", "ai", "gaming"], drive: "#" },
-            { name: "Data Structures (DSA)", tags: ["cs", "se", "cyber", "ai", "gaming"], drive: "#" },
-            { name: "Database (DB)", tags: ["cs", "se", "cyber", "ai", "gaming"], drive: "#" },
-            { name: "Linear Algebra", tags: ["cs", "se", "cyber", "ai", "gaming"], drive: "#" },
-            { name: "Calculus 1", tags: ["cs", "se", "cyber", "ai", "gaming"], drive: "#" },
-            { name: "Operating Systems (OS)", tags: ["cs", "se", "cyber", "ai", "gaming"], drive: "#" },
-            { name: "Discrete Structures 1", tags: ["cs", "se", "ai", "gaming"], drive: "#" },
-            { name: "Probability & Statistics", tags: ["cs", "se", "ai", "gaming"], drive: "#" },
-            { name: "Numerical Analysis", tags: ["cs", "se", "ai", "gaming"], drive: "#" },
-            { name: "Technical Writing", tags: ["cs", "se", "ai", "gaming"], drive: "#" },
-            { name: "Computing Ethics", tags: ["se", "gaming"], drive: "#" },
-            { name: "Web-Based Programming", tags: ["cs", "se", "cyber", "gaming"], drive: "#" },
-            { name: "Digital Systems", tags: ["cs", "cyber", "gaming"], drive: "#" },
-            { name: "Computer Organization & Architecture", tags: ["cs", "cyber", "gaming"], drive: "#" },
-            { name: "Human Computer Interaction (HCI)", tags: ["cs", "se", "gaming"], drive: "#" },
-            { name: "English Language for IT", tags: ["gaming"], drive: "#" },
-            { name: "Assembly", tags: ["cs", "cyber", "gaming"], drive: "#" },
+            // --- Shared / First Year / General ---
+            { name: "Structured Programming (C++)", arabic: "البرمجة المهيكلة", tags: ["cs", "se", "cyber", "ai", "gaming"], drive: "#" },
+            { name: "Object-Oriented Programming (1)", arabic: "البرمجة الكينونية (1)", tags: ["cs", "se", "cyber", "ai", "gaming"], drive: "#" },
+            { name: "Data Structures & Algorithms", arabic: "تراكيب البيانات والخوارزميات", tags: ["cs", "se", "cyber", "ai", "gaming"], drive: "#" },
+            { name: "Database & Applications", arabic: "قواعد البيانات وتطبيقاتها", tags: ["cs", "se", "cyber", "ai", "gaming"], drive: "#" },
+            { name: "Linear Algebra", arabic: "الجبر الخطي", tags: ["cs", "se", "cyber", "ai", "gaming"], drive: "#" },
+            { name: "Calculus (1)", arabic: "تفاضل وتكامل (1)", tags: ["cs", "se", "cyber", "ai", "gaming"], drive: "#" },
+            { name: "Discrete Structures (1)", arabic: "تراكيب منفصلة (1)", tags: ["cs", "se", "ai", "gaming", "cyber"], drive: "#" },
+            { name: "Probability & Statistics", arabic: "الاحتمالات والإحصاء", tags: ["cs", "se", "ai", "gaming", "cyber"], drive: "#" },
+            { name: "Numerical Analysis", arabic: "التحليل العددي", tags: ["cs", "se", "ai", "gaming", "cyber"], drive: "#" },
+            { name: "Technical Writing", arabic: "مهارات الكتابة الفنية والاتصال", tags: ["cs", "se", "ai", "gaming", "cyber"], drive: "#" },
+            { name: "Computing Ethics", arabic: "أخلاقيات الحاسوب", tags: ["se", "gaming", "cyber"], drive: "#" },
+            { name: "Web-Based Programming", arabic: "برمجة تطبيقات الويب", tags: ["cs", "se", "cyber", "gaming"], drive: "#" },
+            { name: "Digital Systems", arabic: "النظم الرقمية", tags: ["cs", "cyber", "gaming"], drive: "#" },
+            { name: "Comp. Org. & Architecture", arabic: "تنظيم وعمارة الحاسوب", tags: ["cs", "cyber", "gaming"], drive: "#" },
+            { name: "Assembly Language", arabic: "لغة التجميع", tags: ["cs", "cyber", "gaming"], drive: "#" },
 
-            // --- Gaming (VR/AR) Specific ---
-            { name: "AI Programming for Gaming", tags: ["gaming"], drive: "#" },
-            { name: "Animate 2D and 3D Models", tags: ["gaming"], drive: "#" },
-            { name: "Computer Drawing Principles", tags: ["gaming"], drive: "#" },
-            { name: "Design and Development of AR Systems", tags: ["gaming"], drive: "#" },
-            { name: "Design and Development of VR Systems", tags: ["gaming"], drive: "#" },
-            { name: "Design of 2D and 3D Models", tags: ["gaming"], drive: "#" },
-            { name: "Developing Electronic Games", tags: ["gaming"], drive: "#" },
-            { name: "Extended Reality & Game Principles", tags: ["gaming"], drive: "#" },
-            { name: "Game Design Theories", tags: ["gaming"], drive: "#" },
-            { name: "Game Theory Applications", tags: ["gaming"], drive: "#" },
-            { name: "Multimedia Systems", tags: ["gaming"], drive: "#" },
-            { name: "Storyboard Design for Games", tags: ["gaming"], drive: "#" },
+            // --- Cybersecurity Specific (New List) ---
+            { name: "Introduction to Cybersecurity", arabic: "مقدمة في الأمن السيبراني", tags: ["cyber"], drive: "#" },
+            { name: "Cybersecurity Programming", arabic: "البرمجة للأمن السيبراني", tags: ["cyber"], drive: "#" },
+            { name: "Operating Systems for Cyber", arabic: "نظم التشغيل للأمن السيبراني", tags: ["cyber"], drive: "#" },
+            { name: "Secure Comm. Protocols", arabic: "بروتوكولات الاتصال الآمن", tags: ["cyber"], drive: "#" },
+            { name: "Advanced Cloud Computing", arabic: "الحوسبة السحابية المتقدمة", tags: ["cyber"], drive: "#" },
+            { name: "Analysis & Design for Cyber", arabic: "تحليل وتصميم النظم للأمن", tags: ["cyber"], drive: "#" },
+            { name: "Infra. Security (Linux)", arabic: "أمن البنية التحتية (لينكس)", tags: ["cyber"], drive: "#" },
+            { name: "Data & Mobile Security", arabic: "أمن البيانات والتطبيقات المتنقلة", tags: ["cyber"], drive: "#" },
+            { name: "Encryption & Authentication", arabic: "نظرية التشفير والتحقق", tags: ["cyber"], drive: "#" },
+            { name: "Digital Forensics", arabic: "التحقيق الرقمي والجرائم الإلكترونية", tags: ["cyber"], drive: "#" },
+            { name: "Cloud Computing Security", arabic: "أمن الحوسبة السحابية", tags: ["cyber"], drive: "#" },
+            { name: "Penetration Testing", arabic: "اختبار الاختراق", tags: ["cyber"], drive: "#" },
+            { name: "Data Analytics in Cyber", arabic: "تحليل البيانات في الأمن السيبراني", tags: ["cyber"], drive: "#" },
+            { name: "Advanced Internet Computing", arabic: "حوسبة الإنترنت المتقدمة", tags: ["cyber", "cs"], drive: "#" },
+            { name: "Ethical Hacking", arabic: "القرصنة الأخلاقية", tags: ["cyber"], drive: "#" },
+            { name: "Risk Management", arabic: "إدارة المخاطر وتحليل الثغرات", tags: ["cyber"], drive: "#" },
+            { name: "Security Ops & Incident", arabic: "عمليات الأمن والاستجابة للحوادث", tags: ["cyber"], drive: "#" },
+            { name: "Data Comm. & Networks", arabic: "تراسل البيانات والشبكات", tags: ["cyber", "cs"], drive: "#" },
+            { name: "Network Security", arabic: "أمن الشبكات", tags: ["cyber"], drive: "#" },
+            { name: "Principles of Cloud Comp.", arabic: "مبادئ الحوسبة السحابية", tags: ["cyber"], drive: "#" },
+
+            // --- Gaming Specific ---
+            { name: "AI Programming for Gaming", arabic: "برمجة الذكاء الاصطناعي للألعاب", tags: ["gaming"], drive: "#" },
+            { name: "Animate 2D and 3D Models", arabic: "تحريك النماذج ثنائية وثلاثية الأبعاد", tags: ["gaming"], drive: "#" },
+            { name: "Computer Drawing Principles", arabic: "مبادئ الرسم الحاسوبي", tags: ["gaming"], drive: "#" },
+            { name: "AR Systems Development", arabic: "تطوير نظم الواقع المعزز", tags: ["gaming"], drive: "#" },
+            { name: "VR Systems Development", arabic: "تطوير نظم الواقع الافتراضي", tags: ["gaming"], drive: "#" },
+            { name: "Design of 2D/3D Models", arabic: "تصميم النماذج ثنائية وثلاثية الأبعاد", tags: ["gaming"], drive: "#" },
+            { name: "Developing Electronic Games", arabic: "تطوير الألعاب الإلكترونية", tags: ["gaming"], drive: "#" },
+            { name: "XR & Game Principles", arabic: "مبادئ الواقع الممتد والألعاب", tags: ["gaming"], drive: "#" },
+            { name: "Game Design Theories", arabic: "نظريات تصميم الألعاب", tags: ["gaming"], drive: "#" },
+            { name: "Game Theory Applications", arabic: "تطبيقات نظرية الألعاب", tags: ["gaming"], drive: "#" },
+            { name: "Multimedia Systems", arabic: "نظم الوسائط المتعددة", tags: ["gaming"], drive: "#" },
+            { name: "Storyboard Design", arabic: "تصميم القصص المصورة للألعاب", tags: ["gaming"], drive: "#" },
 
             // --- AI Specific ---
-            { name: "Artificial Intelligence Programming", tags: ["ai"], drive: "#" },
-            { name: "Artificial Neural Networks", tags: ["ai"], drive: "#" },
-            { name: "Big Data Analysis", tags: ["ai"], drive: "#" },
-            { name: "Business Intelligence", tags: ["ai"], drive: "#" },
-            { name: "Computing Systems for AI", tags: ["ai"], drive: "#" },
-            { name: "Data Engineering & Analysis", tags: ["ai"], drive: "#" },
-            { name: "Data Mining", tags: ["ai"], drive: "#" },
-            { name: "Data Modeling & Simulation", tags: ["ai"], drive: "#" },
-            { name: "Data Science Programming (R)", tags: ["ai"], drive: "#" },
-            { name: "Knowledge Representation", tags: ["ai"], drive: "#" },
-            { name: "Machine Learning", tags: ["ai"], drive: "#" },
-            { name: "NLP & Pattern Recognition", tags: ["ai"], drive: "#" },
-            { name: "Principles of Info Retrieval", tags: ["ai"], drive: "#" },
-            { name: "Smart Mobile Robots", tags: ["ai"], drive: "#" },
-            { name: "Basics of Data Science & AI", tags: ["ai"], drive: "#" },
-            { name: "VR and AR Technology", tags: ["ai"], drive: "#" },
-            { name: "Visual Data", tags: ["ai"], drive: "#" },
+            { name: "AI Programming", arabic: "برمجة الذكاء الاصطناعي", tags: ["ai"], drive: "#" },
+            { name: "Neural Networks & Deep Learning", arabic: "الشبكات العصبية والتعلم العميق", tags: ["ai"], drive: "#" },
+            { name: "Big Data Analysis", arabic: "تحليل البيانات الضخمة", tags: ["ai"], drive: "#" },
+            { name: "Business Intelligence", arabic: "ذكاء الأعمال", tags: ["ai"], drive: "#" },
+            { name: "Computing Systems for AI", arabic: "أنظمة الحوسبة للذكاء الاصطناعي", tags: ["ai"], drive: "#" },
+            { name: "Data Engineering", arabic: "هندسة وتحليل البيانات", tags: ["ai"], drive: "#" },
+            { name: "Data Mining", arabic: "التنقيب في البيانات", tags: ["ai"], drive: "#" },
+            { name: "Data Modeling & Simulation", arabic: "نمذجة ومحاكاة البيانات", tags: ["ai"], drive: "#" },
+            { name: "Data Science (R)", arabic: "برمجة علم البيانات (R)", tags: ["ai"], drive: "#" },
+            { name: "Knowledge Representation", arabic: "تمثيل المعرفة والاستنتاج", tags: ["ai"], drive: "#" },
+            { name: "Machine Learning", arabic: "تعلم الآلة", tags: ["ai"], drive: "#" },
+            { name: "NLP & Pattern Recog.", arabic: "معالجة اللغات وتمييز الأنماط", tags: ["ai"], drive: "#" },
+            { name: "Info Retrieval Principles", arabic: "مبادئ استرجاع المعلومات", tags: ["ai"], drive: "#" },
+            { name: "Smart Mobile Robots", arabic: "الروبوتات المتنقلة الذكية", tags: ["ai"], drive: "#" },
+            { name: "Basics of Data Science", arabic: "أساسيات علم البيانات والذكاء الاصطناعي", tags: ["ai"], drive: "#" },
+            { name: "VR and AR Technology", arabic: "تكنولوجيا الواقع الافتراضي والمعزز", tags: ["ai"], drive: "#" },
+            { name: "Visual Data", arabic: "البيانات المرئية", tags: ["ai"], drive: "#" },
             
             // --- CS Specific ---
-            { name: "Visual Programming (Flutter)", tags: ["cs", "ai", "gaming"], drive: "#" },
-            { name: "Algorithms (Algo)", tags: ["cs", "ai", "gaming"], drive: "#" },
-            { name: "Advanced Internet Computing", tags: ["cs"], drive: "#" },
-            { name: "Theory of Computation", tags: ["cs"], drive: "#" },
-            { name: "Compiler Design", tags: ["cs"], drive: "#" },
-            { name: "Parallel Programming", tags: ["cs"], drive: "#" },
-            
+            { name: "Visual Programming (Flutter)", arabic: "البرمجة المرئية", tags: ["cs", "ai", "gaming"], drive: "#" },
+            { name: "Algorithms (Algo)", arabic: "تصميم وتحليل الخوارزميات", tags: ["cs", "ai", "gaming"], drive: "#" },
+            { name: "Theory of Computation", arabic: "نظرية الحوسبة", tags: ["cs"], drive: "#" },
+            { name: "Compiler Design", arabic: "تصميم المترجمات", tags: ["cs"], drive: "#" },
+            { name: "Parallel Programming", arabic: "البرمجة المتوازية", tags: ["cs"], drive: "#" },
+            { name: "Operating Systems (OS)", arabic: "نظم التشغيل", tags: ["cs", "se"], drive: "#" },
+
             // --- SE Specific ---
-            { name: "Intro to Software Engineering", tags: ["se"], drive: "#" },
-            { name: "Software Architecture", tags: ["se"], drive: "#" },
-            { name: "Software Testing", tags: ["se"], drive: "#" },
-            { name: "Software Requirements", tags: ["se"], drive: "#" },
-            
-            // --- Cyber Specific ---
-            { name: "Network Security", tags: ["cyber"], drive: "#" },
-            { name: "Ethical Hacking", tags: ["cyber"], drive: "#" },
-            { name: "Digital Forensics", tags: ["cyber"], drive: "#" },
-            { name: "Intro to Cybersecurity", tags: ["cyber"], drive: "#" },
-            { name: "Encryption Theory", tags: ["cyber"], drive: "#" }
+            { name: "Intro to Software Eng.", arabic: "مقدمة في هندسة البرمجيات", tags: ["se"], drive: "#" },
+            { name: "Software Architecture", arabic: "عمارة البرمجيات", tags: ["se"], drive: "#" },
+            { name: "Software Testing", arabic: "فحص البرمجيات", tags: ["se"], drive: "#" },
+            { name: "Software Requirements", arabic: "هندسة المتطلبات", tags: ["se"], drive: "#" },
+            { name: "Software Analysis & Design", arabic: "تحليل وتصميم البرمجيات", tags: ["se"], drive: "#" },
+            { name: "Software Maintenance", arabic: "صيانة البرمجيات", tags: ["se"], drive: "#" },
+            { name: "Software Project Mgmt", arabic: "إدارة مشاريع البرمجيات", tags: ["se"], drive: "#" },
+            { name: "Software Quality", arabic: "جودة البرمجيات", tags: ["se"], drive: "#" }
         ];
 
         // ==========================================
@@ -350,11 +365,13 @@
                 card.className = 'course-card';
                 card.onclick = () => openModal(course);
                 
+                // Store both names for search
                 card.dataset.tags = course.tags.join(' ');
-                card.dataset.name = course.name.toLowerCase();
+                card.dataset.name = (course.name + " " + course.arabic).toLowerCase();
 
                 card.innerHTML = `
                     <div class="course-name">${course.name}</div>
+                    <div class="course-arabic">${course.arabic}</div>
                     <div class="tags">
                         ${course.tags.map(t => `<span class="tag">${t.toUpperCase()}</span>`).join('')}
                     </div>
@@ -385,10 +402,10 @@
 
             cards.forEach(card => {
                 const tags = card.dataset.tags;
-                const name = card.dataset.name;
+                const nameData = card.dataset.name;
 
                 const matchesCategory = currentFilter === 'all' || tags.includes(currentFilter);
-                const matchesSearch = name.includes(query);
+                const matchesSearch = nameData.includes(query);
 
                 if (matchesCategory && matchesSearch) {
                     card.style.display = 'flex';
@@ -400,14 +417,18 @@
 
         const modal = document.getElementById('resourceModal');
         const modalTitle = document.getElementById('modalTitle');
+        const modalSubtitle = document.getElementById('modalSubtitle');
         const btnDrive = document.getElementById('btnDrive');
         
         function openModal(course) {
             modalTitle.innerText = course.name;
+            modalSubtitle.innerText = course.arabic;
+            
             btnDrive.href = course.drive; 
             document.getElementById('btnSlides').href = course.drive;
             document.getElementById('btnPastPapers').href = course.drive;
             document.getElementById('btnMidterms').href = course.drive;
+            
             modal.style.display = 'flex';
         }
 
