@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FNTBG5RY0T"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FNTBG5RY0T');
+    </script>
+    
+    <title>ASU Bank - المواد الدراسية</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* --- VISUAL STYLE (Dark Mode / Red Accents) --- */
+        body { 
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            background: linear-gradient(-45deg, #000000, #1a1a1a, #2b0000, #000000);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 { margin-bottom: 10px; text-shadow: 0 0 10px #9D0208; }
+
+        /* --- NEW: INTRODUCTORY INSTRUCTIONS --- */
+        .intro-box {
+            background: rgba(157, 2, 8, 0.15); /* Low opacity red */
+            border: 1px solid #9D0208;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            max-width: 800px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .intro-box h3 {
+            color: #ff4d4d;
+            margin-top: 0;
+        }
+
+        .intro-box p {
+            color: #ddd;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        /* --- CONTROLS SECTION (P1: Majors + Search) --- */
+        .controls-container {
+            width: 100%;
+            max-width: 1000px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #555;
+            color: #ddd;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #9D0208;
+            border-color: #9D0208;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(157, 2, 8, 0.4);
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            border-radius: 50px;
+            border: 2px solid #9D0208;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            font-size: 1rem;
+            text-align: center;
+            outline: none;
+            transition: 0.3s;
+        }
+        
+        .search-box:focus { box-shadow: 0 0 20px rgba(157, 2, 8, 0.5); }
+
+        /* --- GRID SECTION (P2: Courses) --- */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .course-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex; 
+            flex-direction: column;
+            justify-content: center;
+            min-height: 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            background: rgba(157, 2, 8, 0.15);
+            border-color: #9D0208;
+            box-shadow: 0 5px 20px rgba(157, 2, 8, 0.2);
+        }
+
+        .course-name { font-weight: bold; font-size: 1.1rem; margin-bottom: 5px; }
+        .course-code { font-size: 0.8rem; color: #aaa; }
+
+        .tags { margin-top: 10px; display: flex; justify-content: center; gap: 5px; flex-wrap: wrap; }
+        .tag { font-size: 0.65rem; padding: 2px 8px; border-radius: 10px; background: rgba(255,255,255,0.1); color: #ccc; }
+
+        /* --- POPUP MODAL (P4) --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.2s ease;
+        }
+
+        .modal-content {
+            background: #151515;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #9D0208;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 40px rgba(157, 2, 8, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .close-modal {
+            position: absolute;
+            top: 15px; right: 20px; 
+            background: none; border: none;
+            color: #888; font-size: 1.5rem; cursor: pointer;
+        }
+        .close-modal:hover { color: white; }
+
+        .modal-title { color: #9D0208; font-size: 1.5rem; margin-bottom: 30px; }
+
+        .resource-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background: transparent;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .resource-btn:hover {
+            background: #9D0208;
+            border-color: #9D0208;
+            padding-left: 25px; 
+        }
+        
+        .resource-icon { font-size: 1.2rem; }
+
+    </style>
+</head>
+<body>
+
+    <h1>بنك الأسئلة والمواد</h1>
+
+    <div class="intro-box">
+        <h3>كيف يعمل النظام؟</h3>
+        <p>
+            هذه المنصة مصممة لتسهيل الوصول للمواد الدراسية. <br>
+            1. <b>اختر تخصصك</b> من الأزرار في الأسفل لتصفية المواد. <br>
+            2. <b>ابحث عن اسم المادة</b> التي تريدها. <br>
+            3. <b>اضغط على البطاقة</b> للوصول المباشر إلى ملفات جوجل درايف (سنوات، شروحات، ملخصات).
+        </p>
+    </div>
+
+    <div class="controls-container">
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterCourses('all')">الكل (All)</button>
+            <button class="filter-btn" onclick="filterCourses('cs')">علم الحاسوب (CS)</button>
+            <button class="filter-btn" onclick="filterCourses('se')">هندسة البرمجيات (SE)</button>
+            <button class="filter-btn" onclick="filterCourses('cyber')">الأمن السيبراني (Cyber)</button>
+            <button class="filter-btn" onclick="filterCourses('ai')">الذكاء الاصطناعي (AI)</button>
+        </div>
+        
+        <input type="text" id="searchInput" class="search-box" placeholder="ابحث عن اسم المادة... (Search Course)">
+    </div>
+
+    <div id="gridContainer" class="courses-grid">
+        </div>
+
+    <div id="resourceModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">✕</button>
+            <h2 id="modalTitle" class="modal-title">Course Name</h2>
+            
+            <a href="#" id="btnSlides" target="_blank" class="resource-btn">
+                <span>ملفات الشرح (Slides)</span> <span class="resource-icon">📄</span>
+            </a>
+            <a href="#" id="btnPastPapers" target="_blank" class="resource-btn">
+                <span>أسئلة سنوات (Past Papers)</span> <span class="resource-icon">📝</span>
+            </a>
+            <a href="#" id="btnMidterms" target="_blank" class="resource-btn">
+                <span>امتحانات نصفية (Midterms)</span> <span class="resource-icon">🎓</span>
+            </a>
+            <a href="#" id="btnDrive" target="_blank" class="resource-btn" style="border-color: #9D0208;">
+                <span>المجلد الكامل (Full Drive)</span> <span class="resource-icon">📂</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // CONFIGURATION: MASTER COURSE LIST
+        // ==========================================
+        
+        const courses = [
+            // --- Shared Common Courses (Applied to multiple tags) ---
+            { name: "Structured Programming (C++)", tags: ["cs", "se", "cyber", "ai"], drive: "#" },
+            { name: "Object-Oriented Programming (Java1)", tags: ["cs", "se", "cyber", "ai"], drive: "#" },
+            { name: "Data Structures (DSA)", tags: ["cs", "se", "cyber", "ai"], drive: "#" },
+            { name: "Database (DB)", tags: ["cs", "se", "cyber", "ai"], drive: "#" },
+            { name: "Linear Algebra", tags: ["cs", "se", "cyber", "ai"], drive: "#" },
+            { name: "Calculus 1", tags: ["cs", "se", "cyber", "ai"], drive: "#" },
+            { name: "Operating Systems (OS)", tags: ["cs", "se", "cyber", "ai"], drive: "#" },
+            { name: "Discrete Structures 1", tags: ["cs", "se", "ai"], drive: "#" },
+            { name: "Probability & Statistics", tags: ["cs", "se", "ai"], drive: "#" },
+            { name: "Numerical Analysis", tags: ["cs", "se", "ai"], drive: "#" },
+            { name: "Technical Writing", tags: ["cs", "se", "ai"], drive: "#" },
+            { name: "Web-Based Programming", tags: ["cs", "se", "cyber"], drive: "#" },
+            
+            // --- AI Specific Courses ---
+            { name: "Artificial Intelligence Programming", tags: ["ai"], drive: "#" },
+            { name: "Artificial Neural Networks", tags: ["ai"], drive: "#" },
+            { name: "Big Data Analysis", tags: ["ai"], drive: "#" },
+            { name: "Business Intelligence", tags: ["ai"], drive: "#" },
+            { name: "Computing Systems for AI", tags: ["ai"], drive: "#" },
+            { name: "Data Engineering & Analysis", tags: ["ai"], drive: "#" },
+            { name: "Data Mining", tags: ["ai"], drive: "#" },
+            { name: "Data Modeling & Simulation", tags: ["ai"], drive: "#" },
+            { name: "Data Science Programming (R)", tags: ["ai"], drive: "#" },
+            { name: "Knowledge Representation", tags: ["ai"], drive: "#" },
+            { name: "Machine Learning", tags: ["ai"], drive: "#" },
+            { name: "NLP & Pattern Recognition", tags: ["ai"], drive: "#" },
+            { name: "Principles of Info Retrieval", tags: ["ai"], drive: "#" },
+            { name: "Smart Mobile Robots", tags: ["ai"], drive: "#" },
+            { name: "Basics of Data Science & AI", tags: ["ai"], drive: "#" },
+            { name: "VR and AR Technology", tags: ["ai"], drive: "#" },
+            { name: "Visual Data", tags: ["ai"], drive: "#" },
+            
+            // --- CS Specific (from previous lists) ---
+            { name: "Digital Systems", tags: ["cs", "cyber"], drive: "#" },
+            { name: "Visual Programming (Flutter)", tags: ["cs", "ai"], drive: "#" },
+            { name: "Algorithms (Algo)", tags: ["cs", "ai"], drive: "#" },
+            { name: "Advanced Internet Computing", tags: ["cs"], drive: "#" },
+            { name: "Theory of Computation", tags: ["cs"], drive: "#" },
+            { name: "Compiler Design", tags: ["cs"], drive: "#" },
+            { name: "Parallel Programming", tags: ["cs"], drive: "#" },
+            
+            // --- SE Specific ---
+            { name: "Intro to Software Engineering", tags: ["se"], drive: "#" },
+            { name: "Software Architecture", tags: ["se"], drive: "#" },
+            { name: "Software Testing", tags: ["se"], drive: "#" },
+            { name: "Software Requirements", tags: ["se"], drive: "#" },
+            
+            // --- Cyber Specific ---
+            { name: "Network Security", tags: ["cyber"], drive: "#" },
+            { name: "Ethical Hacking", tags: ["cyber"], drive: "#" },
+            { name: "Digital Forensics", tags: ["cyber"], drive: "#" },
+            { name: "Intro to Cybersecurity", tags: ["cyber"], drive: "#" },
+            { name: "Encryption Theory", tags: ["cyber"], drive: "#" }
+        ];
+
+        // ==========================================
+        // 2. LOGIC
+        // ==========================================
+        
+        const grid = document.getElementById('gridContainer');
+        const searchInput = document.getElementById('searchInput');
+        let currentFilter = 'all';
+
+        function renderCourses() {
+            grid.innerHTML = ''; 
+
+            courses.forEach(course => {
+                const card = document.createElement('div');
+                card.className = 'course-card';
+                card.onclick = () => openModal(course);
+                
+                card.dataset.tags = course.tags.join(' ');
+                card.dataset.name = course.name.toLowerCase();
+
+                card.innerHTML = `
+                    <div class="course-name">${course.name}</div>
+                    <div class="tags">
+                        ${course.tags.map(t => `<span class="tag">${t.toUpperCase()}</span>`).join('')}
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+
+        function filterCourses(category) {
+            currentFilter = category;
+            
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.innerText.toLowerCase().includes(category) || (category === 'all' && btn.innerText.includes('All'))) {
+                    btn.classList.add('active');
+                }
+            });
+
+            applyFilters();
+        }
+
+        searchInput.addEventListener('input', applyFilters);
+
+        function applyFilters() {
+            const query = searchInput.value.toLowerCase();
+            const cards = document.querySelectorAll('.course-card');
+
+            cards.forEach(card => {
+                const tags = card.dataset.tags;
+                const name = card.dataset.name;
+
+                const matchesCategory = currentFilter === 'all' || tags.includes(currentFilter);
+                const matchesSearch = name.includes(query);
+
+                if (matchesCategory && matchesSearch) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        const modal = document.getElementById('resourceModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const btnDrive = document.getElementById('btnDrive');
+        
+        function openModal(course) {
+            modalTitle.innerText = course.name;
+            btnDrive.href = course.drive; 
+            document.getElementById('btnSlides').href = course.drive;
+            document.getElementById('btnPastPapers').href = course.drive;
+            document.getElementById('btnMidterms').href = course.drive;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            if (e.target == modal) closeModal();
+        }
+
+        renderCourses();
+
+    </script>
+
+</body>
+</html>
