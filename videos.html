@@ -408,8 +408,16 @@
                 loc.style.display = 'none';
                 yt.style.display = 'block';
                 let src = vid.src;
+                
                 if(src.includes("watch?v=")) src = src.replace("watch?v=", "embed/");
                 if(src.includes("youtu.be/")) src = src.replace("youtu.be/", "www.youtube.com/embed/");
+                
+                if (!src.includes('?')) {
+                    src += "?rel=0&modestbranding=1";
+                } else {
+                    src += "&rel=0&modestbranding=1";
+                }
+
                 yt.src = src;
             } else {
                 yt.style.display = 'none';
