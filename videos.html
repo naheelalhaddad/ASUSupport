@@ -9,7 +9,7 @@
       gtag('config', 'G-FNTBG5RY0T');
     </script>
     
-    <title>ASU Learn - Video Courses</title>
+    <title>ASU Bank - Video Courses</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body { 
@@ -22,10 +22,9 @@
             flex-direction: column;
         }
 
-        /* --- 1. BIGGER NAVBAR --- */
         .navbar {
-            height: 80px; /* Bigger */
-            background: linear-gradient(to bottom, #1a0000, #000); /* Dark Red tint */
+            height: 80px;
+            background: linear-gradient(to bottom, #1a0000, #000);
             border-bottom: 2px solid #9D0208;
             display: flex;
             align-items: center;
@@ -63,7 +62,7 @@
             background: #222;
             color: #fff;
             border: 1px solid #555;
-            padding: 10px 15px; /* Bigger padding */
+            padding: 10px 15px;
             border-radius: 8px;
             font-family: inherit;
             font-size: 1rem;
@@ -71,7 +70,6 @@
             cursor: pointer;
         }
 
-        /* --- 2. HERO SECTION (The Big Sign) --- */
         .hero-banner {
             background: linear-gradient(135deg, #9D0208 0%, #3a0000 100%);
             padding: 50px 20px;
@@ -98,7 +96,6 @@
             font-weight: 500;
         }
 
-        /* --- 3. COURSE GRID (Clean, No Icons) --- */
         #courseSelectionView {
             width: 100%;
             max-width: 1200px;
@@ -117,7 +114,7 @@
         .video-course-card {
             background: rgba(30, 30, 30, 0.8);
             border: 1px solid #444;
-            border-right: 4px solid #9D0208; /* Red Accent on side */
+            border-right: 4px solid #9D0208;
             border-radius: 12px;
             padding: 30px 20px;
             cursor: pointer;
@@ -141,11 +138,10 @@
         .v-card-title { font-weight: bold; font-size: 1.3rem; color: white; margin-bottom: 8px; }
         .v-card-desc { color: #aaa; font-size: 0.95rem; }
 
-        /* --- 4. PLAYER VIEW --- */
         #playerView {
             display: none;
             flex: 1;
-            height: calc(100vh - 80px); /* Adjust for new navbar height */
+            height: calc(100vh - 80px);
             overflow: hidden;
             flex-direction: row-reverse; 
         }
@@ -236,11 +232,10 @@
             </select>
         </div>
         
-        <div style="color: white; font-weight: bold; font-size: 1.2rem; letter-spacing: 1px;">ASU LEARN</div>
+        <div id="navbarLogo"></div>
     </div>
 
     <div id="courseSelectionView">
-        
         <div class="hero-banner">
             <h1 class="hero-title">Course Videos</h1>
             <div class="hero-subtitle">Viewing videos for each course in proper order</div>
@@ -366,7 +361,7 @@
             document.getElementById('courseSelectionView').style.display = 'block';
             document.getElementById('playerView').style.display = 'none';
             document.getElementById('courseDropdown').style.display = 'none';
-            document.getElementById('backToCoursesBtn').style.display = 'none'; // Hide Back button
+            document.getElementById('backToCoursesBtn').style.display = 'none';
 
             const grid = document.getElementById('courseGrid');
             grid.innerHTML = "";
@@ -379,7 +374,6 @@
                     openPlayer(key);
                 };
                 
-                // NO ICONS - Text Only
                 card.innerHTML = `
                     <div class="v-card-title">${data.title}</div>
                     <div class="v-card-desc">${data.desc}</div>
@@ -403,7 +397,7 @@
             document.getElementById('playerView').style.display = 'flex';
             document.getElementById('courseDropdown').style.display = 'block';
             document.getElementById('courseDropdown').value = id;
-            document.getElementById('backToCoursesBtn').style.display = 'flex'; // Show Back button
+            document.getElementById('backToCoursesBtn').style.display = 'flex';
 
             userProgress = JSON.parse(localStorage.getItem('asu_vid_progress_' + id)) || {};
 
@@ -440,11 +434,9 @@
         }
 
         function exitPlayer() {
-            window.history.pushState({}, "", window.location.pathname); // Clear URL
-            // Stop video
+            window.history.pushState({}, "", window.location.pathname);
             document.getElementById('ytPlayer').src = "";
             document.getElementById('localPlayer').pause();
-            
             renderCourseGrid();
         }
 
