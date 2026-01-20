@@ -17,81 +17,109 @@
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #e0e0e0;
-            background: linear-gradient(-45deg, #000000, #1a1a1a, #2b0000, #000000);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            background-color: #0f0f0f;
             display: flex;
             flex-direction: column;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
+        /* --- 1. BIGGER NAVBAR --- */
         .navbar {
-            height: 60px;
-            background: rgba(0,0,0,0.9);
-            border-bottom: 1px solid #333;
+            height: 80px; /* Bigger */
+            background: linear-gradient(to bottom, #1a0000, #000); /* Dark Red tint */
+            border-bottom: 2px solid #9D0208;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
+            padding: 0 30px;
             flex-shrink: 0;
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 4px 20px rgba(157, 2, 8, 0.4);
         }
 
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
 
-        .nav-title { font-weight: bold; font-size: 1.1rem; color: #fff; }
-        .back-btn { text-decoration: none; color: #aaa; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; cursor: pointer; }
-        .back-btn:hover { color: white; }
+        .home-btn { 
+            text-decoration: none; 
+            color: #fff; 
+            font-size: 1.1rem; 
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: 0.3s;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .home-btn:hover { background: #9D0208; }
 
         .course-select {
             background: #222;
             color: #fff;
-            border: 1px solid #444;
-            padding: 5px 10px;
-            border-radius: 5px;
+            border: 1px solid #555;
+            padding: 10px 15px; /* Bigger padding */
+            border-radius: 8px;
             font-family: inherit;
-            font-size: 0.9rem;
+            font-size: 1rem;
             outline: none;
+            cursor: pointer;
         }
 
+        /* --- 2. HERO SECTION (The Big Sign) --- */
+        .hero-banner {
+            background: linear-gradient(135deg, #9D0208 0%, #3a0000 100%);
+            padding: 50px 20px;
+            text-align: center;
+            border-bottom: 1px solid #ff4d4d;
+            box-shadow: 0 0 30px rgba(157, 2, 8, 0.3);
+            margin-bottom: 40px;
+        }
+        
+        .hero-title {
+            color: white;
+            font-size: 3rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 800;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        
+        .hero-subtitle {
+            color: #ffcccc;
+            font-size: 1.2rem;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        /* --- 3. COURSE GRID (Clean, No Icons) --- */
         #courseSelectionView {
-            padding: 40px 20px;
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            width: 100%;
+            padding: 0 20px 40px 20px;
             box-sizing: border-box;
             display: block;
-        }
-
-        .section-title {
-            text-align: center;
-            color: #9D0208;
-            font-size: 2rem;
-            margin-bottom: 30px;
         }
 
         .video-course-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            gap: 25px;
         }
 
         .video-course-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid #333;
-            border-radius: 15px;
-            padding: 20px;
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid #444;
+            border-right: 4px solid #9D0208; /* Red Accent on side */
+            border-radius: 12px;
+            padding: 30px 20px;
             cursor: pointer;
             transition: 0.3s;
             text-align: center;
@@ -99,28 +127,32 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 150px;
+            min-height: 120px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
+        
         .video-course-card:hover {
-            background: rgba(157, 2, 8, 0.2);
-            border-color: #9D0208;
+            background: #2a2a2a;
             transform: translateY(-5px);
+            border-color: #ff4d4d;
+            box-shadow: 0 10px 25px rgba(157, 2, 8, 0.2);
         }
-        .v-card-icon { font-size: 2.5rem; margin-bottom: 15px; display: block; }
-        .v-card-title { font-weight: bold; font-size: 1.1rem; color: white; margin-bottom: 5px; }
-        .v-card-desc { color: #aaa; font-size: 0.85rem; }
 
+        .v-card-title { font-weight: bold; font-size: 1.3rem; color: white; margin-bottom: 8px; }
+        .v-card-desc { color: #aaa; font-size: 0.95rem; }
+
+        /* --- 4. PLAYER VIEW --- */
         #playerView {
             display: none;
             flex: 1;
-            height: calc(100vh - 60px);
+            height: calc(100vh - 80px); /* Adjust for new navbar height */
             overflow: hidden;
             flex-direction: row-reverse; 
         }
 
         .sidebar {
-            width: 300px;
-            background: #151515;
+            width: 320px;
+            background: #111;
             border-right: 1px solid #333; 
             border-left: 1px solid #333;
             display: flex;
@@ -128,29 +160,29 @@
             flex-shrink: 0;
         }
 
-        .course-progress { padding: 20px; border-bottom: 1px solid #333; text-align: right; background: #1a1a1a; }
-        .progress-bar-bg { width: 100%; height: 6px; background: #333; border-radius: 3px; margin-top: 10px; }
-        .progress-bar-fill { height: 100%; background: #2ecc71; border-radius: 3px; width: 0%; transition: width 0.5s; }
+        .course-progress { padding: 25px; border-bottom: 1px solid #333; text-align: right; background: #1a0000; }
+        .progress-bar-bg { width: 100%; height: 8px; background: #333; border-radius: 4px; margin-top: 10px; }
+        .progress-bar-fill { height: 100%; background: #ff4d4d; border-radius: 4px; width: 0%; transition: width 0.5s; }
 
         .module-list { flex: 1; overflow-y: auto; }
-        .module-header { background: #222; padding: 15px 20px; font-weight: bold; color: #ccc; border-bottom: 1px solid #333; text-align: right; }
+        .module-header { background: #222; padding: 15px 20px; font-weight: bold; color: #fff; border-bottom: 1px solid #444; text-align: right; border-right: 3px solid #9D0208; }
         
         .video-item {
-            display: flex; padding: 15px 20px; cursor: pointer;
-            border-bottom: 1px solid #2a2a2a; transition: 0.2s;
+            display: flex; padding: 18px 20px; cursor: pointer;
+            border-bottom: 1px solid #222; transition: 0.2s;
             align-items: center; justify-content: space-between; flex-direction: row-reverse;
         }
-        .video-item:hover { background: #2a2a2a; }
-        .video-item.active { background: rgba(157, 2, 8, 0.15); border-right: 4px solid #9D0208; }
+        .video-item:hover { background: #222; }
+        .video-item.active { background: rgba(157, 2, 8, 0.15); border-right: 4px solid #ff4d4d; }
         .video-item.completed .item-icon { color: #2ecc71; }
-        .video-item.completed .item-title { color: #888; text-decoration: line-through; }
+        .video-item.completed .item-title { color: #777; text-decoration: line-through; }
 
-        .item-title { font-size: 0.9rem; color: #ddd; text-align: right; flex: 1; margin-right: 10px; }
+        .item-title { font-size: 0.95rem; color: #ddd; text-align: right; flex: 1; margin-right: 15px; }
 
         .content-area {
             flex: 1;
             overflow-y: auto;
-            padding: 20px;
+            padding: 30px;
             background: #000;
             display: flex;
             flex-direction: column;
@@ -158,32 +190,34 @@
         }
 
         .video-wrapper {
-            width: 100%; max-width: 1000px; aspect-ratio: 16 / 9;
-            background: #000; border-radius: 8px; overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5); margin-bottom: 20px;
+            width: 100%; max-width: 1100px; aspect-ratio: 16 / 9;
+            background: #000; border-radius: 12px; overflow: hidden;
+            border: 1px solid #333;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6); margin-bottom: 25px;
         }
         iframe, video { width: 100%; height: 100%; border: none; }
 
-        .video-info { width: 100%; max-width: 1000px; text-align: right; }
-        .video-title { font-size: 1.5rem; color: #fff; margin-bottom: 10px; }
-        .video-desc { color: #aaa; line-height: 1.6; font-size: 1rem; }
+        .video-info { width: 100%; max-width: 1100px; text-align: right; }
+        .video-title { font-size: 1.8rem; color: #fff; margin-bottom: 10px; border-bottom: 2px solid #9D0208; padding-bottom: 10px; display: inline-block;}
+        .video-desc { color: #bbb; line-height: 1.7; font-size: 1.05rem; }
 
         .controls {
-            width: 100%; max-width: 1000px; display: flex; justify-content: space-between;
-            margin-top: 20px; padding-top: 20px; border-top: 1px solid #333;
+            width: 100%; max-width: 1100px; display: flex; justify-content: space-between;
+            margin-top: 30px; padding-top: 20px; border-top: 1px solid #333;
         }
         .btn-control {
-            padding: 10px 20px; border-radius: 5px; border: 1px solid #444;
-            background: transparent; color: white; cursor: pointer; font-size: 1rem; transition: 0.3s;
+            padding: 12px 25px; border-radius: 8px; border: 1px solid #555;
+            background: #222; color: white; cursor: pointer; font-size: 1rem; transition: 0.3s; font-weight: bold;
         }
-        .btn-control:hover { background: #333; }
+        .btn-control:hover { background: #333; border-color: #fff; }
         .btn-primary { background: #9D0208; border-color: #9D0208; }
-        .btn-primary:hover { background: #b00209; }
+        .btn-primary:hover { background: #cc020a; border-color: #cc020a; }
 
         @media (max-width: 768px) {
             #playerView { flex-direction: column; }
             .sidebar { width: 100%; height: 40%; order: 2; }
             .content-area { height: 60%; order: 1; }
+            .hero-title { font-size: 2rem; }
         }
     </style>
 </head>
@@ -191,23 +225,34 @@
 
     <div class="navbar">
         <div class="nav-right">
-            <a href="index.html" class="back-btn">🏠 الرئيسية</a>
+            <a href="index.html" class="home-btn">🏠 الرئيسية (Home)</a>
+            
+            <button id="backToCoursesBtn" class="home-btn" style="display: none; background: #9D0208;" onclick="exitPlayer()">
+                📚 قائمة المواد (Courses)
+            </button>
+
             <select id="courseDropdown" class="course-select" onchange="switchCourse(this.value)">
                 <option value="" disabled selected>تغيير المساق (Change Course)</option>
             </select>
         </div>
-        <div class="nav-title" id="pageTitle">Video Courses</div>
+        
+        <div style="color: white; font-weight: bold; font-size: 1.2rem; letter-spacing: 1px;">ASU LEARN</div>
     </div>
 
     <div id="courseSelectionView">
-        <h2 class="section-title">اختر مساقاً للبدء (Choose a Course)</h2>
+        
+        <div class="hero-banner">
+            <h1 class="hero-title">Course Videos</h1>
+            <div class="hero-subtitle">Viewing videos for each course in proper order</div>
+        </div>
+
         <div class="video-course-grid" id="courseGrid"></div>
     </div>
 
     <div id="playerView">
         <div class="sidebar">
             <div class="course-progress">
-                <div style="display:flex; justify-content:space-between;">
+                <div style="display:flex; justify-content:space-between; color: white; font-weight: bold;">
                     <span id="progressText">0%</span>
                     <span>التقدم (Progress)</span>
                 </div>
@@ -236,7 +281,6 @@
         const coursesData = {
             "oop1": {
                 title: "Object-Oriented Programming (1)",
-                icon: "☕",
                 desc: "البرمجة الكينونية (1)",
                 modules: [
                     {
@@ -260,32 +304,32 @@
                     }
                 ]
             },
-            "cpp": { title: "Structured Programming (C++)", icon: "💻", desc: "البرمجة المهيكلة", modules: [] },
-            "dsa": { title: "Data Structures & Algorithms", icon: "🧩", desc: "تراكيب البيانات والخوارزميات", modules: [] },
-            "db": { title: "Database & Applications", icon: "🗄️", desc: "قواعد البيانات وتطبيقاتها", modules: [] },
-            "linear": { title: "Linear Algebra", icon: "📐", desc: "الجبر الخطي", modules: [] },
-            "calc1": { title: "Calculus (1)", icon: "∫", desc: "تفاضل وتكامل (1)", modules: [] },
-            "discrete": { title: "Discrete Structures (1)", icon: "🔢", desc: "تراكيب منفصلة (1)", modules: [] },
-            "prob": { title: "Probability & Statistics", icon: "📊", desc: "الاحتمالات والإحصاء", modules: [] },
-            "num": { title: "Numerical Analysis", icon: "📈", desc: "التحليل العددي", modules: [] },
-            "techwrite": { title: "Technical Writing", icon: "📝", desc: "مهارات الكتابة الفنية", modules: [] },
-            "ethics": { title: "Computing Ethics", icon: "⚖️", desc: "أخلاقيات الحاسوب", modules: [] },
-            "web": { title: "Web-Based Programming", icon: "🌐", desc: "برمجة تطبيقات الويب", modules: [] },
-            "digital": { title: "Digital Systems", icon: "🔌", desc: "النظم الرقمية", modules: [] },
-            "arch": { title: "Comp. Org. & Architecture", icon: "🏗️", desc: "تنظيم وعمارة الحاسوب", modules: [] },
-            "assembly": { title: "Assembly Language", icon: "⚙️", desc: "لغة التجميع", modules: [] },
-            "cyber_intro": { title: "Intro to Cybersecurity", icon: "🔒", desc: "مقدمة في الأمن السيبراني", modules: [] },
-            "cyber_prog": { title: "Cybersecurity Programming", icon: "🐍", desc: "البرمجة للأمن السيبراني", modules: [] },
-            "os_cyber": { title: "OS for Cyber", icon: "🐧", desc: "نظم التشغيل للأمن", modules: [] },
-            "net_sec": { title: "Network Security", icon: "🛡️", desc: "أمن الشبكات", modules: [] },
-            "eth_hack": { title: "Ethical Hacking", icon: "🕵️", desc: "القرصنة الأخلاقية", modules: [] },
-            "forensics": { title: "Digital Forensics", icon: "🔍", desc: "التحقيق الرقمي", modules: [] },
-            "ai_prog": { title: "AI Programming", icon: "🤖", desc: "برمجة الذكاء الاصطناعي", modules: [] },
-            "ml": { title: "Machine Learning", icon: "🧠", desc: "تعلم الآلة", modules: [] },
-            "dl": { title: "Deep Learning", icon: "🕸️", desc: "التعلم العميق", modules: [] },
-            "nlp": { title: "NLP", icon: "🗣️", desc: "معالجة اللغات", modules: [] },
-            "game_ai": { title: "AI for Gaming", icon: "🎮", desc: "الذكاء الاصطناعي للألعاب", modules: [] },
-            "unity": { title: "Game Development", icon: "🕹️", desc: "تطوير الألعاب", modules: [] }
+            "cpp": { title: "Structured Programming (C++)", desc: "البرمجة المهيكلة", modules: [] },
+            "dsa": { title: "Data Structures & Algorithms", desc: "تراكيب البيانات والخوارزميات", modules: [] },
+            "db": { title: "Database & Applications", desc: "قواعد البيانات وتطبيقاتها", modules: [] },
+            "linear": { title: "Linear Algebra", desc: "الجبر الخطي", modules: [] },
+            "calc1": { title: "Calculus (1)", desc: "تفاضل وتكامل (1)", modules: [] },
+            "discrete": { title: "Discrete Structures (1)", desc: "تراكيب منفصلة (1)", modules: [] },
+            "prob": { title: "Probability & Statistics", desc: "الاحتمالات والإحصاء", modules: [] },
+            "num": { title: "Numerical Analysis", desc: "التحليل العددي", modules: [] },
+            "techwrite": { title: "Technical Writing", desc: "مهارات الكتابة الفنية", modules: [] },
+            "ethics": { title: "Computing Ethics", desc: "أخلاقيات الحاسوب", modules: [] },
+            "web": { title: "Web-Based Programming", desc: "برمجة تطبيقات الويب", modules: [] },
+            "digital": { title: "Digital Systems", desc: "النظم الرقمية", modules: [] },
+            "arch": { title: "Comp. Org. & Architecture", desc: "تنظيم وعمارة الحاسوب", modules: [] },
+            "assembly": { title: "Assembly Language", desc: "لغة التجميع", modules: [] },
+            "cyber_intro": { title: "Intro to Cybersecurity", desc: "مقدمة في الأمن السيبراني", modules: [] },
+            "cyber_prog": { title: "Cybersecurity Programming", desc: "البرمجة للأمن السيبراني", modules: [] },
+            "os_cyber": { title: "OS for Cyber", desc: "نظم التشغيل للأمن", modules: [] },
+            "net_sec": { title: "Network Security", desc: "أمن الشبكات", modules: [] },
+            "eth_hack": { title: "Ethical Hacking", desc: "القرصنة الأخلاقية", modules: [] },
+            "forensics": { title: "Digital Forensics", desc: "التحقيق الرقمي", modules: [] },
+            "ai_prog": { title: "AI Programming", desc: "برمجة الذكاء الاصطناعي", modules: [] },
+            "ml": { title: "Machine Learning", desc: "تعلم الآلة", modules: [] },
+            "dl": { title: "Deep Learning", desc: "التعلم العميق", modules: [] },
+            "nlp": { title: "NLP", desc: "معالجة اللغات", modules: [] },
+            "game_ai": { title: "AI for Gaming", desc: "الذكاء الاصطناعي للألعاب", modules: [] },
+            "unity": { title: "Game Development", desc: "تطوير الألعاب", modules: [] }
         };
 
         let currentCourseId = null;
@@ -321,8 +365,8 @@
         function renderCourseGrid() {
             document.getElementById('courseSelectionView').style.display = 'block';
             document.getElementById('playerView').style.display = 'none';
-            document.getElementById('pageTitle').innerText = "Video Courses";
             document.getElementById('courseDropdown').style.display = 'none';
+            document.getElementById('backToCoursesBtn').style.display = 'none'; // Hide Back button
 
             const grid = document.getElementById('courseGrid');
             grid.innerHTML = "";
@@ -334,8 +378,9 @@
                     window.history.pushState({}, "", `?id=${key}`);
                     openPlayer(key);
                 };
+                
+                // NO ICONS - Text Only
                 card.innerHTML = `
-                    <span class="v-card-icon">${data.icon}</span>
                     <div class="v-card-title">${data.title}</div>
                     <div class="v-card-desc">${data.desc}</div>
                 `;
@@ -358,8 +403,7 @@
             document.getElementById('playerView').style.display = 'flex';
             document.getElementById('courseDropdown').style.display = 'block';
             document.getElementById('courseDropdown').value = id;
-            
-            document.getElementById('pageTitle').innerText = course.title;
+            document.getElementById('backToCoursesBtn').style.display = 'flex'; // Show Back button
 
             userProgress = JSON.parse(localStorage.getItem('asu_vid_progress_' + id)) || {};
 
@@ -393,6 +437,15 @@
 
             updateProgressBar();
             loadVideo(0);
+        }
+
+        function exitPlayer() {
+            window.history.pushState({}, "", window.location.pathname); // Clear URL
+            // Stop video
+            document.getElementById('ytPlayer').src = "";
+            document.getElementById('localPlayer').pause();
+            
+            renderCourseGrid();
         }
 
         function loadVideo(index) {
