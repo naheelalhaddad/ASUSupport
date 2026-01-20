@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FNTBG5RY0T"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FNTBG5RY0T');
+    </script>
+    
+    <title>ASU Learn - Video Courses</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { 
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #e0e0e0;
+            background: linear-gradient(-45deg, #000000, #1a1a1a, #2b0000, #000000);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .navbar {
+            height: 60px;
+            background: rgba(0,0,0,0.9);
+            border-bottom: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-title { font-weight: bold; font-size: 1.1rem; color: #fff; }
+        .back-btn { text-decoration: none; color: #aaa; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; cursor: pointer; }
+        .back-btn:hover { color: white; }
+
+        .course-select {
+            background: #222;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        #courseSelectionView {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+            display: block;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #9D0208;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .video-course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .video-course-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 150px;
+        }
+        .video-course-card:hover {
+            background: rgba(157, 2, 8, 0.2);
+            border-color: #9D0208;
+            transform: translateY(-5px);
+        }
+        .v-card-icon { font-size: 2.5rem; margin-bottom: 15px; display: block; }
+        .v-card-title { font-weight: bold; font-size: 1.1rem; color: white; margin-bottom: 5px; }
+        .v-card-desc { color: #aaa; font-size: 0.85rem; }
+
+        #playerView {
+            display: none;
+            flex: 1;
+            height: calc(100vh - 60px);
+            overflow: hidden;
+            flex-direction: row-reverse; 
+        }
+
+        .sidebar {
+            width: 300px;
+            background: #151515;
+            border-right: 1px solid #333; 
+            border-left: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        .course-progress { padding: 20px; border-bottom: 1px solid #333; text-align: right; background: #1a1a1a; }
+        .progress-bar-bg { width: 100%; height: 6px; background: #333; border-radius: 3px; margin-top: 10px; }
+        .progress-bar-fill { height: 100%; background: #2ecc71; border-radius: 3px; width: 0%; transition: width 0.5s; }
+
+        .module-list { flex: 1; overflow-y: auto; }
+        .module-header { background: #222; padding: 15px 20px; font-weight: bold; color: #ccc; border-bottom: 1px solid #333; text-align: right; }
+        
+        .video-item {
+            display: flex; padding: 15px 20px; cursor: pointer;
+            border-bottom: 1px solid #2a2a2a; transition: 0.2s;
+            align-items: center; justify-content: space-between; flex-direction: row-reverse;
+        }
+        .video-item:hover { background: #2a2a2a; }
+        .video-item.active { background: rgba(157, 2, 8, 0.15); border-right: 4px solid #9D0208; }
+        .video-item.completed .item-icon { color: #2ecc71; }
+        .video-item.completed .item-title { color: #888; text-decoration: line-through; }
+
+        .item-title { font-size: 0.9rem; color: #ddd; text-align: right; flex: 1; margin-right: 10px; }
+
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .video-wrapper {
+            width: 100%; max-width: 1000px; aspect-ratio: 16 / 9;
+            background: #000; border-radius: 8px; overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5); margin-bottom: 20px;
+        }
+        iframe, video { width: 100%; height: 100%; border: none; }
+
+        .video-info { width: 100%; max-width: 1000px; text-align: right; }
+        .video-title { font-size: 1.5rem; color: #fff; margin-bottom: 10px; }
+        .video-desc { color: #aaa; line-height: 1.6; font-size: 1rem; }
+
+        .controls {
+            width: 100%; max-width: 1000px; display: flex; justify-content: space-between;
+            margin-top: 20px; padding-top: 20px; border-top: 1px solid #333;
+        }
+        .btn-control {
+            padding: 10px 20px; border-radius: 5px; border: 1px solid #444;
+            background: transparent; color: white; cursor: pointer; font-size: 1rem; transition: 0.3s;
+        }
+        .btn-control:hover { background: #333; }
+        .btn-primary { background: #9D0208; border-color: #9D0208; }
+        .btn-primary:hover { background: #b00209; }
+
+        @media (max-width: 768px) {
+            #playerView { flex-direction: column; }
+            .sidebar { width: 100%; height: 40%; order: 2; }
+            .content-area { height: 60%; order: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="nav-right">
+            <a href="index.html" class="back-btn">🏠 الرئيسية</a>
+            <select id="courseDropdown" class="course-select" onchange="switchCourse(this.value)">
+                <option value="" disabled selected>تغيير المساق (Change Course)</option>
+            </select>
+        </div>
+        <div class="nav-title" id="pageTitle">Video Courses</div>
+    </div>
+
+    <div id="courseSelectionView">
+        <h2 class="section-title">اختر مساقاً للبدء (Choose a Course)</h2>
+        <div class="video-course-grid" id="courseGrid"></div>
+    </div>
+
+    <div id="playerView">
+        <div class="sidebar">
+            <div class="course-progress">
+                <div style="display:flex; justify-content:space-between;">
+                    <span id="progressText">0%</span>
+                    <span>التقدم (Progress)</span>
+                </div>
+                <div class="progress-bar-bg"><div id="progressBar" class="progress-bar-fill"></div></div>
+            </div>
+            <div class="module-list" id="moduleList"></div>
+        </div>
+
+        <div class="content-area">
+            <div class="video-wrapper">
+                <iframe id="ytPlayer" src="" allowfullscreen style="display:none;"></iframe>
+                <video id="localPlayer" controls style="display:none;"><source id="localSource" src="" type="video/mp4"></video>
+            </div>
+            <div class="video-info">
+                <h2 id="currentVideoTitle" class="video-title">...</h2>
+                <p id="currentVideoDesc" class="video-desc">...</p>
+            </div>
+            <div class="controls">
+                <button class="btn-control" id="prevBtn" onclick="prevVideo()">السابق (Prev)</button>
+                <button class="btn-control btn-primary" id="nextBtn" onclick="markAndNext()">إكمال (Next)</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const coursesData = {
+            "oop1": {
+                title: "Object-Oriented Programming (1)",
+                icon: "☕",
+                desc: "البرمجة الكينونية (1)",
+                modules: [
+                    {
+                        title: "Midterm Revision",
+                        videos: [
+                            { 
+                                id: "oop1_mid_rev", 
+                                title: "Midterm Revision Session (Complete)", 
+                                type: "youtube", 
+                                src: "https://youtu.be/U004Ow6Lji0", 
+                                desc: "Full revision session covering Chapters 1-4 for the midterm exam." 
+                            }
+                        ]
+                    }
+                ]
+            },
+            "cpp": { title: "Structured Programming (C++)", icon: "💻", desc: "البرمجة المهيكلة", modules: [] },
+            "dsa": { title: "Data Structures & Algorithms", icon: "🧩", desc: "تراكيب البيانات والخوارزميات", modules: [] },
+            "db": { title: "Database & Applications", icon: "🗄️", desc: "قواعد البيانات وتطبيقاتها", modules: [] },
+            "linear": { title: "Linear Algebra", icon: "📐", desc: "الجبر الخطي", modules: [] },
+            "calc1": { title: "Calculus (1)", icon: "∫", desc: "تفاضل وتكامل (1)", modules: [] },
+            "discrete": { title: "Discrete Structures (1)", icon: "🔢", desc: "تراكيب منفصلة (1)", modules: [] },
+            "prob": { title: "Probability & Statistics", icon: "📊", desc: "الاحتمالات والإحصاء", modules: [] },
+            "num": { title: "Numerical Analysis", icon: "📈", desc: "التحليل العددي", modules: [] },
+            "techwrite": { title: "Technical Writing", icon: "📝", desc: "مهارات الكتابة الفنية", modules: [] },
+            "ethics": { title: "Computing Ethics", icon: "⚖️", desc: "أخلاقيات الحاسوب", modules: [] },
+            "web": { title: "Web-Based Programming", icon: "🌐", desc: "برمجة تطبيقات الويب", modules: [] },
+            "digital": { title: "Digital Systems", icon: "🔌", desc: "النظم الرقمية", modules: [] },
+            "arch": { title: "Comp. Org. & Architecture", icon: "🏗️", desc: "تنظيم وعمارة الحاسوب", modules: [] },
+            "assembly": { title: "Assembly Language", icon: "⚙️", desc: "لغة التجميع", modules: [] },
+            "cyber_intro": { title: "Intro to Cybersecurity", icon: "🔒", desc: "مقدمة في الأمن السيبراني", modules: [] },
+            "cyber_prog": { title: "Cybersecurity Programming", icon: "🐍", desc: "البرمجة للأمن السيبراني", modules: [] },
+            "os_cyber": { title: "OS for Cyber", icon: "🐧", desc: "نظم التشغيل للأمن", modules: [] },
+            "net_sec": { title: "Network Security", icon: "🛡️", desc: "أمن الشبكات", modules: [] },
+            "eth_hack": { title: "Ethical Hacking", icon: "🕵️", desc: "القرصنة الأخلاقية", modules: [] },
+            "forensics": { title: "Digital Forensics", icon: "🔍", desc: "التحقيق الرقمي", modules: [] },
+            "ai_prog": { title: "AI Programming", icon: "🤖", desc: "برمجة الذكاء الاصطناعي", modules: [] },
+            "ml": { title: "Machine Learning", icon: "🧠", desc: "تعلم الآلة", modules: [] },
+            "dl": { title: "Deep Learning", icon: "🕸️", desc: "التعلم العميق", modules: [] },
+            "nlp": { title: "NLP", icon: "🗣️", desc: "معالجة اللغات", modules: [] },
+            "game_ai": { title: "AI for Gaming", icon: "🎮", desc: "الذكاء الاصطناعي للألعاب", modules: [] },
+            "unity": { title: "Game Development", icon: "🕹️", desc: "تطوير الألعاب", modules: [] }
+        };
+
+        let currentCourseId = null;
+        let flatList = [];
+        let currentIndex = 0;
+        let userProgress = {};
+
+        function init() {
+            const dropdown = document.getElementById('courseDropdown');
+            for (const [key, data] of Object.entries(coursesData)) {
+                const option = document.createElement('option');
+                option.value = key;
+                option.innerText = data.title;
+                dropdown.appendChild(option);
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const courseId = urlParams.get('id');
+
+            if(courseId && coursesData[courseId]) {
+                openPlayer(courseId);
+                dropdown.value = courseId;
+            } else {
+                renderCourseGrid();
+            }
+        }
+
+        function switchCourse(id) {
+            window.history.pushState({}, "", `?id=${id}`);
+            openPlayer(id);
+        }
+
+        function renderCourseGrid() {
+            document.getElementById('courseSelectionView').style.display = 'block';
+            document.getElementById('playerView').style.display = 'none';
+            document.getElementById('pageTitle').innerText = "Video Courses";
+            document.getElementById('courseDropdown').style.display = 'none';
+
+            const grid = document.getElementById('courseGrid');
+            grid.innerHTML = "";
+
+            for (const [key, data] of Object.entries(coursesData)) {
+                const card = document.createElement('div');
+                card.className = 'video-course-card';
+                card.onclick = () => {
+                    window.history.pushState({}, "", `?id=${key}`);
+                    openPlayer(key);
+                };
+                card.innerHTML = `
+                    <span class="v-card-icon">${data.icon}</span>
+                    <div class="v-card-title">${data.title}</div>
+                    <div class="v-card-desc">${data.desc}</div>
+                `;
+                grid.appendChild(card);
+            }
+        }
+
+        function openPlayer(id) {
+            currentCourseId = id;
+            const course = coursesData[id];
+            
+            if (!course.modules || course.modules.length === 0) {
+                alert("Coming Soon! No videos uploaded for this course yet.");
+                window.history.pushState({}, "", window.location.pathname);
+                renderCourseGrid();
+                return;
+            }
+
+            document.getElementById('courseSelectionView').style.display = 'none';
+            document.getElementById('playerView').style.display = 'flex';
+            document.getElementById('courseDropdown').style.display = 'block';
+            document.getElementById('courseDropdown').value = id;
+            
+            document.getElementById('pageTitle').innerText = course.title;
+
+            userProgress = JSON.parse(localStorage.getItem('asu_vid_progress_' + id)) || {};
+
+            const listContainer = document.getElementById('moduleList');
+            listContainer.innerHTML = "";
+            flatList = [];
+
+            course.modules.forEach(mod => {
+                const header = document.createElement('div');
+                header.className = 'module-header';
+                header.innerText = mod.title;
+                listContainer.appendChild(header);
+
+                mod.videos.forEach(vid => {
+                    flatList.push(vid);
+                    const idx = flatList.length - 1;
+                    
+                    const item = document.createElement('div');
+                    item.className = 'video-item';
+                    item.id = `item-${idx}`;
+                    if(userProgress[vid.id]) item.classList.add('completed');
+                    item.onclick = () => loadVideo(idx);
+
+                    item.innerHTML = `
+                        <div class="item-title">${vid.title}</div>
+                        <div class="item-icon">${userProgress[vid.id] ? '✓' : '▶'}</div>
+                    `;
+                    listContainer.appendChild(item);
+                });
+            });
+
+            updateProgressBar();
+            loadVideo(0);
+        }
+
+        function loadVideo(index) {
+            if(flatList.length === 0) return;
+            currentIndex = index;
+            const vid = flatList[index];
+
+            document.querySelectorAll('.video-item').forEach(el => el.classList.remove('active'));
+            document.getElementById(`item-${index}`).classList.add('active');
+
+            document.getElementById('currentVideoTitle').innerText = vid.title;
+            document.getElementById('currentVideoDesc').innerText = vid.desc || "";
+
+            const yt = document.getElementById('ytPlayer');
+            const loc = document.getElementById('localPlayer');
+            
+            yt.src = ""; loc.pause();
+
+            if (vid.type === 'youtube') {
+                loc.style.display = 'none';
+                yt.style.display = 'block';
+                let src = vid.src;
+                if(src.includes("watch?v=")) src = src.replace("watch?v=", "embed/");
+                if(src.includes("youtu.be/")) src = src.replace("youtu.be/", "www.youtube.com/embed/");
+                yt.src = src;
+            } else {
+                yt.style.display = 'none';
+                loc.style.display = 'block';
+                document.getElementById('localSource').src = vid.src;
+                loc.load();
+            }
+        }
+
+        function markAndNext() {
+            if(flatList.length === 0) return;
+            const vid = flatList[currentIndex];
+            userProgress[vid.id] = true;
+            localStorage.setItem('asu_vid_progress_' + currentCourseId, JSON.stringify(userProgress));
+
+            const item = document.getElementById(`item-${currentIndex}`);
+            item.classList.add('completed');
+            item.querySelector('.item-icon').innerText = '✓';
+            updateProgressBar();
+
+            if (currentIndex < flatList.length - 1) {
+                loadVideo(currentIndex + 1);
+            }
+        }
+
+        function prevVideo() {
+            if (currentIndex > 0) loadVideo(currentIndex - 1);
+        }
+
+        function updateProgressBar() {
+            if(flatList.length === 0) return;
+            const total = flatList.length;
+            const done = Object.keys(userProgress).length;
+            const pct = Math.round((done / total) * 100);
+            document.getElementById('progressBar').style.width = pct + "%";
+            document.getElementById('progressText').innerText = pct + "%";
+        }
+
+        init();
+    </script>
+</body>
+</html>
