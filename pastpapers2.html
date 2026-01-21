@@ -9,10 +9,9 @@
       gtag('config', 'G-FNTBG5RY0T');
     </script>
     
-    <title>ASU Bank - المواد الدراسية</title>
+    <title>ASU Bank - Study Materials</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* --- VISUAL STYLE --- */
         body { 
             margin: 0;
             min-height: 100vh;
@@ -33,9 +32,8 @@
             100% { background-position: 0% 50%; }
         }
 
-        h1 { margin-bottom: 20px; text-shadow: 0 0 10px #9D0208; }
+        h1 { margin-bottom: 20px; text-shadow: 0 0 10px #9D0208; font-size: 2.2rem; }
 
-        /* --- SEARCH BOX --- */
         .search-container {
             width: 100%;
             max-width: 600px;
@@ -56,15 +54,15 @@
             transition: 0.3s;
             box-sizing: border-box;
         }
-        .search-box:focus { box-shadow: 0 0 25px rgba(157, 2, 8, 0.5); }
+        .search-box:focus { box-shadow: 0 0 25px rgba(157, 2, 8, 0.5); background: rgba(0,0,0,0.8); }
 
-        /* --- ACCORDION STYLES --- */
         .accordion-container {
             width: 100%;
             max-width: 1000px;
             display: flex;
             flex-direction: column;
             gap: 15px;
+            flex: 1; 
         }
 
         .accordion-btn {
@@ -75,7 +73,7 @@
             width: 100%;
             border: 1px solid #444;
             text-align: right;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: bold;
             transition: 0.4s;
             border-radius: 15px;
@@ -115,7 +113,6 @@
             padding: 20px 15px;
         }
 
-        /* --- COURSE CARD STYLES --- */
         .courses-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -168,7 +165,6 @@
             text-transform: uppercase;
         }
 
-        /* --- MODAL --- */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -207,7 +203,6 @@
         .modal-title { color: #9D0208; font-size: 1.4rem; margin-bottom: 5px; font-weight: bold; direction: ltr; }
         .modal-subtitle { color: #ccc; font-size: 1rem; margin-bottom: 25px; direction: rtl; }
 
-        /* Standard Button */
         .resource-btn {
             display: flex;
             align-items: center;
@@ -227,7 +222,6 @@
         }
         .resource-btn:hover { background: #9D0208; border-color: #9D0208; transform: translateY(-2px); }
 
-        /* Dropdown Button (Accordion) */
         .dropdown-btn {
             background: rgba(157, 2, 8, 0.1);
             border: 1px solid #9D0208;
@@ -268,12 +262,48 @@
         .file-link:last-child { border-bottom: none; }
         .file-link:hover { color: #9D0208; padding-right: 10px; }
 
-        /* --- PDF VIEWER --- */
         #pdfViewerModal { z-index: 3000; }
         #pdfViewerContent { width: 95%; height: 90%; max-width: 1000px; padding: 0; background: #000; display: flex; flex-direction: column; }
         #pdfFrame { width: 100%; height: 100%; border: none; background: white; }
-        .pdf-header { padding: 10px; background: #9D0208; color: white; display: flex; justify-content: space-between; align-items: center; }
-        .btn-close-pdf { background: white; color: #9D0208; border: none; padding: 5px 15px; font-weight: bold; cursor: pointer; border-radius: 5px; }
+        .pdf-header { padding: 15px; background: #9D0208; color: white; display: flex; justify-content: space-between; align-items: center; }
+        .btn-close-pdf { background: white; color: #9D0208; border: none; padding: 8px 20px; font-weight: bold; cursor: pointer; border-radius: 5px; }
+
+        .no-results {
+            color: #aaa;
+            margin-top: 20px;
+            display: none;
+            font-size: 1.1rem;
+        }
+
+        .nav-links { margin-top: 40px; display: flex; flex-direction: column; gap: 15px; padding-bottom: 20px; }
+        
+        .home-link { 
+            color: #9D0208; 
+            font-weight: bold; 
+            text-decoration: none; 
+            border: 1px solid #9D0208; 
+            padding: 10px 20px; 
+            border-radius: 20px; 
+            transition: 0.3s; 
+        }
+        .home-link:hover { background: #9D0208; color: white; }
+
+        .back-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #ccc;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        .back-btn:hover { 
+            background: white; 
+            color: black; 
+            box-shadow: 0 0 15px white;
+        }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -288,7 +318,14 @@
         <input type="text" id="searchInput" class="search-box" placeholder="ابحث عن اسم المادة... (Search Course)">
     </div>
 
+    <div id="noResults" class="no-results">⚠️ لا يوجد مواد تطابق بحثك</div>
+
     <div id="accordionWrapper" class="accordion-container"></div>
+
+    <div class="nav-links">
+        <a href="index.html" class="home-link">🏠 القائمة الرئيسية (Main Menu)</a>
+        <a href="groups.html" class="back-btn">← العودة لصفحة المجموعات</a>
+    </div>
 
     <div id="resourceModal" class="modal-overlay">
         <div class="modal-content" id="modalBodyContent">
@@ -306,9 +343,6 @@
     </div>
 
     <script>
-        // ==========================================
-        // CONFIGURATION: DATA
-        // ==========================================
         const majors = [
             { id: "cs", title: "علم الحاسوب (CS)", icon: "💻" },
             { id: "se", title: "هندسة البرمجيات (SE)", icon: "⚙️" },
@@ -318,7 +352,6 @@
         ];
 
         const courses = [
-            // === SPECIAL: JAVA ===
             { 
                 name: "Object-Oriented Programming (1)", 
                 arabic: "البرمجة الكينونية (1)", 
@@ -361,7 +394,6 @@
                 }
             },
 
-            // === GENERIC COURSES ===
             { name: "Structured Programming (C++)", arabic: "البرمجة المهيكلة", tags: ["cs", "se", "cyber", "ai", "gaming"], file: "#" },
             { name: "Data Structures & Algorithms", arabic: "تراكيب البيانات والخوارزميات", tags: ["cs", "se", "cyber", "ai", "gaming"], file: "#" },
             { name: "Database & Applications", arabic: "قواعد البيانات وتطبيقاتها", tags: ["cs", "se", "cyber", "ai", "gaming"], file: "#" },
@@ -377,7 +409,6 @@
             { name: "Comp. Org. & Architecture", arabic: "تنظيم وعمارة الحاسوب", tags: ["cs", "cyber", "gaming"], file: "#" },
             { name: "Assembly Language", arabic: "لغة التجميع", tags: ["cs", "cyber", "gaming"], file: "#" },
 
-            // --- Cybersecurity Specific ---
             { name: "Introduction to Cybersecurity", arabic: "مقدمة في الأمن السيبراني", tags: ["cyber"], file: "#" },
             { name: "Cybersecurity Programming", arabic: "البرمجة للأمن السيبراني", tags: ["cyber"], file: "#" },
             { name: "Operating Systems for Cyber", arabic: "نظم التشغيل للأمن السيبراني", tags: ["cyber"], file: "#" },
@@ -399,7 +430,6 @@
             { name: "Network Security", arabic: "أمن الشبكات", tags: ["cyber"], file: "#" },
             { name: "Principles of Cloud Comp.", arabic: "مبادئ الحوسبة السحابية", tags: ["cyber"], file: "#" },
 
-            // --- Gaming Specific ---
             { name: "AI Programming for Gaming", arabic: "برمجة الذكاء الاصطناعي للألعاب", tags: ["gaming"], file: "#" },
             { name: "Animate 2D and 3D Models", arabic: "تحريك النماذج ثنائية وثلاثية الأبعاد", tags: ["gaming"], file: "#" },
             { name: "Computer Drawing Principles", arabic: "مبادئ الرسم الحاسوبي", tags: ["gaming"], file: "#" },
@@ -413,7 +443,6 @@
             { name: "Multimedia Systems", arabic: "نظم الوسائط المتعددة", tags: ["gaming"], file: "#" },
             { name: "Storyboard Design", arabic: "تصميم القصص المصورة للألعاب", tags: ["gaming"], file: "#" },
 
-            // --- AI Specific ---
             { name: "AI Programming", arabic: "برمجة الذكاء الاصطناعي", tags: ["ai"], file: "#" },
             { name: "Neural Networks & Deep Learning", arabic: "الشبكات العصبية والتعلم العميق", tags: ["ai"], file: "#" },
             { name: "Big Data Analysis", arabic: "تحليل البيانات الضخمة", tags: ["ai"], file: "#" },
@@ -432,7 +461,6 @@
             { name: "VR and AR Technology", arabic: "تكنولوجيا الواقع الافتراضي والمعزز", tags: ["ai"], file: "#" },
             { name: "Visual Data", arabic: "البيانات المرئية", tags: ["ai"], file: "#" },
             
-            // --- CS Specific ---
             { name: "Visual Programming (Flutter)", arabic: "البرمجة المرئية", tags: ["cs", "ai", "gaming"], file: "#" },
             { name: "Algorithms (Algo)", arabic: "تصميم وتحليل الخوارزميات", tags: ["cs", "ai", "gaming"], file: "#" },
             { name: "Theory of Computation", arabic: "نظرية الحوسبة", tags: ["cs"], file: "#" },
@@ -440,7 +468,6 @@
             { name: "Parallel Programming", arabic: "البرمجة المتوازية", tags: ["cs"], file: "#" },
             { name: "Operating Systems (OS)", arabic: "نظم التشغيل", tags: ["cs", "se"], file: "#" },
 
-            // --- SE Specific ---
             { name: "Intro to Software Eng.", arabic: "مقدمة في هندسة البرمجيات", tags: ["se"], file: "#" },
             { name: "Software Architecture", arabic: "عمارة البرمجيات", tags: ["se"], file: "#" },
             { name: "Software Testing", arabic: "فحص البرمجيات", tags: ["se"], file: "#" },
@@ -451,9 +478,6 @@
             { name: "Software Quality", arabic: "جودة البرمجيات", tags: ["se"], file: "#" }
         ];
 
-        // ==========================================
-        // UI LOGIC
-        // ==========================================
         const wrapper = document.getElementById('accordionWrapper');
 
         function init() {
@@ -511,17 +535,19 @@
             return card;
         }
 
-        // ==========================================
-        // SEARCH
-        // ==========================================
         document.getElementById('searchInput').addEventListener('input', function() {
             const query = this.value.toLowerCase();
             const cards = document.querySelectorAll('.course-card');
             const panels = document.querySelectorAll('.panel');
+            let hasResults = false;
 
             cards.forEach(card => {
-                card.style.display = card.dataset.name.includes(query) ? 'flex' : 'none';
+                const matches = card.dataset.name.includes(query);
+                card.style.display = matches ? 'flex' : 'none';
+                if(matches) hasResults = true;
             });
+
+            document.getElementById('noResults').style.display = hasResults ? 'none' : 'block';
 
             if(query.length > 0) {
                 panels.forEach(p => {
@@ -544,9 +570,6 @@
             }
         });
 
-        // ==========================================
-        // MODAL & FILE VIEWER
-        // ==========================================
         const menuModal = document.getElementById('resourceModal');
         const modalBody = document.getElementById('modalBodyContent');
         const pdfModal = document.getElementById('pdfViewerModal');

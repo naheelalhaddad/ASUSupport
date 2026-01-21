@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FNTBG5RY0T"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FNTBG5RY0T"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-FNTBG5RY0T');
-</script>
-    <title>ASU FIT Hub</title>
+      gtag('config', 'G-FNTBG5RY0T');
+    </script>
+    
+    <title>ASU Support - Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        
         body { 
             margin: 0;
             min-height: 100vh;
@@ -37,9 +36,16 @@
         }
 
         /* LOGO AREA */
+        .logo-box {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
         .logo-box img { 
             height: 100px; 
-            margin: 0 15px; 
             filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
             animation: float 6s ease-in-out infinite;
         }
@@ -51,24 +57,29 @@
         }
 
         .glass-container {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(20, 20, 20, 0.6);
             backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
             padding: 40px;
             max-width: 600px;
             width: 100%;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            margin-top: 30px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            margin-top: 10px;
             opacity: 0;
             animation: slideUp 1s ease forwards;
         }
 
-        h1 { font-size: 2.2rem; margin-bottom: 20px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+        h1 { 
+            font-size: 2.2rem; 
+            margin-bottom: 20px; 
+            text-shadow: 0 0 15px rgba(157, 2, 8, 0.6); 
+            font-weight: 800;
+        }
 
-        .welcome-ar { font-size: 1.1rem; color: #eee; margin-bottom: 15px; }
-        .divider { height: 1px; background: linear-gradient(90deg, transparent, #9D0208, transparent); margin: 15px 0; }
-        .welcome-en { font-size: 1rem; color: #ccc; font-weight: 300; }
+        .welcome-ar { font-size: 1.1rem; color: #eee; margin-bottom: 15px; line-height: 1.6; }
+        .divider { height: 1px; background: linear-gradient(90deg, transparent, #9D0208, transparent); margin: 20px 0; }
+        .welcome-en { font-size: 1rem; color: #ccc; font-weight: 400; line-height: 1.5; }
 
         .menu-btn {
             display: block;
@@ -78,19 +89,40 @@
             font-weight: bold;
             text-decoration: none;
             color: white;
-            border-radius: 50px;
-            background: linear-gradient(90deg, transparent 0%, rgba(157, 2, 8, 0.2) 50%, transparent 100%);
-            border: 1px solid #9D0208;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .menu-btn:hover {
-            background: #9D0208;
-            box-shadow: 0 0 20px #9D0208;
-            transform: scale(1.02);
+            background: rgba(157, 2, 8, 0.2);
+            border-color: #9D0208;
+            box-shadow: 0 0 20px rgba(157, 2, 8, 0.4);
+            transform: translateY(-3px);
         }
 
-        .footer { margin-top: 40px; color: #666; font-size: 0.8rem; letter-spacing: 1px; }
+        /* FOOTER STYLES */
+        .footer { 
+            margin-top: 40px; 
+            color: #888; 
+            font-size: 0.9rem; 
+            letter-spacing: 0.5px; 
+            opacity: 0.9;
+            line-height: 1.6;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .footer strong { color: #fff; }
+        .footer-sub { font-size: 0.8rem; color: #666; margin-top: 10px; }
 
         @keyframes slideUp {
             from { transform: translateY(50px); opacity: 0; }
@@ -124,20 +156,32 @@
         <br>
 
         <a href="plans.html" class="menu-btn">
-            📄 الخطط الدراسية (Study Plans)
+            <span>📄</span> 
+            <span>الخطط الدراسية (Study Plans)</span>
         </a>
         
         <a href="registration.html" class="menu-btn">
-            🎓 خطوات التسجيل (Registration Steps)
+            <span>🎓</span>
+            <span>خطوات التسجيل (Registration Steps)</span>
         </a>
 
         <a href="advice.html" class="menu-btn">
-            💡 نصائح وإرشادات (Helpful Guides)
+            <span>💡</span>
+            <span>نصائح وإرشادات (Helpful Guides)</span>
         </a>
 
     </div>
 
-    <p class="footer">© 2026 E-Library Hub | ASU Academy</p>
+    <div class="footer">
+        <strong>ASU Academy | Faculty of Information Technology</strong><br>
+        <div style="margin-top: 10px; font-size: 0.85rem; color: #aaa;">
+            Special Thanks to:<br>
+            <span style="color: #9D0208;">Dean:</span> Dr. Yousef AlQasrawi<br>
+            <span style="color: #9D0208;">Vice Dean:</span> Dr. Mohammad Hijjawi<br>
+            <span style="color: #9D0208;">Supervisor:</span> Inst. Rawan Jarrar
+        </div>
+        <div class="footer-sub">© 2026 E-Library Hub</div>
+    </div>
 
 </body>
 </html>

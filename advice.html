@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-        <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FNTBG5RY0T"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FNTBG5RY0T"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-FNTBG5RY0T');
-</script>
-    <title>نصائح وإرشادات</title>
+      gtag('config', 'G-FNTBG5RY0T');
+    </script>
+    
+    <title>ASU Support - Advice</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body { 
@@ -36,6 +36,7 @@
             margin-bottom: 50px;
             color: white;
             text-shadow: 0 0 15px #9D0208;
+            font-weight: 800;
         }
 
         .grid-container {
@@ -141,15 +142,34 @@
         }
         .web-link-btn:hover { background: #9D0208; color: white; }
 
-        .back-link {
+        .coming-soon {
+            display: inline-block;
+            color: #888;
+            border: 1px dashed #666;
+            padding: 8px 25px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            width: fit-content;
+            cursor: default;
+        }
+
+        .back-btn {
             display: inline-block;
             margin-top: 60px;
-            color: #888;
+            padding: 12px 30px;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #ccc;
             text-decoration: none;
-            border-bottom: 1px solid transparent;
+            font-size: 1rem;
             transition: 0.3s;
         }
-        .back-link:hover { color: #fff; border-color: #fff; }
+        .back-btn:hover { 
+            background: white; 
+            color: black; 
+            box-shadow: 0 0 15px white;
+        }
 
     </style>
 </head>
@@ -270,15 +290,13 @@
             </div>
             
             <div class="card-bottom">
-                <a href="https://scanned.page/p/RUe8Z7" target="_blank" class="web-link-btn">
-                    🎁 عرض الميزات (View Benefits)
-                </a>
+                <span class="coming-soon">قريباً (Coming Soon)</span>
             </div>
         </div>
 
     </div>
 
-    <a href="index.html" class="back-link">← العودة للصفحة الرئيسية</a>
+    <a href="index.html" class="back-btn">← العودة للصفحة الرئيسية (Home)</a>
 
 </body>
 </html>

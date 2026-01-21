@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FNTBG5RY0T"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FNTBG5RY0T"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-FNTBG5RY0T');
-</script>
-    <title>دليل التسجيل</title>
+      gtag('config', 'G-FNTBG5RY0T');
+    </script>
+    
+    <title>ASU Support - Registration</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body { 
@@ -36,6 +36,7 @@
             margin-bottom: 40px;
             color: white;
             text-shadow: 0 0 15px #9D0208;
+            font-weight: 800;
         }
 
         .timeline-section {
@@ -129,6 +130,7 @@
         .info-img {
             display: block; 
             width: 100%;
+            height: auto; /* Responsive fix */
             max-width: 400px;
             border-radius: 10px;
             margin: 15px auto; 
@@ -145,15 +147,23 @@
             font-style: italic;
         }
 
-        .back-link {
+        .back-btn {
             display: inline-block;
             margin-top: 50px;
-            color: #888;
+            padding: 12px 30px;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #ccc;
             text-decoration: none;
-            border-bottom: 1px solid transparent;
+            font-size: 1rem;
             transition: 0.3s;
         }
-        .back-link:hover { color: #fff; border-color: #fff; }
+        .back-btn:hover { 
+            background: white; 
+            color: black; 
+            box-shadow: 0 0 15px white;
+        }
 
     </style>
 </head>
@@ -199,7 +209,7 @@
 
     </div>
 
-    <a href="index.html" class="back-link">← العودة للصفحة الرئيسية</a>
+    <a href="index.html" class="back-btn">← العودة للصفحة الرئيسية (Home)</a>
 
 </body>
 </html>

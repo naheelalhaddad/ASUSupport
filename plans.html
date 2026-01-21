@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FNTBG5RY0T"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FNTBG5RY0T"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-FNTBG5RY0T');
-</script>
-    <title>اختر التخصص</title>
+      gtag('config', 'G-FNTBG5RY0T');
+    </script>
+    
+    <title>ASU Support - Study Plans</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        
         body { 
             margin: 0;
             min-height: 100vh;
@@ -35,11 +34,16 @@
 
         h1 {
             font-size: 2.5rem;
-            margin-bottom: 50px;
+            margin-bottom: 10px;
             text-transform: uppercase;
-            letter-spacing: 1px;
             text-shadow: 0 0 15px #9D0208; 
             animation: fadeIn 1.5s ease;
+        }
+
+        .subtitle {
+            color: #aaa;
+            margin-bottom: 50px;
+            font-size: 1.1rem;
         }
 
         .grid-container {
@@ -57,7 +61,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             padding: 30px;
-            text-align: right;
+            text-align: center; /* Centered for better bilingual look */
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -91,6 +95,14 @@
             line-height: 1.4;
         }
 
+        .en-title {
+            display: block;
+            font-size: 0.9rem;
+            color: #bbb;
+            font-weight: normal;
+            margin-top: 5px;
+        }
+
         .download-btn {
             display: inline-block;
             width: 100%;
@@ -111,16 +123,23 @@
             box-shadow: 0 0 15px #9D0208;
         }
 
-        .back-link {
+        .back-btn {
             display: inline-block;
             margin-top: 60px;
-            color: #888;
+            padding: 12px 30px;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #ccc;
             text-decoration: none;
             font-size: 1rem;
             transition: 0.3s;
-            width: 100%;
         }
-        .back-link:hover { color: #9D0208; }
+        .back-btn:hover { 
+            background: white; 
+            color: black; 
+            box-shadow: 0 0 15px white;
+        }
 
         @keyframes slideIn {
             from { transform: translateY(30px); opacity: 0; }
@@ -133,37 +152,48 @@
 <body>
 
     <h1>اختر تخصصك الأكاديمي</h1>
+    <div class="subtitle">Select Your Major</div>
 
     <div class="grid-container">
         
         <div class="major-card">
-            <h3>💻 علم حاسوب</h3>
+            <h3>💻 علم الحاسوب
+                <span class="en-title">Computer Science</span>
+            </h3>
             <a href="https://drive.google.com/drive/u/0/folders/1o-krQ7kBgeeStnBqh3OSsn5FALgMRP-g" class="download-btn" target="_blank">عرض الخطط ➜</a>
         </div>
 
         <div class="major-card">
-            <h3>⚙️ هندسة البرمجيات</h3>
+            <h3>⚙️ هندسة البرمجيات
+                <span class="en-title">Software Engineering</span>
+            </h3>
             <a href="https://drive.google.com/drive/u/0/folders/1_QiyokuW3ovr5Va2_aD9-kP-k3TflD1L" class="download-btn" target="_blank">عرض الخطط ➜</a>
         </div>
 
         <div class="major-card">
-            <h3>🛡️ الأمن السيبراني والحوسبة السحابية</h3>
+            <h3>🛡️ الأمن السيبراني والحوسبة السحابية
+                <span class="en-title">Cybersecurity & Cloud Computing</span>
+            </h3>
             <a href="https://drive.google.com/drive/u/0/folders/1hEtuAfMb6bl2JkY2BjZZ0rlmVyJzcAir" class="download-btn" target="_blank">عرض الخطط ➜</a>
         </div>
 
         <div class="major-card">
-            <h3>🎮 الواقع الرقمي وتطوير الألعاب</h3>
+            <h3>🎮 الواقع الرقمي وتطوير الألعاب
+                <span class="en-title">Digital Reality & Game Development</span>
+            </h3>
             <a href="https://drive.google.com/drive/u/0/folders/1wp48lCqJcnjJ1Jo_msUubldT-BLekgj5" class="download-btn" target="_blank">عرض الخطط ➜</a>
         </div>
 
         <div class="major-card">
-            <h3>📊 علم بيانات وذكاء اصطناعي</h3>
+            <h3>📊 علم بيانات وذكاء اصطناعي
+                <span class="en-title">Data Science & AI</span>
+            </h3>
             <a href="https://drive.google.com/drive/u/0/folders/1CMufjmEGQ_iVvYqh5CZ8MC92xOSQDJec" class="download-btn" target="_blank">عرض الخطط ➜</a>
         </div>
 
     </div>
 
-    <a href="index.html" class="back-link">← العودة للصفحة الرئيسية</a>
+    <a href="index.html" class="back-btn">← العودة للصفحة الرئيسية (Home)</a>
 
 </body>
 </html>
