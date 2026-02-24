@@ -11,70 +11,144 @@
             --glass: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.08);
             --text-main: #f8fafc;
+            --text-muted: #94a3b8;
         }
 
         body { 
-            margin: 0; min-height: 100vh;
-            font-family: 'Segoe UI', sans-serif;
+            margin: 0; 
+            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: radial-gradient(circle at top right, #1a0505, #0a0c10);
             color: var(--text-main);
-            display: flex; flex-direction: column; align-items: center;
-            padding: 20px;
+            display: flex;
+            overflow: hidden; /* Prevent body scroll, let content area scroll */
         }
 
-        h1 { margin-bottom: 30px; text-shadow: 0 0 20px rgba(157, 2, 8, 0.4); }
+        /* Dashboard Layout */
+        .sidebar {
+            width: 300px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border-left: 1px solid var(--glass-border);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            overflow-y: auto;
+        }
 
-        .container { width: 100%; max-width: 900px; display: flex; flex-direction: column; gap: 10px; }
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-        /* Level 1: Major */
-        .major-item { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 15px; overflow: hidden; }
-        .major-btn { width: 100%; padding: 20px; background: rgba(255,255,255,0.02); border: none; color: white; display: flex; justify-content: space-between; cursor: pointer; font-size: 1.2rem; font-weight: bold; }
+        /* Sidebar Elements */
+        .logo-area { text-align: center; margin-bottom: 20px; }
+        .logo-area h2 { margin: 0; color: white; text-shadow: 0 0 10px rgba(157,2,8,0.5); font-size: 1.8rem; }
+        
+        .major-btn {
+            width: 100%; padding: 15px 20px; background: var(--glass); border: 1px solid var(--glass-border);
+            color: var(--text-muted); border-radius: 12px; cursor: pointer; text-align: right;
+            font-size: 1.1rem; font-weight: bold; transition: 0.3s;
+        }
+        .major-btn:hover { background: rgba(255,255,255,0.08); color: white; }
+        .major-btn.active { background: var(--asu-red); color: white; border-color: var(--asu-red); box-shadow: 0 0 15px rgba(157,2,8,0.4); }
 
-        /* Level 2: Course */
-        .course-list { display: none; padding: 10px; flex-direction: column; gap: 8px; }
-        .course-item { background: rgba(0,0,0,0.2); border-radius: 10px; border: 1px solid var(--glass-border); overflow: hidden; }
-        .course-btn { width: 100%; padding: 15px; background: none; border: none; color: #fff; display: flex; justify-content: space-between; cursor: pointer; font-weight: bold; }
+        /* Content Elements */
+        .header-section { width: 100%; max-width: 900px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        h1 { margin: 0; font-size: 2.2rem; }
+        
+        .search-box {
+            width: 350px; padding: 15px 25px; border-radius: 50px;
+            border: 1px solid var(--glass-border); background: rgba(0,0,0,0.5);
+            color: white; font-size: 1rem; outline: none; transition: 0.3s;
+        }
+        .search-box:focus { border-color: var(--asu-red); }
 
-        /* Level 3: Category */
-        .category-list { display: none; padding: 10px 20px; background: rgba(0,0,0,0.3); flex-direction: column; gap: 5px; }
-        .category-btn { width: 100%; padding: 10px; background: none; border: none; color: var(--asu-red); display: flex; justify-content: space-between; cursor: pointer; font-size: 0.9rem; font-weight: 800; border-bottom: 1px solid var(--glass-border); margin-bottom: 5px; }
+        .courses-container { width: 100%; max-width: 900px; display: flex; flex-direction: column; gap: 15px; }
 
-       /* Files */
-        .file-list { display: none; flex-direction: column; gap: 8px; padding: 10px 0; }
-        .file-row { padding: 12px 15px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; font-size: 0.95rem; color: #ddd; }
-        .file-row:hover { background: var(--asu-red); color: white; border-color: var(--asu-red); transform: translateX(-5px); }
+        /* Course Accordion */
+        .course-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 15px; overflow: hidden; backdrop-filter: blur(10px); }
+        .course-header { padding: 20px 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); }
+        .course-header h3 { margin: 0; font-size: 1.2rem; color: white; }
+        .course-header span { color: var(--text-muted); font-size: 0.9rem; }
+        
+        .course-body { display: none; padding: 0 25px 25px 25px; }
+        .course-body.show { display: block; }
+
+        /* Flat File Lists inside Course */
+        .section-title { color: #fca5a5; font-size: 0.9rem; font-weight: bold; margin: 20px 0 10px 0; padding-bottom: 5px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .file-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; }
+        .file-item { 
+            background: rgba(0,0,0,0.4); border: 1px solid var(--glass-border); padding: 12px 15px; 
+            border-radius: 8px; display: flex; justify-content: space-between; align-items: center; 
+            cursor: pointer; transition: 0.2s; font-size: 0.9rem; color: #ccc;
+        }
+        .file-item:hover { background: var(--asu-red); color: white; border-color: var(--asu-red); transform: translateY(-3px); }
 
         /* Modal */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; }
         .modal-header { height: 60px; background: var(--asu-red); display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
         iframe { width: 100%; height: calc(100% - 60px); border: none; background: white; }
-        
-        .show { display: flex !important; flex-direction: column; }
+        .close-btn { background: white; color: var(--asu-red); border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+
+        .arrow { transition: transform 0.3s; }
         .rotate { transform: rotate(180deg); }
-        .arrow { transition: 0.3s; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body { flex-direction: column; overflow: auto; }
+            .sidebar { width: 100%; border-left: none; border-bottom: 1px solid var(--glass-border); padding: 20px; box-sizing: border-box; }
+            .main-content { padding: 20px; overflow-y: visible; }
+            .header-section { flex-direction: column; gap: 15px; align-items: stretch; }
+            .search-box { width: 100%; box-sizing: border-box; }
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
     </style>
 </head>
 <body>
 
-    <h1>بنك المواد الأكاديمية</h1>
+    <aside class="sidebar">
+        <div class="logo-area">
+            <h2>بنك المواد</h2>
+        </div>
+        <div id="major-nav">
+            </div>
+    </aside>
 
-    <div id="main-container" class="container"></div>
+    <main class="main-content">
+        <div class="header-section">
+            <h1 id="current-major-title">الرجاء اختيار التخصص</h1>
+            <input type="text" id="search" class="search-box" placeholder="ابحث في هذا التخصص...">
+        </div>
+        
+        <div id="courses-container" class="courses-container">
+            </div>
+    </main>
 
     <div id="pdfModal" class="modal">
         <div class="modal-header">
-            <span id="pdfTitle">File Viewer</span>
-            <button onclick="closePdf()" style="background: white; color: var(--asu-red); border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer;">إغلاق</button>
+            <span id="pdfTitle" style="font-weight: bold;">File Viewer</span>
+            <button class="close-btn" onclick="closePdf()">إغلاق</button>
         </div>
         <iframe id="pdfFrame"></iframe>
     </div>
 
-    
-   <script>
+    <script>
         const AZURE_BASE = "https://asusupportfiles.blob.core.windows.net/pastpapers/";
 
+        // DATA BLOCKS
         const linearAlgebra = {
-            name: "Linear Algebra",
-            arabic: "الجبر الخطي",
+            name: "Linear Algebra", arabic: "الجبر الخطي",
             content: {
                 slides: [
                     { label: "1. Getting Started", file: "1_ Getting Started.pdf" },
@@ -88,15 +162,12 @@
                     { label: "9. Lower Bound Linear Sort", file: "9_ Lower_Bound_Linear_Sort.pdf" },
                     { label: "10. Elementary Graph Algorithms (BFS)", file: "10_Elementary Graph Algorithms_BFS.pdf" },
                     { label: "11. Graph Algorithms (DFS)", file: "11_Graph Algorithms_DFS.pdf" }
-                ],
-                exams: [],
-                quizzes: []
+                ], exams: [], quizzes: []
             }
         };
 
         const calculus1 = {
-            name: "Calculus (1)",
-            arabic: "تفاضل وتكامل (1)",
+            name: "Calculus (1)", arabic: "تفاضل وتكامل (1)",
             content: {
                 slides: [
                     { label: "Final Notes Slides", file: "Calc slides final notes.pdf" },
@@ -120,8 +191,7 @@
         };
 
         const computingSystems = {
-            name: "Computing Systems for DSAI",
-            arabic: "أنظمة الحوسبة",
+            name: "Computing Systems for DSAI", arabic: "أنظمة الحوسبة",
             content: {
                 slides: [],
                 exams: [
@@ -136,8 +206,7 @@
         };
 
         const dataEngineering = {
-            name: "Data Engineering and Analysis",
-            arabic: "هندسة وتحليل البيانات",
+            name: "Data Engineering and Analysis", arabic: "هندسة وتحليل البيانات",
             content: {
                 slides: [],
                 exams: [
@@ -150,13 +219,10 @@
         };
 
         const dataMining = {
-            name: "Data Mining",
-            arabic: "التنقيب في البيانات",
+            name: "Data Mining", arabic: "التنقيب في البيانات",
             content: {
                 slides: [],
-                exams: [
-                    { label: "Midterm 20251", file: "Data mining - Mid - 20251.pdf" }
-                ],
+                exams: [ { label: "Midterm 20251", file: "Data mining - Mid - 20251.pdf" } ],
                 quizzes: [
                     { label: "Quiz 1 20251", file: "Data mining - Quiz1 - 20251.pdf" },
                     { label: "Quiz 2 20251", file: "Data mining - Quiz2 - 20251.pdf" }
@@ -165,62 +231,80 @@
         };
 
         const materials = [
-            { major: "الذكاء الاصطناعي وعلم البيانات (AI & DS)", courses: [linearAlgebra, calculus1, computingSystems, dataEngineering, dataMining] },
+            { major: "الذكاء الاصطناعي (AI & DS)", courses: [linearAlgebra, calculus1, computingSystems, dataEngineering, dataMining] },
             { major: "علم الحاسوب (CS)", courses: [linearAlgebra, calculus1] },
             { major: "الأمن السيبراني (Cybersecurity)", courses: [linearAlgebra, calculus1] },
             { major: "هندسة البرمجيات (SE)", courses: [linearAlgebra, calculus1] },
             { major: "الواقع الرقمي والألعاب (Gaming)", courses: [linearAlgebra, calculus1] }
         ];
 
+        let currentMajorIndex = 0; // Default to AI
+
         function init() {
-            const container = document.getElementById('main-container');
-            materials.forEach((m, mIdx) => {
-                let html = `
-                    <div class="major-item">
-                        <button class="major-btn" onclick="toggle(this)">
-                            <span>${m.major}</span> <span class="arrow">▼</span>
-                        </button>
-                        <div class="course-list">
-                            ${m.courses.map((c, cIdx) => `
-                                <div class="course-item">
-                                    <button class="course-btn" onclick="toggle(this)">
-                                        <span>${c.name} - ${c.arabic}</span> <span class="arrow">▼</span>
-                                    </button>
-                                    <div class="category-list">
-                                        ${renderSection("Slides / الشرح", c.content.slides)}
-                                        ${renderSection("Exams / الامتحانات", c.content.exams)}
-                                        ${renderSection("Quizzes / الكويزات", c.content.quizzes)}
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>`;
-                container.innerHTML += html;
-            });
+            renderSidebar();
+            selectMajor(0); // Load first major on startup
         }
 
-        function renderSection(title, files) {
+        function renderSidebar() {
+            const nav = document.getElementById('major-nav');
+            nav.innerHTML = materials.map((m, idx) => `
+                <button class="major-btn" id="btn-${idx}" onclick="selectMajor(${idx})">
+                    ${m.major}
+                </button>
+            `).join('');
+        }
+
+        function selectMajor(index) {
+            // Update UI State
+            document.querySelectorAll('.major-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`btn-${index}`).classList.add('active');
+            
+            document.getElementById('current-major-title').innerText = materials[index].major;
+            document.getElementById('search').value = ""; // Clear search
+            
+            currentMajorIndex = index;
+            renderCourses(materials[index].courses);
+        }
+
+        function renderCourses(coursesArray) {
+            const container = document.getElementById('courses-container');
+            container.innerHTML = coursesArray.map((c, cIdx) => `
+                <div class="course-card" data-name="${c.name.toLowerCase()} ${c.arabic}">
+                    <div class="course-header" onclick="toggleCourse(this)">
+                        <div>
+                            <h3>${c.name}</h3>
+                            <span>${c.arabic}</span>
+                        </div>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="course-body">
+                        ${renderFlatSection("Slides / الشرح", c.content.slides)}
+                        ${renderFlatSection("Exams / الامتحانات", c.content.exams)}
+                        ${renderFlatSection("Quizzes / الكويزات", c.content.quizzes)}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderFlatSection(title, files) {
             if (!files || files.length === 0) return "";
             return `
-                <div class="category-group">
-                    <button class="category-btn" onclick="toggle(this)">
-                        <span>${title}</span> <span class="arrow">▼</span>
-                    </button>
-                    <div class="file-list">
-                        ${files.map(f => `
-                            <div class="file-row" onclick="openPdf('${f.file}', '${f.label}')">
-                                <span>${f.label}</span> <span>📄</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>`;
+                <div class="section-title">${title}</div>
+                <div class="file-grid">
+                    ${files.map(f => `
+                        <div class="file-item" onclick="openPdf('${f.file}', '${f.label}')">
+                            <span>${f.label}</span> <span>📄</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
         }
 
-        function toggle(btn) {
-            const panel = btn.nextElementSibling;
-            const arrow = btn.querySelector('.arrow');
-            panel.classList.toggle('show');
-            if(arrow) arrow.classList.toggle('rotate');
+        function toggleCourse(headerElement) {
+            const body = headerElement.nextElementSibling;
+            const arrow = headerElement.querySelector('.arrow');
+            body.classList.toggle('show');
+            arrow.classList.toggle('rotate');
         }
 
         function openPdf(file, title) {
@@ -234,9 +318,16 @@
             document.getElementById('pdfFrame').src = '';
         }
 
+        // Search logic applied only to current major's courses
+        document.getElementById('search').oninput = function() {
+            const val = this.value.toLowerCase();
+            document.querySelectorAll('.course-card').forEach(card => {
+                const name = card.getAttribute('data-name');
+                card.style.display = name.includes(val) ? 'block' : 'none';
+            });
+        };
+
         init();
     </script>
-
-    
 </body>
 </html>
