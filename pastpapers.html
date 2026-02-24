@@ -250,12 +250,16 @@
         const discreteStructures = {
             name: "Discrete Structures (1)", arabic: "تراكيب المتقطعة",
             content: {
-                slides: [], exams: [],
+                slides: [], 
+                exams: [],
                 quizzes: [
-                    { label: "Quiz Weeks (6,7,8)", file: "Quiz Weeks(6,7,8).pdf" },
-                    { label: "Quiz Weeks (9,10,11,12)", file: "Quiz Weeks(9,10,11,12).pdf" },
-                    { label: "Quiz Weeks (12,13,14)", file: "Quiz Weeks(12,13,14).pdf" },
-                    { label: "Quiz Models (Arabic)", file: "نماذج لاسئلة الكويز.pdf" }
+                    { label: "Quizzes 20251", file: "Discrete - Quizzes - 20251.pdf" },
+                    { label: "Quiz 4 20251", file: "Discrete - Quiz4 - 20251.pdf" },
+                    { label: "Quiz 1 20251", file: "Discrete - Quiz1 - 20251.pdf" },
+                    { label: "Quiz Weeks (12,13,14) 2023", file: "Quiz Weeks(12,13,14).pdf" },
+                    { label: "Quiz Weeks (9,10,11,12) 2023", file: "Quiz Weeks(9,10,11,12).pdf" },
+                    { label: "Quiz Weeks (6,7,8) 2023", file: "Quiz Weeks(6,7,8).pdf" },
+                    { label: "Quiz Models (Arabic) 2023", file: "نماذج لاسئلة الكويز.pdf" }
                 ]
             }
         };
@@ -431,16 +435,30 @@
             }
         };
 
+        const krr = {
+            name: "Knowledge Representation and Reasoning (KRR)", arabic: "تمثيل المعرفة والاستنتاج",
+            content: {
+                slides: [],
+                exams: [
+                    { label: "Midterm 20251", file: "KRR - Mid - 20251.pdf" },
+                    { label: "Midterm 20242", file: "KRR - Mid - 20242.pdf" }
+                ],
+                quizzes: [
+                    { label: "Quiz 1 20242", file: "KRR - Quiz1 - 20242.pdf" },
+                    { label: "Worksheet", file: "KRR - worksheet.pdf" }
+                ]
+            }
+        };
+
         // =====================================
         // INJECTING COURSES INTO MAJORS
         // =====================================
-        // Everything inside commonCourses will automatically appear in every major tab!
         const commonCourses = [dsa, algorithms, linearAlgebra, discreteStructures, calculus1, operatingSystems, databaseSystems];
 
         const materials = [
             { 
                 major: "الذكاء الاصطناعي (AI & DS)", 
-                courses: [...commonCourses, computingSystems, dataEngineering, dataMining, dataModeling, dataScienceR, dataSecurity] 
+                courses: [...commonCourses, computingSystems, dataEngineering, dataMining, dataModeling, dataScienceR, dataSecurity, krr] 
             },
             { major: "علم الحاسوب (CS)", courses: [...commonCourses] },
             { major: "الأمن السيبراني (Cybersecurity)", courses: [...commonCourses, dataSecurity] },
