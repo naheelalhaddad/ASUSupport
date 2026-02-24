@@ -72,14 +72,28 @@
     
     <script>
         const AZURE_BASE = "https://asusupportfiles.blob.core.windows.net/pastpapers/";
+        const AZURE_LIST_URL = "https://asusupportfiles.blob.core.windows.net/pastpapers?restype=container&comp=list";
 
-        const materials = [
+        // Human-readable labels for well-known category folder names
+        const CATEGORY_LABELS = {
+            slides:   "Slides / الشرح",
+            midterms: "Midterms / الامتحانات النصفية",
+            finals:   "Finals / الامتحانات النهائية",
+            exams:    "Exams / الامتحانات",
+            quizzes:  "Quizzes / الكويزات",
+            summary:  "Summary / الملخصات",
+            labs:     "Labs / المعامل",
+            projects: "Projects / المشاريع",
+        };
+
+        // Static fallback data – used when Azure listing is unavailable
+        const staticMaterials = [
             {
                 major: "تخصصات تكنولوجيا المعلومات (All IT Majors)",
                 courses: [
                     {
-                        name: "Linear Algebra",
-                        arabic: "الجبر الخطي",
+                        name: "Algorithms",
+                        arabic: "الخوارزميات",
                         content: {
                             slides: [
                                 { label: "1. Getting Started", file: "1_ Getting Started.pdf" },
@@ -93,53 +107,182 @@
                                 { label: "9. Lower Bound Linear Sort", file: "9_ Lower_Bound_Linear_Sort.pdf" },
                                 { label: "10. Elementary Graph Algorithms (BFS)", file: "10_Elementary Graph Algorithms_BFS.pdf" },
                                 { label: "11. Graph Algorithms (DFS)", file: "11_Graph Algorithms_DFS.pdf" }
+                            ]
+                        }
+                    },
+                    {
+                        name: "Java Programming",
+                        arabic: "برمجة جافا",
+                        content: {
+                            slides: [
+                                { label: "Chapter 01 - Introduction to Java", file: "java/slides/Chapter 01[Introduction to Java].pdf" },
+                                { label: "Chapter 02 - Fundamental Programming Structures", file: "java/slides/Chapter 02[Fundamental Programming Structures in Java].pdf" },
+                                { label: "Chapter 03 - Predefined Classes and Methods", file: "java/slides/Chapter 03 [Predefined Classes and user defined methods].pdf" },
+                                { label: "Chapter 04 - Classes and Objects (1)", file: "java/slides/Chapter 04 [Classes and Objects-1].pdf" },
+                                { label: "Chapter 05 & 06 - Classes and Objects (2)", file: "java/slides/Chapter 05 & 06[Classes and Objects-2].pdf" },
+                                { label: "Chapter 07 - Composition and Aggregation", file: "java/slides/Chapter 07 [Composition and aggregation].pdf" },
+                                { label: "Chapter 08 & 09 - Inheritance", file: "java/slides/Chapter 08 & 09 [Inheritance].pdf" },
+                                { label: "Chapter 10 - Abstraction", file: "java/slides/Chapter 10 [Abstraction].pdf" },
+                                { label: "Chapter 11 - Interface", file: "java/slides/Chapter 11 [Interface].pdf" },
+                                { label: "Chapter 12 - Array of Primitives", file: "java/slides/Chapter 12 [Array of primitives].pdf" },
+                                { label: "Chapter 13 - Array of Objects", file: "java/slides/Chapter 13[Array of objects, Array as instance variable].pdf" },
+                                { label: "Chapter 14 - Polymorphism", file: "java/slides/Chapter 14[Polymorphism].pdf" },
+                                { label: "Chapter 15 - Exception Handling", file: "java/slides/Chapter 15 [Exception Handling].pdf" }
                             ],
-                            exams: [],
-                            quizzes: []
+                            midterms: [
+                                { label: "Midterm 2023 (Semester 1)", file: "java/midterms/Java-Mid-20231.pdf" },
+                                { label: "Midterm 2023 (Semester 2)", file: "java/midterms/Java-Mid-20232.pdf" },
+                                { label: "Midterm 2024 (Semester 2)", file: "java/midterms/Java-Mid-20242.pdf" },
+                                { label: "Midterm 2025 (Semester 1)", file: "java/midterms/Java-Mid-20251.pdf" }
+                            ],
+                            quizzes: [
+                                { label: "Assignment 2025 (Semester 1)", file: "java/quizzes/Java - Assignment - 20251.pdf" },
+                                { label: "Final Lab 2024 (Semester 2)", file: "java/quizzes/Java - Final Lab - 20242.pdf" },
+                                { label: "Final Lab 2024 (Semester 3)", file: "java/quizzes/Java - Final Lab - 20243.pdf" },
+                                { label: "Quiz 2024 (Semester 2)", file: "java/quizzes/Java - Quiz - 20242.pdf" },
+                                { label: "Quiz 2024 (Semester 3)", file: "java/quizzes/Java - Quiz - 20243.pdf" },
+                                { label: "Quiz 2025 (Semester 1)", file: "java/quizzes/Java - Quiz - 20251.pdf" },
+                                { label: "Quizzes 2023 (Semester 2)", file: "java/quizzes/Java - Quizzes - 20232.pdf" },
+                                { label: "Final Question 2023 (Semester 2)", file: "java/quizzes/Java - final question - 20232.pdf" }
+                            ],
+                            summary: [
+                                { label: "Java Summary", file: "java/summary/Java summary.pdf" }
+                            ]
                         }
                     }
                 ]
             }
         ];
 
-        function init() {
+        // Escape a string for safe use inside an HTML attribute value or element content
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+        }
+
+        // Fetch ALL blobs from the container, following Azure's NextMarker pagination
+        async function listAllBlobs() {
+            const blobs = [];
+            let marker = '';
+            do {
+                const url = new URL(AZURE_LIST_URL);
+                if (marker) url.searchParams.set('marker', marker);
+                const res = await fetch(url.toString());
+                if (!res.ok) throw new Error(`Failed to list Azure blobs: HTTP ${res.status} ${res.statusText}`);
+                const xml = new DOMParser().parseFromString(await res.text(), 'text/xml');
+                xml.querySelectorAll('Blob').forEach(b => blobs.push(b.querySelector('Name').textContent));
+                const next = xml.querySelector('NextMarker');
+                marker = next ? next.textContent : '';
+            } while (marker);
+            return blobs;
+        }
+
+        // Turn a flat list of blob paths into the materials array structure.
+        // Expected path convention: major/course/category/filename.pdf
+        // Shorter paths fall back gracefully.
+        function organizeBlobsToMaterials(blobs) {
+            const tree = {};
+
+            blobs.forEach(name => {
+                if (!name.toLowerCase().endsWith('.pdf')) return;
+                const parts = name.split('/');
+
+                let major, course, category, filename;
+                if (parts.length >= 4) {
+                    [major, course, category] = parts;
+                    filename = parts.slice(3).join('/');
+                } else if (parts.length === 3) {
+                    major = 'General';
+                    [course, category] = parts;
+                    filename = parts[2];
+                } else if (parts.length === 2) {
+                    major = 'General';
+                    course = parts[0];
+                    category = 'files';
+                    filename = parts[1];
+                } else {
+                    major = 'General';
+                    course = 'Files';
+                    category = 'files';
+                    filename = parts[0];
+                }
+
+                if (!tree[major]) tree[major] = {};
+                if (!tree[major][course]) tree[major][course] = {};
+                if (!tree[major][course][category]) tree[major][course][category] = [];
+                tree[major][course][category].push({ label: filename.replace(/\.pdf$/i, ''), file: name });
+            });
+
+            return Object.entries(tree).map(([major, courses]) => ({
+                major,
+                courses: Object.entries(courses).map(([name, content]) => ({ name, arabic: '', content }))
+            }));
+        }
+
+        // Try Azure listing first; fall back to staticMaterials on any error
+        async function loadMaterials() {
+            try {
+                const blobs = await listAllBlobs();
+                if (blobs.length > 0) {
+                    const dynamic = organizeBlobsToMaterials(blobs);
+                    if (dynamic.length > 0) return dynamic;
+                }
+            } catch (e) {
+                console.warn('Azure listing unavailable, using static data:', e);
+            }
+            return staticMaterials;
+        }
+
+        async function init() {
             const container = document.getElementById('main-container');
-            materials.forEach((m, mIdx) => {
-                let html = `
-                    <div class="major-item">
-                        <button class="major-btn" onclick="toggle(this)">
-                            <span>${m.major}</span> <span class="arrow">▼</span>
-                        </button>
-                        <div class="course-list">
-                            ${m.courses.map((c, cIdx) => `
-                                <div class="course-item">
-                                    <button class="course-btn" onclick="toggle(this)">
-                                        <span>${c.name} - ${c.arabic}</span> <span class="arrow">▼</span>
-                                    </button>
-                                    <div class="category-list">
-                                        ${renderSection("Slides / الشرح", c.content.slides)}
-                                        ${renderSection("Exams / الامتحانات", c.content.exams)}
-                                        ${renderSection("Quizzes / الكويزات", c.content.quizzes)}
-                                    </div>
+            container.innerHTML = '<p style="text-align:center;color:#aaa;padding:40px;">جارٍ تحميل الملفات…</p>';
+
+            const data = await loadMaterials();
+            container.innerHTML = '';
+
+            data.forEach(m => {
+                const majorDiv = document.createElement('div');
+                majorDiv.className = 'major-item';
+                majorDiv.innerHTML = `
+                    <button class="major-btn" onclick="toggle(this)">
+                        <span>${escapeHtml(m.major)}</span> <span class="arrow">▼</span>
+                    </button>
+                    <div class="course-list">
+                        ${m.courses.map(c => `
+                            <div class="course-item">
+                                <button class="course-btn" onclick="toggle(this)">
+                                    <span>${escapeHtml(c.name)}${c.arabic ? ' - ' + escapeHtml(c.arabic) : ''}</span> <span class="arrow">▼</span>
+                                </button>
+                                <div class="category-list">
+                                    ${Object.entries(c.content)
+                                        .map(([key, files]) => renderSection(CATEGORY_LABELS[key] || key, files))
+                                        .join('')}
                                 </div>
-                            `).join('')}
-                        </div>
+                            </div>
+                        `).join('')}
                     </div>`;
-                container.innerHTML += html;
+                container.appendChild(majorDiv);
             });
         }
 
         function renderSection(title, files) {
-            if (!files || files.length === 0) return "";
+            if (!files || files.length === 0) return '';
             return `
                 <div class="category-group">
                     <button class="category-btn" onclick="toggle(this)">
-                        <span>${title}</span> <span class="arrow">▼</span>
+                        <span>${escapeHtml(title)}</span> <span class="arrow">▼</span>
                     </button>
                     <div class="file-list">
                         ${files.map(f => `
-                            <div class="file-row" onclick="openPdf('${f.file}', '${f.label}')">
-                                <span>${f.label}</span> <span>📄</span>
+                            <div class="file-row"
+                                 data-file="${escapeHtml(f.file)}"
+                                 data-label="${escapeHtml(f.label)}"
+                                 onclick="openPdf(this.dataset.file, this.dataset.label)">
+                                <span>${escapeHtml(f.label)}</span> <span>📄</span>
                             </div>
                         `).join('')}
                     </div>
@@ -150,12 +293,14 @@
             const panel = btn.nextElementSibling;
             const arrow = btn.querySelector('.arrow');
             panel.classList.toggle('show');
-            if(arrow) arrow.classList.toggle('rotate');
+            if (arrow) arrow.classList.toggle('rotate');
         }
 
+        // Encode each path segment individually so folder slashes are preserved in the URL
         function openPdf(file, title) {
+            const encodedPath = file.split('/').map(encodeURIComponent).join('/');
             document.getElementById('pdfTitle').innerText = title;
-            document.getElementById('pdfFrame').src = AZURE_BASE + encodeURIComponent(file);
+            document.getElementById('pdfFrame').src = AZURE_BASE + encodedPath;
             document.getElementById('pdfModal').style.display = 'block';
         }
 
