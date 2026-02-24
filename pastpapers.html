@@ -68,12 +68,10 @@
         <iframe id="pdfFrame"></iframe>
     </div>
 
-
     
-    <script>
-      const AZURE_BASE = "https://asusupportfiles.blob.core.windows.net/pastpapers/";
+   <script>
+        const AZURE_BASE = "https://asusupportfiles.blob.core.windows.net/pastpapers/";
 
-        // Define the course once to keep the code neat
         const linearAlgebra = {
             name: "Linear Algebra",
             arabic: "الجبر الخطي",
@@ -96,28 +94,82 @@
             }
         };
 
-        // Inject the course into every major
-        const materials = [
-            {
-                major: "الذكاء الاصطناعي وعلم البيانات (AI & DS)",
-                courses: [linearAlgebra]
-            },
-            {
-                major: "علم الحاسوب (CS)",
-                courses: [linearAlgebra]
-            },
-            {
-                major: "الأمن السيبراني (Cybersecurity)",
-                courses: [linearAlgebra]
-            },
-            {
-                major: "هندسة البرمجيات (SE)",
-                courses: [linearAlgebra]
-            },
-            {
-                major: "الواقع الرقمي والألعاب (Gaming)",
-                courses: [linearAlgebra]
+        const calculus1 = {
+            name: "Calculus (1)",
+            arabic: "تفاضل وتكامل (1)",
+            content: {
+                slides: [
+                    { label: "Final Notes Slides", file: "Calc slides final notes.pdf" },
+                    { label: "Abdulrahman Notes", file: "Calc (Abdulrahman).pdf" }
+                ],
+                exams: [
+                    { label: "Midterm 20251 (A)", file: "Calc - Mid (A) - 20251.pdf" },
+                    { label: "Midterm 20251 (B)", file: "Calc - Mid (B) - 20251.pdf" },
+                    { label: "Midterm 20241", file: "Calc - Mid - 20241.pdf" },
+                    { label: "Midterm 20231 (A)", file: "Calc - Mid (A) - 20231.pdf" },
+                    { label: "Midterm 20231 (B)", file: "Calc - Mid (B) - 20231.pdf" }
+                ],
+                quizzes: [
+                    { label: "Quiz 1 (20251)", file: "Calc - Quiz1 - 20251.pdf" },
+                    { label: "Quiz 2 (20251)", file: "Calc - Quiz2 - 20251.pdf" },
+                    { label: "Quiz 1 (20231)", file: "Calc - Quiz1 - 20231.pdf" },
+                    { label: "Quiz 2 (20231)", file: "Calc - Quiz2 - 20231.pdf" },
+                    { label: "Quiz 3 (20231)", file: "Calc - Quiz3 - 20231.pdf" }
+                ]
             }
+        };
+
+        const computingSystems = {
+            name: "Computing Systems for DSAI",
+            arabic: "أنظمة الحوسبة",
+            content: {
+                slides: [],
+                exams: [
+                    { label: "Final 20251", file: "Computing Systems - Final- 20251.pdf" },
+                    { label: "Midterm 20251", file: "Computing Systems - Mid - 20251.pdf" }
+                ],
+                quizzes: [
+                    { label: "Quiz 1 20251", file: "Computing Systems - Quiz1 - 20251.pdf" },
+                    { label: "Quiz 2 20251", file: "Computing Systems - Quiz2 - 20251.pdf" }
+                ]
+            }
+        };
+
+        const dataEngineering = {
+            name: "Data Engineering and Analysis",
+            arabic: "هندسة وتحليل البيانات",
+            content: {
+                slides: [],
+                exams: [
+                    { label: "Midterm 20242", file: "Data engineer - Mid - 20242.pdf" },
+                    { label: "Midterm 20241", file: "Data engineer - Mid - 20241.pdf" },
+                    { label: "Midterm 20232", file: "Data engineer - Mid - 20232.pdf" }
+                ],
+                quizzes: []
+            }
+        };
+
+        const dataMining = {
+            name: "Data Mining",
+            arabic: "التنقيب في البيانات",
+            content: {
+                slides: [],
+                exams: [
+                    { label: "Midterm 20251", file: "Data mining - Mid - 20251.pdf" }
+                ],
+                quizzes: [
+                    { label: "Quiz 1 20251", file: "Data mining - Quiz1 - 20251.pdf" },
+                    { label: "Quiz 2 20251", file: "Data mining - Quiz2 - 20251.pdf" }
+                ]
+            }
+        };
+
+        const materials = [
+            { major: "الذكاء الاصطناعي وعلم البيانات (AI & DS)", courses: [linearAlgebra, calculus1, computingSystems, dataEngineering, dataMining] },
+            { major: "علم الحاسوب (CS)", courses: [linearAlgebra, calculus1] },
+            { major: "الأمن السيبراني (Cybersecurity)", courses: [linearAlgebra, calculus1] },
+            { major: "هندسة البرمجيات (SE)", courses: [linearAlgebra, calculus1] },
+            { major: "الواقع الرقمي والألعاب (Gaming)", courses: [linearAlgebra, calculus1] }
         ];
 
         function init() {
@@ -184,5 +236,7 @@
 
         init();
     </script>
+
+    
 </body>
 </html>
