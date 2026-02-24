@@ -152,13 +152,9 @@
         <iframe id="pdfFrame"></iframe>
     </div>
 
-   <script>
+  <script>
         const AZURE_BASE = "https://asusupportfiles.blob.core.windows.net/pastpapers/";
 
-        // =====================================
-        // CORE COURSES (Shared across majors)
-        // =====================================
-        
         const dsa = {
             name: "Data Structures and Algorithms (DSA)", arabic: "تراكيب البيانات والخوارزميات",
             content: {
@@ -293,21 +289,37 @@
         };
 
         const databaseSystems = {
-            name: "Database Systems", arabic: "قواعد البيانات",
+            name: "Database and Application of Database (DB)", arabic: "قواعد البيانات وتطبيقاتها",
             content: {
                 slides: [
+                    { label: "Database", file: "Database.pdf" },
+                    { label: "Database Summary", file: "Database-Summary.pdf" },
+                    { label: "Database (Mo-Sallaq)", file: "Data base (Mo-sallaq).pdf" },
+                    { label: "Database Summary All Labs", file: "Database Summary all labs.pdf" },
                     { label: "Lab Summary (1-6)", file: "Summary from Lab(1 until 6) Database .pdf" }
-                ], exams: [],
+                ],
+                exams: [
+                    { label: "Final 20251", file: "DB - Final - 20251.pdf" },
+                    { label: "Final 20242", file: "DB - Final - 20242.pdf" },
+                    { label: "Final 20241", file: "DB - Final - 20241.pdf" },
+                    { label: "Midterm 20251", file: "DB - Mid - 20251.pdf" },
+                    { label: "Midterm 20242", file: "DB - Mid - 20242.pdf" },
+                    { label: "Midterm 20241", file: "DB - Mid - 20241.pdf" },
+                    { label: "Midterm 20231", file: "DB - Mid - 20231.pdf" }
+                ],
                 quizzes: [
+                    { label: "Quiz 1 20251", file: "DB - Quiz1 - 20251.pdf" },
+                    { label: "Quiz 1 20242", file: "DB - Quiz1 - 20242.pdf" },
+                    { label: "Quiz 2 20242", file: "DB - Quiz2 - 20242.pdf" },
+                    { label: "Quiz 3 20251 (A)", file: "DB - Quiz3 (A) - 20251.pdf" },
+                    { label: "Quiz 3 20251 (B)", file: "DB - Quiz3 (B) - 20251.pdf" },
+                    { label: "Quiz 3 20242 (Multi)", file: "DB - Quiz3 - 20242 (multi papers).pdf" },
+                    { label: "Quiz 3 20231", file: "DB - Quiz3 - 20231.pdf" },
                     { label: "Assignment 5", file: "Assignment _5.pdf" }
                 ]
             }
         };
 
-        // =====================================
-        // MAJOR SPECIFIC COURSES
-        // =====================================
-        
         const computingSystems = {
             name: "Computing Systems for DSAI", arabic: "أنظمة الحوسبة",
             content: {
@@ -398,9 +410,6 @@
             }
         };
 
-        // =====================================
-        // INJECTING COURSES INTO MAJORS
-        // =====================================
         const commonCourses = [dsa, algorithms, linearAlgebra, discreteStructures, calculus1, operatingSystems, databaseSystems];
 
         const materials = [
