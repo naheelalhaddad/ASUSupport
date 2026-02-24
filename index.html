@@ -6,27 +6,34 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-FNTBG5RY0T');
     </script>
     
     <title>ASU Support - Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        :root {
+            --asu-red: #9D0208;
+            --bg-dark: #0a0c10;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --blob-yellow: rgba(234, 179, 8, 0.1);
+            --blob-teal: rgba(20, 184, 166, 0.1);
+            --blob-red: rgba(157, 2, 8, 0.15);
+        }
+
         body { 
             margin: 0;
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: white;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: linear-gradient(-45deg, #000000, #1a1a1a, #2b0000, #000000);
+            background: linear-gradient(-45deg, #0a0c10, #140505, #07080a, #11090f);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
         }
 
         @keyframes gradientBG {
@@ -35,153 +42,352 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* LOGO AREA */
-        .logo-box {
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
+        .blob {
+            position: absolute;
+            z-index: -1;
+            filter: blur(60px);
+            animation: float 10s ease-in-out infinite alternate;
         }
 
-        .logo-box img { 
-            height: 100px; 
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
-            animation: float 6s ease-in-out infinite;
+        .blob-1 {
+            top: -10%;
+            right: -5%;
+            width: 500px;
+            height: 500px;
+            background-color: var(--blob-yellow);
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+
+        .blob-2 {
+            top: 20%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background-color: var(--blob-teal);
+            border-radius: 50% 50% 30% 70% / 50% 50% 70% 50%;
+            animation-delay: -3s;
+        }
+
+        .blob-3 {
+            bottom: -10%;
+            right: 20%;
+            width: 700px;
+            height: 500px;
+            background-color: var(--blob-red);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation-delay: -6s;
         }
 
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-30px) scale(1.05); }
         }
 
-        .glass-container {
-            background: rgba(20, 20, 20, 0.6);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 600px;
-            width: 100%;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-            margin-top: 10px;
-            opacity: 0;
-            animation: slideUp 1s ease forwards;
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 5vw;
+            z-index: 10;
         }
 
-        h1 { 
-            font-size: 2.2rem; 
-            margin-bottom: 20px; 
-            text-shadow: 0 0 15px rgba(157, 2, 8, 0.6); 
-            font-weight: 800;
-        }
-
-        .welcome-ar { font-size: 1.1rem; color: #eee; margin-bottom: 15px; line-height: 1.6; }
-        .divider { height: 1px; background: linear-gradient(90deg, transparent, #9D0208, transparent); margin: 20px 0; }
-        .welcome-en { font-size: 1rem; color: #ccc; font-weight: 400; line-height: 1.5; }
-
-        .menu-btn {
-            display: block;
-            padding: 20px;
-            margin: 15px 0;
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-decoration: none;
-            color: white;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+        .logo-box {
             display: flex;
             align-items: center;
+            gap: 15px;
+        }
+
+        .logo-box img { 
+            height: 65px; 
+            object-fit: contain;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+        }
+
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            gap: 10px;
-        }
-
-        .menu-btn:hover {
-            background: rgba(157, 2, 8, 0.2);
-            border-color: #9D0208;
-            box-shadow: 0 0 20px rgba(157, 2, 8, 0.4);
-            transform: translateY(-3px);
-        }
-
-        /* FOOTER STYLES */
-        .footer { 
-            margin-top: 40px; 
-            color: #888; 
-            font-size: 0.9rem; 
-            letter-spacing: 0.5px; 
-            opacity: 0.9;
-            line-height: 1.6;
             text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-            width: 100%;
-            max-width: 600px;
+            padding: 20px 20px 60px 20px;
+            z-index: 10;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
         }
-        
-        .footer strong { color: #fff; }
-        .footer-sub { font-size: 0.8rem; color: #666; margin-top: 10px; }
 
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 60%; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%; 
+            max-width: 700px; 
+            height: 400px;
+            background: radial-gradient(circle, rgba(157,2,8,0.15) 0%, transparent 60%);
+            z-index: -1;
+            animation: pulseGlow 4s alternate infinite;
+            pointer-events: none;
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.95); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            color: var(--text-main);
+            margin: 0 0 20px 0;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 0 40px 0;
+            line-height: 1.7;
+        }
+
+        .hero p span {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.95em;
+        }
+
+        .btn-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            max-width: 800px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-primary {
+            background-color: rgba(157, 2, 8, 0.9);
+            color: white;
+            border: 1px solid var(--asu-red);
+            box-shadow: 0 10px 25px -5px rgba(157, 2, 8, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #ba0209;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -5px rgba(157, 2, 8, 0.5);
+        }
+
+        .btn-outline {
+            background-color: rgba(255, 255, 255, 0.03);
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .btn-icon {
+            font-size: 1.1rem;
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 40px 20px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .footer-header {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .admin-credits {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 35px;
+            line-height: 1.8;
+        }
+
+        .admin-credits span { color: var(--asu-red); font-weight: 600; }
+
+        .contributors-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: right;
+        }
+
+        .contributor-group {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 15px 10px;
+            min-width: 180px;
+            flex: 1 1 180px;
+        }
+
+        .group-title {
+            color: var(--asu-red);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            font-weight: bold;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .contributor-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .contributor-list li {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+        }
+
+        .copyright {
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: #475569;
+        }
+
+        @media (max-width: 768px) {
+            .navbar { justify-content: center; padding: 20px; }
+            .hero { padding-top: 0; }
+            .btn-grid { flex-direction: column; align-items: stretch; }
+            .btn { justify-content: center; }
+            .contributors-container { flex-direction: column; gap: 10px; }
+            .contributor-group { border-top: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="logo-box">
-        <img src="fit_logo.png" alt="FIT Logo">
-        <img src="asu_academy.jpeg" alt="ASU Academy">
-    </div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
 
-    <div class="glass-container">
-        
-        <h1>دليلك الشامل للحياة الجامعية</h1>
-        
-        <div class="welcome-ar">
-            أهلاً وسهلاً بطلاب السنة الأولى! <br>
-            نحن هنا لدعم رحلتكم. اختر من القائمة أدناه.
+    <header class="navbar">
+        <div class="logo-box">
+            <img src="fit_logo.png" alt="FIT Logo">
+            <img src="asu_academy.jpeg" alt="ASU Academy">
         </div>
+    </header>
+
+    <main class="hero">
+        <h1>دليلك الشامل لكلية الـ IT</h1>
+        <p>
+            أهلاً وسهلاً بجميع طلاب كلية تكنولوجيا المعلومات. منصتك الموحدة للمواد، الخطط، والشروحات.
+            <span dir="ltr">Welcome to all IT Faculty students! Your hub for courses, plans, and guides.</span>
+        </p>
+
+        <div class="btn-grid">
+            <a href="pastpapers.html" class="btn btn-primary">
+                <span class="btn-icon">📝</span>
+                <span>بنك الأسئلة (Past Papers)</span>
+            </a>
+            
+            <a href="videos.html" class="btn btn-primary">
+                <span class="btn-icon">🎥</span>
+                <span>شروحات فيديو (Videos)</span>
+            </a>
+
+            <a href="plans.html" class="btn btn-outline">
+                <span class="btn-icon">📄</span>
+                <span>الخطط الدراسية (Study Plans)</span>
+            </a>
+
+            <a href="registration.html" class="btn btn-outline">
+                <span class="btn-icon">🎓</span>
+                <span>خطوات التسجيل (Registration)</span>
+            </a>
+
+            <a href="advice.html" class="btn btn-outline">
+                <span class="btn-icon">💡</span>
+                <span>نصائح وإرشادات (Guides)</span>
+            </a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-header">ASU Academy | Faculty of Information Technology</div>
         
-        <div class="divider"></div>
-        
-        <div class="welcome-en" dir="ltr">
-            <b>Welcome First-Year Students!</b> <br>
-            Start your journey here. Select an option below.
+        <div class="admin-credits" dir="ltr">
+            <span>Dean:</span> Dr. Yousef AlQasrawi &nbsp;•&nbsp; 
+            <span>Vice Dean:</span> Dr. Mohammad Hijjawi &nbsp;•&nbsp; 
+            <span>Supervisor:</span> Inst. Rawan Jarrar
         </div>
 
-        <br>
+        <div class="contributors-container">
+            
+            <div class="contributor-group">
+                <div class="group-title">Data Science & AI</div>
+                <ul class="contributor-list">
+                    <li>Naheel Al-Haddad</li>
+                    <li>Joud AlSabban</li>
+                    <li>Ali Abufaris</li>
+                </ul>
+            </div>
 
-        <a href="plans.html" class="menu-btn">
-            <span>📄</span> 
-            <span>الخطط الدراسية (Study Plans)</span>
-        </a>
-        
-        <a href="registration.html" class="menu-btn">
-            <span>🎓</span>
-            <span>خطوات التسجيل (Registration Steps)</span>
-        </a>
+            <div class="contributor-group">
+                <div class="group-title">Computer Science</div>
+                <ul class="contributor-list">
+                    <li>Lina Fattash</li>
+                    <li>Tala Ayman</li>
+                </ul>
+            </div>
 
-        <a href="advice.html" class="menu-btn">
-            <span>💡</span>
-            <span>نصائح وإرشادات (Helpful Guides)</span>
-        </a>
+            <div class="contributor-group">
+                <div class="group-title">Software Engineering</div>
+                <ul class="contributor-list">
+                    <li>Yousef Younes</li>
+                    <li>Mahmoud Alramahi</li>
+                </ul>
+            </div>
 
-    </div>
+            <div class="contributor-group">
+                <div class="group-title">Cybersecurity & Cloud</div>
+                <ul class="contributor-list">
+                    <li>Sara Sarhan</li>
+                </ul>
+            </div>
 
-    <div class="footer">
-        <strong>ASU Academy | Faculty of Information Technology</strong><br>
-        <div style="margin-top: 10px; font-size: 0.85rem; color: #aaa;">
-            Special Thanks to:<br>
-            <span style="color: #9D0208;">Dean:</span> Dr. Yousef AlQasrawi<br>
-            <span style="color: #9D0208;">Vice Dean:</span> Dr. Mohammad Hijjawi<br>
-            <span style="color: #9D0208;">Supervisor:</span> Inst. Rawan Jarrar
         </div>
-        <div class="footer-sub">© 2026 E-Library Hub</div>
-    </div>
+
+        <div class="copyright">© 2026 ASU Support Hub. Developed for the students.</div>
+    </footer>
 
 </body>
 </html>

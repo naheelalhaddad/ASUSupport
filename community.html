@@ -6,23 +6,36 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-FNTBG5RY0T');
     </script>
     
     <title>ASU Support - Community Service</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        :root {
+            --asu-red: #9D0208;
+            --bg-dark: #0a0c10;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --blob-yellow: rgba(234, 179, 8, 0.08);
+            --blob-teal: rgba(20, 184, 166, 0.08);
+            --blob-red: rgba(157, 2, 8, 0.12);
+        }
+
         body { 
             margin: 0;
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: white;
-            text-align: center;
-            background: linear-gradient(-45deg, #000000, #1a1a1a, #2b0000, #000000);
+            background: linear-gradient(-45deg, #0a0c10, #140505, #07080a, #11090f);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
-            padding: 40px 20px;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
         }
 
         @keyframes gradientBG {
@@ -31,130 +44,299 @@
             100% { background-position: 0% 50%; }
         }
 
+        .blob {
+            position: absolute;
+            z-index: -1;
+            filter: blur(60px);
+            animation: float 10s ease-in-out infinite alternate;
+        }
+        .blob-1 { top: -5%; right: -10%; width: 500px; height: 500px; background-color: var(--blob-yellow); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+        .blob-2 { top: 50%; left: -10%; width: 600px; height: 600px; background-color: var(--blob-teal); border-radius: 50% 50% 30% 70% / 50% 50% 70% 50%; animation-delay: -3s; }
+        .blob-3 { bottom: -10%; right: 20%; width: 700px; height: 500px; background-color: var(--blob-red); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; animation-delay: -6s; }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-30px) scale(1.05); }
+        }
+
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 5vw;
+            box-sizing: border-box;
+            z-index: 10;
+            max-width: 1200px;
+        }
+
+        .logo-box img { 
+            height: 55px; 
+            object-fit: contain;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+        .nav-link:hover { color: white; background: rgba(255, 255, 255, 0.08); border-color: rgba(255,255,255,0.2); }
+
+        .page-header {
+            text-align: center;
+            padding: 10px 20px 40px;
+            z-index: 10;
+        }
+
         h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-            color: white;
-            text-shadow: 0 0 15px #9D0208;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .highlight-badge {
+            display: inline-block;
+            background: rgba(157, 2, 8, 0.2);
+            color: #fca5a5;
+            padding: 8px 20px;
+            border-radius: 50px;
+            border: 1px solid rgba(157, 2, 8, 0.4);
+            margin-top: 15px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+            padding: 0 20px 40px;
+            box-sizing: border-box;
+            z-index: 10;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: right;
+            transition: 0.3s;
+        }
+        .info-card:hover { background: rgba(255, 255, 255, 0.04); border-color: rgba(255,255,255,0.15); transform: translateY(-3px); }
+
+        .info-card h3 { color: #fca5a5; margin: 0 0 15px 0; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; }
+        .info-card p { color: var(--text-muted); line-height: 1.6; margin: 0 0 15px 0; font-size: 0.95rem; }
+        
+        .note {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            border-right: 3px solid var(--asu-red);
+        }
+
+        .section-title-container {
+            text-align: center;
+            margin: 10px 0 40px 0;
+            z-index: 10;
+            position: relative;
+        }
+
+        .section-title-container h2 {
+            font-size: 2rem;
+            color: #fff;
+            margin: 0 0 5px 0;
             font-weight: 800;
         }
 
-        .subtitle { color: #ccc; margin-bottom: 40px; font-size: 1.1rem; }
-
-        .info-grid {
-            display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 50px;
+        .section-title-container p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+            direction: ltr;
         }
-        .info-card {
-            background: rgba(255,255,255,0.05); border: 1px solid #444; border-radius: 10px; padding: 20px; width: 300px;
-        }
-        .info-card h3 { color: #9D0208; border-bottom: 1px solid #444; padding-bottom: 10px; font-size: 1.2rem; }
 
         .timeline-section {
-            max-width: 700px; margin: 0 auto; text-align: right; position: relative; padding: 20px 0; z-index: 1; 
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            position: relative;
+            padding: 0 20px;
+            box-sizing: border-box;
+            z-index: 10;
         }
+
         .timeline-section::after {
-            content: ''; position: absolute; width: 2px; background-color: #444; z-index: -1; top: 0; bottom: 0; right: 30px; 
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: var(--glass-border);
+            top: 10px;
+            bottom: 10px;
+            right: 45px; 
+            z-index: -1; 
         }
 
         .timeline-item {
-            padding: 10px 60px 40px 10px; position: relative; opacity: 0; animation: slideIn 0.6s forwards; z-index: 2; 
+            padding: 0 40px 30px 0;
+            position: relative;
+            opacity: 0;
+            animation: slideIn 0.6s forwards;
         }
-        .timeline-item:nth-child(1) { animation-delay: 0.2s; }
-        .timeline-item:nth-child(2) { animation-delay: 0.3s; }
-        .timeline-item:nth-child(3) { animation-delay: 0.4s; }
-        .timeline-item:nth-child(4) { animation-delay: 0.5s; }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
 
         @keyframes slideIn {
-            from { transform: translateX(-30px); opacity: 0; } to { transform: translateX(0); opacity: 1; }
+            from { transform: translateX(-30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
         .timeline-item::after {
-            content: ''; position: absolute; width: 20px; height: 20px; right: 21px; top: 25px;
-            background-color: #000; border: 3px solid #9D0208; border-radius: 50%; z-index: 10;
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            right: 17px; 
+            top: 20px;
+            background-color: var(--bg-dark);
+            border: 3px solid var(--asu-red);
+            border-radius: 50%;
+            z-index: 2;
+            transition: 0.3s;
+            box-shadow: 0 0 10px rgba(157, 2, 8, 0.5);
         }
-        .timeline-item:hover::after { background-color: #9D0208; box-shadow: 0 0 15px #9D0208; }
+        
+        .timeline-item:hover::after { background-color: var(--asu-red); box-shadow: 0 0 15px var(--asu-red); transform: scale(1.2); }
 
         .timeline-content {
-            padding: 20px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
-            border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .timeline-content h3 { margin-top: 0; color: #fff; font-size: 1.2rem; }
-        .timeline-content p { color: #ccc; font-size: 0.95rem; line-height: 1.6; }
-
-        .note { font-size: 0.8rem; color: #aaa; margin-top: 5px; font-style: italic; }
-
-        .back-btn {
-            display: inline-block;
-            margin-top: 50px;
-            padding: 12px 30px;
-            border-radius: 50px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: #ccc;
-            text-decoration: none;
-            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 25px;
             transition: 0.3s;
+            text-align: right;
         }
-        .back-btn:hover { 
-            background: white; 
-            color: black; 
-            box-shadow: 0 0 15px white;
+
+        .timeline-content:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateX(-5px);
+        }
+
+        .timeline-content h3 { margin: 0 0 10px 0; color: white; font-size: 1.2rem; }
+        .timeline-content h3 span { color: var(--text-muted); font-size: 0.9rem; font-weight: normal; margin-right: 5px; }
+        .timeline-content p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0; }
+        .timeline-content b { color: #fca5a5; }
+
+        @media (max-width: 768px) {
+            .navbar { padding: 20px; }
+            .blob-1 { width: 300px; height: 300px; }
+            .timeline-section::after { right: 35px; }
+            .timeline-item { padding: 0 30px 20px 0; }
+            .timeline-item::after { right: 7px; }
+            .section-title-container h2 { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
 
-    <h1>نقاط خدمة المجتمع</h1>
-    <p class="subtitle">متطلب إجباري للتخرج: 10 نقاط (Required: 10 Points)</p>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <header class="navbar">
+        <div class="logo-box">
+            <img src="fit_logo.png" alt="FIT Logo">
+        </div>
+        <a href="advice.html" class="nav-link">
+            <span>العودة (Back)</span>
+            <span>←</span>
+        </a>
+    </header>
+
+    <div class="page-header">
+        <h1>نقاط خدمة المجتمع</h1>
+        <p class="subtitle">(Community Service Points)</p>
+        <div class="highlight-badge">متطلب إجباري للتخرج: 10 نقاط</div>
+    </div>
 
     <div class="info-grid">
         <div class="info-card">
-            <h3>النشاطات الداخلية (Internal)</h3>
-            <p>ورشات عمل، مسابقات، وأنشطة عامة.</p>
-            <p class="note">تعلن على فريق "Fiters" في Microsoft Teams.</p>
+            <h3><span>🏢</span> النشاطات الداخلية (Internal)</h3>
+            <p>تشمل ورشات العمل، المسابقات البرمجية، والأنشطة العامة داخل الحرم الجامعي.</p>
+            <div class="note">تُعلن الأنشطة باستمرار على فريق <b>"Fiters"</b> في منصة Microsoft Teams.</div>
         </div>
         <div class="info-card">
-            <h3>النشاطات الخارجية (External)</h3>
-            <p>أي نشاط تطوعي خارج الجامعة.</p>
-            <p class="note" style="color: #ff4444;">⚠ يجب الحصول على موافقة مسبقة.</p>
+            <h3><span>🌍</span> النشاطات الخارجية (External)</h3>
+            <p>أي نشاط أو عمل تطوعي يتم خارج أسوار الجامعة مع مؤسسات معتمدة.</p>
+            <div class="note" style="border-color: #eab308; color: #fde047;">⚠ <b>تنبيه:</b> يجب الحصول على موافقة مسبقة من الكلية قبل البدء بأي نشاط خارجي.</div>
         </div>
     </div>
 
-    <h2 style="margin-bottom: 30px;">خطوات احتساب النقاط (How to Claim Points)</h2>
+    <div class="section-title-container">
+        <h2>خطوات تسجيل وتوثيق النقاط</h2>
+        <p>(How to Register & Claim Your Points)</p>
+    </div>
 
     <div class="timeline-section">
-
+        
         <div class="timeline-item">
             <div class="timeline-content">
-                <h3>1. حضور النشاط (Attend Event)</h3>
-                <p>تابع قناة <b>Fiters Channel</b> على التيمز، واحضر الورشات أو المسابقات المعلن عنها.</p>
+                <h3>1. حضور النشاط <span>(Attend Event)</span></h3>
+                <p>تابع قناة <b>Fiters Channel</b> على التيمز لمعرفة مواعيد الأنشطة، واحضر الورشات أو المسابقات المُعلن عنها.</p>
             </div>
         </div>
 
         <div class="timeline-item">
             <div class="timeline-content">
-                <h3>2. تعبئة النموذج الإلكتروني (Online Form)</h3>
-                <p>في نهاية كل فعالية، سيتم نشر رابط (Form). يجب تعبئته لإثبات الحضور.</p>
+                <h3>2. تعبئة النموذج الإلكتروني <span>(Online Form)</span></h3>
+                <p>في نهاية كل فعالية، سيقوم المنظمون بنشر رابط (Form). يجب تعبئته في نفس الوقت لإثبات حضورك.</p>
             </div>
         </div>
 
         <div class="timeline-item">
             <div class="timeline-content">
-                <h3>3. استلام النموذج الورقي (Paperwork)</h3>
-                <p>توجه إلى <b>الطابق الثاني</b> في كلية الـ IT. قم بتعبئة النموذج الورقي الموجود عند "طاولة الأوراق المهمة".</p>
+                <h3>3. استلام النموذج الورقي <span>(Paperwork)</span></h3>
+                <p>توجه إلى <b>الطابق الثاني</b> في كلية تكنولوجيا المعلومات. قم بتعبئة النموذج الورقي الخاص بخدمة المجتمع الموجود عند "طاولة الأوراق المهمة".</p>
             </div>
         </div>
 
         <div class="timeline-item">
             <div class="timeline-content">
-                <h3>4. تسليم النموذج (Submit)</h3>
-                <p>سلم الورقة إلى <b>رئيس القسم (HOD)</b> الخاص بتخصصك لاعتماد النقاط رسمياً.</p>
+                <h3>4. تسليم النموذج <span>(Submit)</span></h3>
+                <p>سلّم الورقة المكتملة إلى <b>رئيس القسم (HOD)</b> الخاص بتخصصك ليتم اعتماد النقاط وإضافتها إلى رصيدك الأكاديمي رسمياً.</p>
             </div>
         </div>
 
     </div>
-
-    <a href="advice.html" class="back-btn">← العودة لصفحة النصائح (Back)</a>
 
 </body>
 </html>

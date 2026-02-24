@@ -6,23 +6,36 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-FNTBG5RY0T');
     </script>
     
-    <title>ASU Support - Registration</title>
+    <title>ASU Support - Registration Steps</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        :root {
+            --asu-red: #9D0208;
+            --bg-dark: #0a0c10;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --blob-yellow: rgba(234, 179, 8, 0.08);
+            --blob-teal: rgba(20, 184, 166, 0.08);
+            --blob-red: rgba(157, 2, 8, 0.12);
+        }
+
         body { 
             margin: 0;
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: white;
-            text-align: center;
-            background: linear-gradient(-45deg, #000000, #1a1a1a, #2b0000, #000000);
+            background: linear-gradient(-45deg, #0a0c10, #140505, #07080a, #11090f);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
-            padding: 40px 20px;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
         }
 
         @keyframes gradientBG {
@@ -31,45 +44,105 @@
             100% { background-position: 0% 50%; }
         }
 
+        .blob {
+            position: absolute;
+            z-index: -1;
+            filter: blur(60px);
+            animation: float 10s ease-in-out infinite alternate;
+        }
+        .blob-1 { top: -5%; right: -10%; width: 500px; height: 500px; background-color: var(--blob-yellow); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+        .blob-2 { top: 50%; left: -10%; width: 600px; height: 600px; background-color: var(--blob-teal); border-radius: 50% 50% 30% 70% / 50% 50% 70% 50%; animation-delay: -3s; }
+        .blob-3 { bottom: -10%; right: 20%; width: 700px; height: 500px; background-color: var(--blob-red); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; animation-delay: -6s; }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-30px) scale(1.05); }
+        }
+
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 5vw;
+            box-sizing: border-box;
+            z-index: 10;
+            max-width: 1200px;
+        }
+
+        .logo-box img { 
+            height: 55px; 
+            object-fit: contain;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+        .nav-link:hover { color: white; background: rgba(255, 255, 255, 0.08); border-color: rgba(255,255,255,0.2); }
+
+        .page-header {
+            text-align: center;
+            padding: 10px 20px 40px;
+            z-index: 10;
+        }
+
         h1 {
-            font-size: 2.2rem;
-            margin-bottom: 40px;
-            color: white;
-            text-shadow: 0 0 15px #9D0208;
-            font-weight: 800;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin: 0;
         }
 
         .timeline-section {
-            max-width: 700px;
-            margin: 0 auto;
-            text-align: right;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 30px;
             position: relative;
-            padding: 20px 0;
-            z-index: 1; 
+            padding: 0 20px;
+            box-sizing: border-box;
+            z-index: 10;
         }
 
         .timeline-section::after {
             content: '';
             position: absolute;
             width: 2px;
-            background-color: #444;
+            background: var(--glass-border);
+            top: 10px;
+            bottom: 10px;
+            right: 45px; 
             z-index: -1; 
-            top: 0;
-            bottom: 0;
-            right: 30px; 
         }
 
         .timeline-item {
-            padding: 10px 60px 40px 10px; 
+            padding: 0 40px 30px 0;
             position: relative;
             opacity: 0;
             animation: slideIn 0.6s forwards;
-            z-index: 2; 
         }
 
-        .timeline-item:nth-child(1) { animation-delay: 0.2s; }
-        .timeline-item:nth-child(2) { animation-delay: 0.4s; }
-        .timeline-item:nth-child(3) { animation-delay: 0.6s; }
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
 
         @keyframes slideIn {
             from { transform: translateX(-30px); opacity: 0; }
@@ -79,120 +152,186 @@
         .timeline-item::after {
             content: '';
             position: absolute;
-            width: 20px;
-            height: 20px;
-            right: 21px; 
-            top: 25px;
-            background-color: #000;
-            border: 3px solid #9D0208;
+            width: 16px;
+            height: 16px;
+            right: 17px; 
+            top: 20px;
+            background-color: var(--bg-dark);
+            border: 3px solid var(--asu-red);
             border-radius: 50%;
-            z-index: 10;
+            z-index: 2;
             transition: 0.3s;
-            box-shadow: 0 0 5px rgba(0,0,0,0.5); 
+            box-shadow: 0 0 10px rgba(157, 2, 8, 0.5);
         }
         
-        .timeline-item:hover::after { background-color: #9D0208; box-shadow: 0 0 15px #9D0208; }
+        .timeline-item:hover::after { background-color: var(--asu-red); box-shadow: 0 0 15px var(--asu-red); transform: scale(1.2); }
 
         .timeline-content {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
             padding: 25px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: 0.3s;
+            text-align: right;
         }
 
         .timeline-content:hover {
-            transform: translateY(-5px);
-            border-color: #9D0208;
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateX(-5px);
         }
 
-        .timeline-content h3 { margin-top: 0; color: #fff; font-size: 1.3rem; margin-bottom: 10px;}
-        .timeline-content p { color: #ccc; font-size: 1rem; line-height: 1.6; }
-
-        .video-btn {
-            display: inline-block;
-            margin-top: 15px;
-            background: rgba(157, 2, 8, 0.2);
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.95rem;
-            border: 1px solid #9D0208;
-            padding: 10px 20px;
-            border-radius: 30px;
-            transition: 0.3s;
-            display: block; 
-            width: fit-content;
-            margin: 15px auto 0 auto;
-        }
-        .video-btn:hover { background: #9D0208; box-shadow: 0 0 15px #9D0208; }
-
+        .timeline-content h3 { margin: 0 0 10px 0; color: white; font-size: 1.2rem; display: flex; align-items: center; gap: 8px;}
+        .timeline-content h3 span { color: var(--text-muted); font-size: 0.9rem; font-weight: normal; margin-right: auto; }
+        .timeline-content p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0 0 15px 0; }
+        
+        /* --- IMAGE STYLES --- */
         .info-img {
             display: block; 
             width: 100%;
-            height: auto; /* Responsive fix */
-            max-width: 400px;
-            border-radius: 10px;
-            margin: 15px auto; 
-            border: 1px solid #444;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            max-width: 450px;
+            border-radius: 12px;
+            margin: 20px auto 10px auto; 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+            transition: 0.3s;
+        }
+        
+        .info-img:hover {
+            border-color: rgba(157, 2, 8, 0.4);
+            transform: scale(1.02);
         }
 
         .img-caption {
             font-size: 0.85rem;
-            color: #aaa;
+            color: var(--text-muted);
             text-align: center;
-            margin-top: -10px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             font-style: italic;
         }
 
-        .back-btn {
-            display: inline-block;
-            margin-top: 50px;
-            padding: 12px 30px;
-            border-radius: 50px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: #ccc;
+        /* --- VIDEO BUTTONS --- */
+        .video-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(157, 2, 8, 0.15);
+            color: #fca5a5;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: 1px solid rgba(157, 2, 8, 0.4);
+            padding: 10px 24px;
+            border-radius: 50px;
             transition: 0.3s;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            box-sizing: border-box;
         }
-        .back-btn:hover { 
-            background: white; 
-            color: black; 
-            box-shadow: 0 0 15px white;
+        
+        .video-btn:hover { 
+            background: var(--asu-red); 
+            color: white;
+            border-color: var(--asu-red);
+            box-shadow: 0 0 15px rgba(157, 2, 8, 0.4); 
         }
 
+        /* --- ACTION CARD --- */
+        .action-card {
+            width: 100%;
+            max-width: 760px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin: 0 auto 60px;
+            box-sizing: border-box;
+            z-index: 10;
+        }
+
+        .action-card h2 { margin: 0 0 10px 0; color: #fff; font-size: 1.4rem; }
+        .action-card p { color: var(--text-muted); margin: 0 0 20px 0; font-size: 0.95rem; }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(157, 2, 8, 0.9);
+            color: white;
+            border: 1px solid var(--asu-red);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+            box-shadow: 0 10px 25px -5px rgba(157, 2, 8, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #ba0209;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px -5px rgba(157, 2, 8, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .navbar { padding: 20px; }
+            .blob-1 { width: 300px; height: 300px; }
+            .timeline-section::after { right: 35px; }
+            .timeline-item { padding: 0 30px 20px 0; }
+            .timeline-item::after { right: 7px; }
+            .action-card { margin: 0 20px 60px; width: calc(100% - 40px); }
+        }
     </style>
 </head>
 <body>
 
-    <h1>رحلة التسجيل (Registration Journey)</h1>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <header class="navbar">
+        <div class="logo-box">
+            <img src="fit_logo.png" alt="FIT Logo">
+        </div>
+        <a href="index.html" class="nav-link">
+            <span>الرئيسية (Home)</span>
+            <span>🏠</span>
+        </a>
+    </header>
+
+    <div class="page-header">
+        <h1>رحلة التسجيل</h1>
+        <p class="subtitle">دليلك لتسجيل المواد واعتماد الجدول <br> <span dir="ltr">(Registration Journey)</span></p>
+    </div>
 
     <div class="timeline-section">
-
+        
         <div class="timeline-item">
             <div class="timeline-content">
-                <h3>1. معرفة المرشد الأكاديمي (Academic Advisor)</h3>
+                <h3>🎓 1. معرفة المرشد الأكاديمي <span>(Academic Advisor)</span></h3>
                 <p>تعرف على مرشدك الأكاديمي الذي سيساعدك في اختيار المواد وحل المشاكل الأكاديمية.</p>
                 
-                <img src="shared image.jfif" alt="Advisor Info" class="info-img">
-                
-                <div class="img-caption">
-                    استخدم هذه القائمة لمعرفة موقع مكتب المرشد <br>
-                    (Use this map to find your advisor's office)
-                </div>
+                <img src="shared image.jfif" alt="Advisor Info Map" class="info-img">
+                <div class="img-caption">استخدم هذه القائمة لمعرفة موقع مكتب المرشد (Use this map to find your advisor's office)</div>
 
-                <a href="https://drive.google.com/drive/folders/1oLGxzChc9cQUcvRDy-pQ-3__Jksxxp1P?usp=sharing" class="video-btn" target="_blank">🎥 مشاهدة الشرح (Watch Video)</a>
+                <div style="text-align: center;">
+                    <a href="https://drive.google.com/drive/folders/1oLGxzChc9cQUcvRDy-pQ-3__Jksxxp1P?usp=sharing" class="video-btn" target="_blank">
+                        <span>🎥</span> مشاهدة الشرح (Watch Video)
+                    </a>
+                </div>
             </div>
         </div>
 
         <div class="timeline-item">
             <div class="timeline-content">
-                <h3>2. الدفع والرسوم (Payment)</h3>
-                <p>بعد اختيار المواد، يجب تسديد الرسوم. تعرف على طرق الدفع وكيفية معرفة المبلغ المطلوب.</p>
+                <h3>💳 2. الدفع والرسوم <span>(Payment)</span></h3>
+                <p>بعد اختيار المواد، يجب تسديد الرسوم. تعرف على طرق الدفع وكيفية معرفة المبلغ المطلوب من خلال إي فواتيركم أو الدائرة المالية.</p>
                 
                 <img src="payment.jpg" alt="Payment Methods" class="info-img">
             </div>
@@ -200,16 +339,27 @@
 
         <div class="timeline-item">
             <div class="timeline-content">
-                <h3>3. تسجيل المواد (Registration)</h3>
-                <p>الخطوة الأخيرة هي تثبيت الجدول الدراسي عبر بوابة الطالب الإلكترونية.</p>
+                <h3>📝 3. تسجيل المواد <span>(Registration)</span></h3>
+                <p>الخطوة الأخيرة هي تثبيت الجدول الدراسي وإرساله للمرشد عبر بوابة الطالب الإلكترونية.</p>
                 
-                <a href="https://www.awesomescreenshot.com/video/47841166?key=43d0b3c11a8df715143aa35219572678" class="video-btn" target="_blank">💻 مشاهدة الشرح (Watch Video)</a>
+                <div style="text-align: center;">
+                    <a href="https://www.awesomescreenshot.com/video/47841166?key=43d0b3c11a8df715143aa35219572678" class="video-btn" target="_blank">
+                        <span>💻</span> مشاهدة الشرح (Watch Video)
+                    </a>
+                </div>
             </div>
         </div>
 
     </div>
 
-    <a href="index.html" class="back-btn">← العودة للصفحة الرئيسية (Home)</a>
+    <div class="action-card">
+        <h2>جاهز للتسجيل؟</h2>
+        <p>انتقل الآن إلى بوابة الطالب الإلكترونية لتنفيذ الخطوات</p>
+        <a href="https://my.asu.edu.jo" target="_blank" class="btn-primary">
+            <span>🌐</span>
+            دخول بوابة الطالب (MyASU)
+        </a>
+    </div>
 
 </body>
 </html>

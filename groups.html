@@ -6,26 +6,37 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-FNTBG5RY0T');
     </script>
     
     <title>ASU Support - WhatsApp Groups</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        :root {
+            --asu-red: #9D0208;
+            --bg-dark: #0a0c10;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --blob-yellow: rgba(234, 179, 8, 0.08);
+            --blob-teal: rgba(20, 184, 166, 0.08);
+            --blob-red: rgba(157, 2, 8, 0.12);
+            --wa-green: #25D366;
+        }
+
         body { 
             margin: 0;
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: white;
-            text-align: center;
-            background: linear-gradient(-45deg, #000000, #1a1a1a, #2b0000, #000000);
+            background: linear-gradient(-45deg, #0a0c10, #140505, #07080a, #11090f);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
-            padding: 40px 20px;
+            color: var(--text-main);
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden;
+            position: relative;
         }
 
         @keyframes gradientBG {
@@ -34,203 +45,384 @@
             100% { background-position: 0% 50%; }
         }
 
-        h1 { font-size: 2.2rem; margin-bottom: 40px; text-shadow: 0 0 15px #9D0208; font-weight: 800; }
-
-        .section-title {
-            color: #ccc;
-            font-size: 1.2rem;
-            margin: 30px 0 15px 0;
-            position: relative;
-            display: inline-block;
+        .blob {
+            position: absolute;
+            z-index: -1;
+            filter: blur(60px);
+            animation: float 10s ease-in-out infinite alternate;
         }
-        
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 2px;
-            background: #9D0208;
-            margin: 5px auto 0;
+        .blob-1 { top: -5%; right: -10%; width: 500px; height: 500px; background-color: var(--blob-yellow); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+        .blob-2 { top: 40%; left: -10%; width: 600px; height: 600px; background-color: var(--blob-teal); border-radius: 50% 50% 30% 70% / 50% 50% 70% 50%; animation-delay: -3s; }
+        .blob-3 { bottom: -10%; right: 20%; width: 700px; height: 500px; background-color: var(--blob-red); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; animation-delay: -6s; }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-30px) scale(1.05); }
         }
 
-        .flex-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+        .navbar {
             width: 100%;
-            max-width: 1000px;
-            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 5vw;
+            box-sizing: border-box;
+            z-index: 10;
+            max-width: 1200px;
         }
-        
-        .group-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
+
+        .logo-box img { 
+            height: 55px; 
+            object-fit: contain;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+        }
+
+        .nav-link {
+            color: var(--text-muted);
             text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             transition: 0.3s;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+        .nav-link:hover { color: white; background: rgba(255, 255, 255, 0.08); border-color: rgba(255,255,255,0.2); }
+
+        .page-header {
+            text-align: center;
+            padding: 10px 20px 40px;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* --- NEW DIRECTORY LAYOUT --- */
+        .directory-container {
+            width: 100%;
+            max-width: 800px;
+            padding: 0 20px 60px;
+            box-sizing: border-box;
+            z-index: 10;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 260px;
+            gap: 30px;
         }
 
-        .group-card:hover {
-            transform: translateY(-5px);
-            border-color: #9D0208; 
+        .category-panel {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+        }
+
+        .category-header {
             background: rgba(157, 2, 8, 0.1);
-            box-shadow: 0 5px 20px rgba(157, 2, 8, 0.2);
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .icon { font-size: 2.5rem; margin-bottom: 10px; }
-        
-        h3 { 
-            color: #fff; 
-            margin: 0 0 5px 0; 
-            font-size: 1.1rem; 
+        .category-header h2 {
+            margin: 0;
+            font-size: 1.25rem;
+            color: #fca5a5;
+            font-weight: 800;
         }
 
-        .sub-text {
-            color: #aaa;
+        .category-icon {
+            font-size: 1.5rem;
+        }
+
+        .group-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .group-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .group-row:last-child {
+            border-bottom: none;
+        }
+
+        .group-row:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .group-info-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .row-icon {
+            font-size: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .row-text h3 {
+            margin: 0 0 4px 0;
+            font-size: 1.1rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .row-text p {
+            margin: 0;
             font-size: 0.85rem;
-            margin-bottom: 15px;
+            color: var(--text-muted);
+            direction: ltr;
+            text-align: right;
         }
 
         .join-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
             background: transparent;
-            color: #9D0208;
-            border: 1px solid #9D0208;
-            padding: 5px 20px;
-            border-radius: 20px;
+            color: var(--wa-green);
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            border-radius: 50px;
+            font-weight: 600;
             font-size: 0.9rem;
             transition: 0.3s;
+            white-space: nowrap;
         }
 
-        .group-card:hover .join-btn {
-            background: #9D0208;
-            color: white;
-            font-weight: bold;
+        .group-row:hover .join-btn {
+            background: rgba(37, 211, 102, 0.1);
+            border-color: var(--wa-green);
+            box-shadow: 0 0 15px rgba(37, 211, 102, 0.2);
+            transform: scale(1.05);
         }
 
-        .back-btn {
-            display: inline-block;
-            margin-top: auto;
-            padding: 12px 30px;
-            border-radius: 50px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: #ccc;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: 0.3s;
+        @media (max-width: 600px) {
+            .navbar { padding: 20px; }
+            .blob-1 { width: 300px; height: 300px; }
+            
+            .group-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+                padding: 20px;
+            }
+            .join-btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
-        .back-btn:hover { 
-            background: white; 
-            color: black; 
-            box-shadow: 0 0 15px white;
-        }
-
     </style>
 </head>
 <body>
 
-    <h1>مجموعات واتساب الرسمية <br> <span style="font-size: 1rem; color: #ccc;">(Official WhatsApp Groups)</span></h1>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
 
-    <div class="section-title">مجموعات الكلية (Faculty)</div>
-    <div class="flex-container">
+    <header class="navbar">
+        <div class="logo-box">
+            <img src="fit_logo.png" alt="FIT Logo">
+        </div>
+        <a href="index.html" class="nav-link">
+            <span>الرئيسية (Home)</span>
+            <span>🏠</span>
+        </a>
+    </header>
+
+    <div class="page-header">
+        <h1>مجموعات واتساب الرسمية</h1>
+        <p class="subtitle">تواصل مع زملائك في التخصص والكلية <span dir="ltr">(Official WhatsApp Groups)</span></p>
+    </div>
+
+    <main class="directory-container">
         
-        <a href="https://chat.whatsapp.com/Hb1jON8CrpoK6nrG0TCO8z" target="_blank" class="group-card">
-            <span class="icon">🏢</span>
-            <h3>كلية تكنولوجيا المعلومات</h3>
-            <span class="sub-text">IT Faculty (General)</span>
-            <span class="join-btn">انضم للمجموعة</span>
-        </a>
+        <div class="category-panel">
+            <div class="category-header">
+                <span class="category-icon">🏢</span>
+                <h2>مجموعات الكلية (Faculty)</h2>
+            </div>
+            <div class="group-list">
+                
+                <a href="https://chat.whatsapp.com/Hb1jON8CrpoK6nrG0TCO8z" target="_blank" class="group-row">
+                    <div class="group-info-wrapper">
+                        <div class="row-icon">🏛️</div>
+                        <div class="row-text">
+                            <h3>كلية تكنولوجيا المعلومات</h3>
+                            <p>IT Faculty (General)</p>
+                        </div>
+                    </div>
+                    <div class="join-btn"><span>💬</span> انضمام</div>
+                </a>
 
-        <a href="https://chat.whatsapp.com/KmTeJjk5a9uAV6cHct3SZ5" target="_blank" class="group-card">
-            <span class="icon">👩‍🎓</span>
-            <h3>طالبات الكلية</h3>
-            <span class="sub-text">IT Faculty (Girls Only)</span>
-            <span class="join-btn">انضم للمجموعة</span>
-        </a>
+                <a href="https://chat.whatsapp.com/KmTeJjk5a9uAV6cHct3SZ5" target="_blank" class="group-row">
+                    <div class="group-info-wrapper">
+                        <div class="row-icon">👩‍🎓</div>
+                        <div class="row-text">
+                            <h3>طالبات الكلية</h3>
+                            <p>IT Faculty (Girls Only)</p>
+                        </div>
+                    </div>
+                    <div class="join-btn"><span>💬</span> انضمام</div>
+                </a>
 
-    </div>
+            </div>
+        </div>
 
-    <div class="section-title">التخصصات (Majors)</div>
-    <div class="flex-container">
+        <div class="category-panel">
+            <div class="category-header">
+                <span class="category-icon">🎓</span>
+                <h2>التخصصات (Majors)</h2>
+            </div>
+            <div class="group-list">
+                
+                <a href="https://chat.whatsapp.com/DDRN4vkegzhEYTadtodJoT" target="_blank" class="group-row">
+                    <div class="group-info-wrapper">
+                        <div class="row-icon">💻</div>
+                        <div class="row-text">
+                            <h3>علم الحاسوب</h3>
+                            <p>Computer Science</p>
+                        </div>
+                    </div>
+                    <div class="join-btn"><span>💬</span> انضمام</div>
+                </a>
 
-        <a href="https://chat.whatsapp.com/DDRN4vkegzhEYTadtodJoT" target="_blank" class="group-card">
-            <span class="icon">💻</span>
-            <h3>علم الحاسوب</h3>
-            <span class="sub-text">Computer Science</span>
-            <span class="join-btn">انضم للمجموعة</span>
-        </a>
+                <a href="https://chat.whatsapp.com/KX4pGRzrkSf3rhcpDA9alM" target="_blank" class="group-row">
+                    <div class="group-info-wrapper">
+                        <div class="row-icon">🔒</div>
+                        <div class="row-text">
+                            <h3>الأمن السيبراني</h3>
+                            <p>Cyber Security</p>
+                        </div>
+                    </div>
+                    <div class="join-btn"><span>💬</span> انضمام</div>
+                </a>
 
-        <a href="https://chat.whatsapp.com/KX4pGRzrkSf3rhcpDA9alM" target="_blank" class="group-card">
-            <span class="icon">🔒</span>
-            <h3>الأمن السيبراني</h3>
-            <span class="sub-text">Cyber Security</span>
-            <span class="join-btn">انضم للمجموعة</span>
-        </a>
+                <a href="https://chat.whatsapp.com/LH3fvJyEomELbgprJGj8Wr" target="_blank" class="group-row">
+                    <div class="group-info-wrapper">
+                        <div class="row-icon">🤖</div>
+                        <div class="row-text">
+                            <h3>الذكاء الاصطناعي</h3>
+                            <p>Artificial Intelligence</p>
+                        </div>
+                    </div>
+                    <div class="join-btn"><span>💬</span> انضمام</div>
+                </a>
 
-        <a href="https://chat.whatsapp.com/LH3fvJyEomELbgprJGj8Wr" target="_blank" class="group-card">
-            <span class="icon">🤖</span>
-            <h3>الذكاء الاصطناعي</h3>
-            <span class="sub-text">Artificial Intelligence</span>
-            <span class="join-btn">انضم للمجموعة</span>
-        </a>
+                <a href="https://chat.whatsapp.com/EnVe9jIEJZFIN2bIQMf3SQ?mode=hqrt2" target="_blank" class="group-row">
+                    <div class="group-info-wrapper">
+                        <div class="row-icon">⚙️</div>
+                        <div class="row-text">
+                            <h3>هندسة البرمجيات</h3>
+                            <p>Software Engineering</p>
+                        </div>
+                    </div>
+                    <div class="join-btn"><span>💬</span> انضمام</div>
+                </a>
 
-        <a href="https://chat.whatsapp.com/EnVe9jIEJZFIN2bIQMf3SQ?mode=hqrt2" target="_blank" class="group-card">
-            <span class="icon">⚙️</span>
-            <h3>هندسة البرمجيات</h3>
-            <span class="sub-text">Software Engineering</span>
-            <span class="join-btn">انضم للمجموعة</span>
-        </a>
+                <a href="https://chat.whatsapp.com/DTvlc3X0yB3LekC5pZlrCC" target="_blank" class="group-row">
+                    <div class="group-info-wrapper">
+                        <div class="row-icon">🎮</div>
+                        <div class="row-text">
+                            <h3>الواقع الرقمي والألعاب</h3>
+                            <p>Digital Reality & Gaming</p>
+                        </div>
+                    </div>
+                    <div class="join-btn"><span>💬</span> انضمام</div>
+                </a>
 
-        <a href="https://chat.whatsapp.com/DTvlc3X0yB3LekC5pZlrCC" target="_blank" class="group-card">
-            <span class="icon">🎮</span>
-            <h3>الواقع الرقمي والألعاب</h3>
-            <span class="sub-text">Digital Reality & Gaming</span>
-            <span class="join-btn">انضم للمجموعة</span>
-        </a>
+            </div>
+        </div>
 
-    </div>
+        <div class="category-panel">
+            <div class="category-header">
+                <span class="category-icon">🌱</span>
+                <h2>سنافر (First Year)</h2>
+            </div>
+            <div class="group-list">
+                
+                <a href="https://chat.whatsapp.com/KPXIccAiNiWAJz2OrfsU3N?mode=gi_t" target="_blank" class="group-row">
+                    <div class="group-info-wrapper">
+                        <div class="row-icon">⭐</div>
+                        <div class="row-text">
+                            <h3>مجتمع السنة الأولى (C++)</h3>
+                            <p>First Year Community</p>
+                        </div>
+                    </div>
+                    <div class="join-btn"><span>💬</span> انضمام</div>
+                </a>
 
-    <div class="section-title">سنافر (First Year)</div>
-    <div class="flex-container">
+            </div>
+        </div>
 
-        <a href="https://chat.whatsapp.com/EOW0LKkB2hl3td89wcEchK" target="_blank" class="group-card">
-            <span class="icon">🌱</span>
-            <h3>مجتمع السنة الأولى (C++)</h3>
-            <span class="sub-text">First Year Community (C++)</span>
-            <span class="join-btn">انضم للمجموعة</span>
-        </a>
+        <div class="category-panel">
+            <div class="category-header">
+                <span class="category-icon">🛠️</span>
+                <h2>خدمات أخرى (Services)</h2>
+            </div>
+            <div class="group-list">
+                
+                <a href="https://chat.whatsapp.com/LS92JgjO26Y5SZK9SVJ9FJ" target="_blank" class="group-row">
+                    <div class="group-info-wrapper">
+                        <div class="row-icon">📚</div>
+                        <div class="row-text">
+                            <h3>ASU Bank</h3>
+                            <p>بنك أسئلة وملخصات</p>
+                        </div>
+                    </div>
+                    <div class="join-btn"><span>💬</span> انضمام</div>
+                </a>
 
-    </div>
+                <a href="https://chat.whatsapp.com/GrPfNbuHJFi35hdlhf3S2d" target="_blank" class="group-row">
+                    <div class="group-info-wrapper">
+                        <div class="row-icon">🚌</div>
+                        <div class="row-text">
+                            <h3>باصات الجامعة</h3>
+                            <p>University Buses</p>
+                        </div>
+                    </div>
+                    <div class="join-btn"><span>💬</span> انضمام</div>
+                </a>
 
-    <div class="section-title">خدمات أخرى (Services)</div>
-    <div class="flex-container">
+            </div>
+        </div>
 
-        <a href="https://chat.whatsapp.com/LS92JgjO26Y5SZK9SVJ9FJ" target="_blank" class="group-card">
-            <span class="icon">📚</span>
-            <h3>ASU Bank</h3>
-            <span class="sub-text">بنك أسئلة وملخصات</span>
-            <span class="join-btn">انضم للمجموعة</span>
-        </a>
-
-        <a href="https://chat.whatsapp.com/GrPfNbuHJFi35hdlhf3S2d" target="_blank" class="group-card">
-            <span class="icon">🚌</span>
-            <h3>باصات الجامعة</h3>
-            <span class="sub-text">University Buses</span>
-            <span class="join-btn">انضم للمجموعة</span>
-        </a>
-
-    </div>
-
-    <a href="advice.html" class="back-btn">← العودة لصفحة النصائح (Back)</a>
+    </main>
 
 </body>
 </html>

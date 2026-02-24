@@ -6,24 +6,36 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-FNTBG5RY0T');
     </script>
     
     <title>ASU Support - Study Plans</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        :root {
+            --asu-red: #9D0208;
+            --bg-dark: #0a0c10;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --blob-yellow: rgba(234, 179, 8, 0.08);
+            --blob-teal: rgba(20, 184, 166, 0.08);
+            --blob-red: rgba(157, 2, 8, 0.12);
+        }
+
         body { 
             margin: 0;
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-            
-            background: linear-gradient(-45deg, #000000, #1a1a1a, #2b0000, #000000);
+            background: linear-gradient(-45deg, #0a0c10, #140505, #07080a, #11090f);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
         }
 
         @keyframes gradientBG {
@@ -32,168 +44,338 @@
             100% { background-position: 0% 50%; }
         }
 
+        .blob {
+            position: absolute;
+            z-index: -1;
+            filter: blur(60px);
+            animation: float 10s ease-in-out infinite alternate;
+        }
+        .blob-1 { top: -5%; right: -10%; width: 500px; height: 500px; background-color: var(--blob-yellow); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+        .blob-2 { top: 40%; left: -10%; width: 600px; height: 600px; background-color: var(--blob-teal); border-radius: 50% 50% 30% 70% / 50% 50% 70% 50%; animation-delay: -3s; }
+        .blob-3 { bottom: -10%; right: 20%; width: 700px; height: 500px; background-color: var(--blob-red); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; animation-delay: -6s; }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-30px) scale(1.05); }
+        }
+
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 5vw;
+            box-sizing: border-box;
+            z-index: 10;
+            max-width: 1200px;
+        }
+
+        .logo-box img { 
+            height: 55px; 
+            object-fit: contain;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+        .nav-link:hover { color: white; background: rgba(255, 255, 255, 0.08); border-color: rgba(255,255,255,0.2); }
+
+        .page-header {
+            text-align: center;
+            padding: 10px 20px 40px;
+            z-index: 10;
+        }
+
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            text-shadow: 0 0 15px #9D0208; 
-            animation: fadeIn 1.5s ease;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.5px;
         }
 
         .subtitle {
-            color: #aaa;
-            margin-bottom: 50px;
             font-size: 1.1rem;
+            color: var(--text-muted);
+            margin: 0;
         }
 
-        .grid-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center; 
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .major-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center; /* Centered for better bilingual look */
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            
-            flex: 1 1 300px;
-            max-width: 380px; 
-            
-            opacity: 0;
-            animation: slideIn 0.5s forwards;
-        }
-
-        .major-card:nth-child(1) { animation-delay: 0.1s; }
-        .major-card:nth-child(2) { animation-delay: 0.2s; }
-        .major-card:nth-child(3) { animation-delay: 0.3s; }
-        .major-card:nth-child(4) { animation-delay: 0.4s; }
-        .major-card:nth-child(5) { animation-delay: 0.5s; }
-
-        .major-card:hover {
-            transform: translateY(-10px);
-            border-color: #9D0208;
-            box-shadow: 0 10px 30px rgba(157, 2, 8, 0.3);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        h3 {
-            margin-top: 0;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            color: #fff;
-            font-size: 1.3rem;
-            line-height: 1.4;
-        }
-
-        .en-title {
-            display: block;
-            font-size: 0.9rem;
-            color: #bbb;
-            font-weight: normal;
-            margin-top: 5px;
-        }
-
-        .download-btn {
-            display: inline-block;
+        .directory-container {
             width: 100%;
-            text-align: center;
-            padding: 12px 0;
-            margin-top: 20px;
-            border: 1px solid #9D0208;
-            color: #9D0208;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
+            max-width: 800px;
+            padding: 0 20px 60px;
+            box-sizing: border-box;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .category-panel {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+        }
+
+        .category-header {
+            background: rgba(157, 2, 8, 0.1);
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .category-header h2 {
+            margin: 0;
+            font-size: 1.25rem;
+            color: #fca5a5;
+            font-weight: 800;
+        }
+
+        .category-icon {
+            font-size: 1.5rem;
+        }
+
+        .group-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .group-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
             transition: 0.3s;
+            text-decoration: none;
         }
 
-        .download-btn:hover {
-            background: #9D0208;
-            color: white;
-            box-shadow: 0 0 15px #9D0208;
+        .group-row:last-child {
+            border-bottom: none;
         }
 
-        .back-btn {
-            display: inline-block;
-            margin-top: 60px;
-            padding: 12px 30px;
+        .group-row:hover:not(.disabled-row) {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .group-info-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .row-icon {
+            font-size: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .row-text h3 {
+            margin: 0 0 4px 0;
+            font-size: 1.1rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .row-text p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            direction: ltr;
+            text-align: right;
+        }
+
+        .view-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: transparent;
+            color: #fca5a5;
+            border: 1px solid rgba(157, 2, 8, 0.5);
             border-radius: 50px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: #ccc;
-            text-decoration: none;
-            font-size: 1rem;
+            font-weight: 600;
+            font-size: 0.9rem;
             transition: 0.3s;
-        }
-        .back-btn:hover { 
-            background: white; 
-            color: black; 
-            box-shadow: 0 0 15px white;
+            white-space: nowrap;
         }
 
-        @keyframes slideIn {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .group-row:hover:not(.disabled-row) .view-btn {
+            background: rgba(157, 2, 8, 0.2);
+            border-color: var(--asu-red);
+            box-shadow: 0 0 15px rgba(157, 2, 8, 0.3);
+            transform: scale(1.05);
         }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
+        /* Coming Soon State */
+        .disabled-row {
+            cursor: default;
+            opacity: 0.7;
+        }
+
+        .coming-soon-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 600px) {
+            .navbar { padding: 20px; }
+            .blob-1 { width: 300px; height: 300px; }
+            
+            .group-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+                padding: 20px;
+            }
+            .view-btn, .coming-soon-badge {
+                width: 100%;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <h1>اختر تخصصك الأكاديمي</h1>
-    <div class="subtitle">Select Your Major</div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
 
-    <div class="grid-container">
-        
-        <div class="major-card">
-            <h3>💻 علم الحاسوب
-                <span class="en-title">Computer Science</span>
-            </h3>
-            <a href="https://drive.google.com/drive/u/0/folders/1o-krQ7kBgeeStnBqh3OSsn5FALgMRP-g" class="download-btn" target="_blank">عرض الخطط ➜</a>
+    <header class="navbar">
+        <div class="logo-box">
+            <img src="fit_logo.png" alt="FIT Logo">
         </div>
+        <a href="index.html" class="nav-link">
+            <span>الرئيسية (Home)</span>
+            <span>🏠</span>
+        </a>
+    </header>
 
-        <div class="major-card">
-            <h3>⚙️ هندسة البرمجيات
-                <span class="en-title">Software Engineering</span>
-            </h3>
-            <a href="https://drive.google.com/drive/u/0/folders/1_QiyokuW3ovr5Va2_aD9-kP-k3TflD1L" class="download-btn" target="_blank">عرض الخطط ➜</a>
-        </div>
-
-        <div class="major-card">
-            <h3>🛡️ الأمن السيبراني والحوسبة السحابية
-                <span class="en-title">Cybersecurity & Cloud Computing</span>
-            </h3>
-            <a href="https://drive.google.com/drive/u/0/folders/1hEtuAfMb6bl2JkY2BjZZ0rlmVyJzcAir" class="download-btn" target="_blank">عرض الخطط ➜</a>
-        </div>
-
-        <div class="major-card">
-            <h3>🎮 الواقع الرقمي وتطوير الألعاب
-                <span class="en-title">Digital Reality & Game Development</span>
-            </h3>
-            <a href="https://drive.google.com/drive/u/0/folders/1wp48lCqJcnjJ1Jo_msUubldT-BLekgj5" class="download-btn" target="_blank">عرض الخطط ➜</a>
-        </div>
-
-        <div class="major-card">
-            <h3>📊 علم بيانات وذكاء اصطناعي
-                <span class="en-title">Data Science & AI</span>
-            </h3>
-            <a href="https://drive.google.com/drive/u/0/folders/1CMufjmEGQ_iVvYqh5CZ8MC92xOSQDJec" class="download-btn" target="_blank">عرض الخطط ➜</a>
-        </div>
-
+    <div class="page-header">
+        <h1>الخطط الدراسية</h1>
+        <p class="subtitle">اختر تخصصك الأكاديمي لعرض الخطة <br> <span dir="ltr">(Select Your Major)</span></p>
     </div>
 
-    <a href="index.html" class="back-btn">← العودة للصفحة الرئيسية (Home)</a>
+    <main class="directory-container">
+        
+        <div class="category-panel">
+            <div class="category-header">
+                <span class="category-icon">🆕</span>
+                <h2>خطط الدفعات الجديدة (2025)</h2>
+            </div>
+            <div class="group-list">
+                
+                <a href="https://drive.google.com/drive/u/0/folders/1CMufjmEGQ_iVvYqh5CZ8MC92xOSQDJec" target="_blank" class="group-row">
+                    <div class="group-info-wrapper">
+                        <div class="row-icon">🤖</div>
+                        <div class="row-text">
+                            <h3>علم البيانات والذكاء الاصطناعي</h3>
+                            <p>Data Science & AI</p>
+                        </div>
+                    </div>
+                    <div class="view-btn"><span>📄</span> عرض الملفات</div>
+                </a>
+
+                <a href="https://drive.google.com/drive/u/0/folders/1o-krQ7kBgeeStnBqh3OSsn5FALgMRP-g" target="_blank" class="group-row">
+                    <div class="group-info-wrapper">
+                        <div class="row-icon">💻</div>
+                        <div class="row-text">
+                            <h3>علم الحاسوب</h3>
+                            <p>Computer Science</p>
+                        </div>
+                    </div>
+                    <div class="view-btn"><span>📄</span> عرض الملفات</div>
+                </a>
+
+                <a href="https://drive.google.com/drive/u/0/folders/1_QiyokuW3ovr5Va2_aD9-kP-k3TflD1L" target="_blank" class="group-row">
+                    <div class="group-info-wrapper">
+                        <div class="row-icon">⚙️</div>
+                        <div class="row-text">
+                            <h3>هندسة البرمجيات</h3>
+                            <p>Software Engineering</p>
+                        </div>
+                    </div>
+                    <div class="view-btn"><span>📄</span> عرض الملفات</div>
+                </a>
+
+                <a href="https://drive.google.com/drive/u/0/folders/1hEtuAfMb6bl2JkY2BjZZ0rlmVyJzcAir" target="_blank" class="group-row">
+                    <div class="group-info-wrapper">
+                        <div class="row-icon">🔒</div>
+                        <div class="row-text">
+                            <h3>الأمن السيبراني</h3>
+                            <p>Cybersecurity</p>
+                        </div>
+                    </div>
+                    <div class="view-btn"><span>📄</span> عرض الملفات</div>
+                </a>
+
+                <a href="https://drive.google.com/drive/u/0/folders/1wp48lCqJcnjJ1Jo_msUubldT-BLekgj5" target="_blank" class="group-row">
+                    <div class="group-info-wrapper">
+                        <div class="row-icon">🎮</div>
+                        <div class="row-text">
+                            <h3>الواقع الرقمي وتطوير الألعاب</h3>
+                            <p>VR & Game Development</p>
+                        </div>
+                    </div>
+                    <div class="view-btn"><span>📄</span> عرض الملفات</div>
+                </a>
+
+            </div>
+        </div>
+
+        <div class="category-panel">
+            <div class="category-header">
+                <span class="category-icon">⏳</span>
+                <h2>خطط الدفعات السابقة (2024 وما قبل)</h2>
+            </div>
+            <div class="group-list">
+                
+                <div class="group-row disabled-row">
+                    <div class="group-info-wrapper">
+                        <div class="row-icon">📁</div>
+                        <div class="row-text">
+                            <h3>جميع التخصصات</h3>
+                            <p>All IT Majors</p>
+                        </div>
+                    </div>
+                    <div class="coming-soon-badge">قريباً (Coming Soon)</div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
 
 </body>
 </html>
