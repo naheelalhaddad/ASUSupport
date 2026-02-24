@@ -155,6 +155,10 @@
   <script>
         const AZURE_BASE = "https://asusupportfiles.blob.core.windows.net/pastpapers/";
 
+        // =====================================
+        // CORE COURSES (Shared across all majors)
+        // =====================================
+        
         const dsa = {
             name: "Data Structures and Algorithms (DSA)", arabic: "تراكيب البيانات والخوارزميات",
             content: {
@@ -211,7 +215,20 @@
                     { label: "Hashing Concepts", file: "Hashing.pdf" },
                     { label: "MST Kruskal's", file: "MST_Kruskals Algorithm.pdf" },
                     { label: "MST Prim's", file: "MST_Prims Algorithm.pdf" }
-                ], exams: [], quizzes: []
+                ],
+                exams: [
+                    { label: "Final 20251", file: "Algo - Final - 20251.pdf" },
+                    { label: "Final 20242", file: "Algo - Final - 20242.pdf" },
+                    { label: "Final 20223", file: "Algo - Final - 20223.pdf" },
+                    { label: "Midterm 20251", file: "Algo - Mid - 20251.pdf" },
+                    { label: "Midterm 20242", file: "Algo - Mid - 20242.pdf" },
+                    { label: "Midterm 20241", file: "Algo - Mid - 20241.pdf" },
+                    { label: "Midterm 20231", file: "Algo - Mid - 20231.pdf" }
+                ],
+                quizzes: [
+                    { label: "Quiz 1 20251", file: "Algo - Quiz1 - 20251.pdf" },
+                    { label: "Quiz 2 20251", file: "Algo - Quiz2 - 20251.pdf" }
+                ]
             }
         };
 
@@ -231,7 +248,7 @@
         };
 
         const discreteStructures = {
-            name: "Discrete Structures (1)", arabic: "تراكيب منفصلة (1)",
+            name: "Discrete Structures (1)", arabic: "تراكيب المتقطعة",
             content: {
                 slides: [], exams: [],
                 quizzes: [
@@ -320,6 +337,10 @@
             }
         };
 
+        // =====================================
+        // MAJOR SPECIFIC COURSES
+        // =====================================
+        
         const computingSystems = {
             name: "Computing Systems for DSAI", arabic: "أنظمة الحوسبة",
             content: {
@@ -410,6 +431,10 @@
             }
         };
 
+        // =====================================
+        // INJECTING COURSES INTO MAJORS
+        // =====================================
+        // Everything inside commonCourses will automatically appear in every major tab!
         const commonCourses = [dsa, algorithms, linearAlgebra, discreteStructures, calculus1, operatingSystems, databaseSystems];
 
         const materials = [
