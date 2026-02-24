@@ -21,7 +21,7 @@
             background: radial-gradient(circle at top right, #1a0505, #0a0c10);
             color: var(--text-main);
             display: flex;
-            overflow: hidden; /* Prevent body scroll, let content area scroll */
+            overflow: hidden; 
         }
 
         /* Dashboard Layout */
@@ -33,7 +33,7 @@
             padding: 30px 20px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
             overflow-y: auto;
         }
 
@@ -47,9 +47,17 @@
         }
 
         /* Sidebar Elements */
-        .logo-area { text-align: center; margin-bottom: 20px; }
+        .logo-area { text-align: center; margin-bottom: 5px; }
         .logo-area h2 { margin: 0; color: white; text-shadow: 0 0 10px rgba(157,2,8,0.5); font-size: 1.8rem; }
         
+        .home-btn {
+            display: block; width: 100%; box-sizing: border-box; text-align: center;
+            padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border);
+            color: white; text-decoration: none; border-radius: 12px; font-weight: bold;
+            margin-bottom: 15px; transition: 0.3s;
+        }
+        .home-btn:hover { background: var(--asu-red); border-color: var(--asu-red); box-shadow: 0 0 15px rgba(157,2,8,0.4); }
+
         .major-btn {
             width: 100%; padding: 15px 20px; background: var(--glass); border: 1px solid var(--glass-border);
             color: var(--text-muted); border-radius: 12px; cursor: pointer; text-align: right;
@@ -121,6 +129,7 @@
         <div class="logo-area">
             <h2>بنك المواد</h2>
         </div>
+        <a href="index.html" class="home-btn">🏠 القائمة الرئيسية</a>
         <div id="major-nav">
             </div>
     </aside>
@@ -137,7 +146,7 @@
 
     <div id="pdfModal" class="modal">
         <div class="modal-header">
-            <span id="pdfTitle" style="font-weight: bold;">File Viewer</span>
+            <span id="pdfTitle" style="font-weight: bold; color: white;">File Viewer</span>
             <button class="close-btn" onclick="closePdf()">إغلاق</button>
         </div>
         <iframe id="pdfFrame"></iframe>
@@ -230,19 +239,70 @@
             }
         };
 
+        const dataModeling = {
+            name: "Data Modeling and Simulation", arabic: "نمذجة ومحاكاة البيانات",
+            content: {
+                slides: [],
+                exams: [
+                    { label: "Final 20251", file: "Data Modeling - Final- 20251.pdf" },
+                    { label: "Midterm 20251", file: "Data modeling - Mid - 20251.pdf" },
+                    { label: "Midterm 20241", file: "Data Modeling - Mid - 20241.pdf" }
+                ],
+                quizzes: [
+                    { label: "Quiz 1 20251", file: "Data Modeling - Quiz1 - 20251.pdf" },
+                    { label: "Quiz 2 20251", file: "Data Modeling - Quiz2 - 20251.pdf" },
+                    { label: "Quiz 3 20251", file: "Data Modeing - Quiz3 - 20251.pdf" }, // NOTE: Kept typo to match Azure file
+                    { label: "Quiz 5 20251", file: "Data Modeling - Quiz5 - 20251.pdf" }
+                ]
+            }
+        };
+
+        const dataScienceR = {
+            name: "Data Science Programming (R)", arabic: "برمجة علم البيانات",
+            content: {
+                slides: [],
+                exams: [
+                    { label: "Midterm 20251", file: "Data science - Mid - 20251.pdf" },
+                    { label: "Midterm 2024", file: "Data science - Mid - 2024.pdf" }
+                ],
+                quizzes: [
+                    { label: "Quiz 1 20251", file: "Data science - Quiz1 - 20251.pdf" },
+                    { label: "Quiz 1 20243", file: "Data science - Quiz1 - 20243.pdf" },
+                    { label: "Quiz 2 20251", file: "Data science - Quiz2 - 20251.pdf" },
+                    { label: "Quiz 2 20241", file: "Data science - Quiz2 - 20241.pdf" }
+                ]
+            }
+        };
+
+        const dataSecurity = {
+            name: "Data Security", arabic: "أمن البيانات",
+            content: {
+                slides: [],
+                exams: [
+                    { label: "Midterm 20251", file: "Data security - Mid - 20251.pdf" },
+                    { label: "Midterm 20242", file: "Data security - Mid - 20242.pdf" }
+                ],
+                quizzes: [
+                    { label: "Assignment 20251", file: "Data security - Assignment - 20251.pdf" },
+                    { label: "Quiz 1 20251", file: "Data security - Quiz1 - 20251.pdf" },
+                    { label: "Quiz 2 20251", file: "Data security - Quiz2 - 20251.pdf" }
+                ]
+            }
+        };
+
         const materials = [
-            { major: "الذكاء الاصطناعي (AI & DS)", courses: [linearAlgebra, calculus1, computingSystems, dataEngineering, dataMining] },
+            { major: "الذكاء الاصطناعي (AI & DS)", courses: [linearAlgebra, calculus1, computingSystems, dataEngineering, dataMining, dataModeling, dataScienceR, dataSecurity] },
             { major: "علم الحاسوب (CS)", courses: [linearAlgebra, calculus1] },
-            { major: "الأمن السيبراني (Cybersecurity)", courses: [linearAlgebra, calculus1] },
+            { major: "الأمن السيبراني (Cybersecurity)", courses: [linearAlgebra, calculus1, dataSecurity] },
             { major: "هندسة البرمجيات (SE)", courses: [linearAlgebra, calculus1] },
             { major: "الواقع الرقمي والألعاب (Gaming)", courses: [linearAlgebra, calculus1] }
         ];
 
-        let currentMajorIndex = 0; // Default to AI
+        let currentMajorIndex = 0;
 
         function init() {
             renderSidebar();
-            selectMajor(0); // Load first major on startup
+            selectMajor(0);
         }
 
         function renderSidebar() {
@@ -255,12 +315,11 @@
         }
 
         function selectMajor(index) {
-            // Update UI State
             document.querySelectorAll('.major-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById(`btn-${index}`).classList.add('active');
             
             document.getElementById('current-major-title').innerText = materials[index].major;
-            document.getElementById('search').value = ""; // Clear search
+            document.getElementById('search').value = ""; 
             
             currentMajorIndex = index;
             renderCourses(materials[index].courses);
@@ -318,7 +377,6 @@
             document.getElementById('pdfFrame').src = '';
         }
 
-        // Search logic applied only to current major's courses
         document.getElementById('search').oninput = function() {
             const val = this.value.toLowerCase();
             document.querySelectorAll('.course-card').forEach(card => {
