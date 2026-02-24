@@ -71,34 +71,52 @@
 
     
     <script>
-        const AZURE_BASE = "https://asusupportfiles.blob.core.windows.net/pastpapers/";
+      const AZURE_BASE = "https://asusupportfiles.blob.core.windows.net/pastpapers/";
 
+        // Define the course once to keep the code neat
+        const linearAlgebra = {
+            name: "Linear Algebra",
+            arabic: "الجبر الخطي",
+            content: {
+                slides: [
+                    { label: "1. Getting Started", file: "1_ Getting Started.pdf" },
+                    { label: "2. Characterizing Running Times", file: "2_ Characterizing Running Times.pdf" },
+                    { label: "3. Recursion", file: "3_ Recursion.pdf" },
+                    { label: "4. Insertion Sort", file: "4_ Insertion sort.pdf" },
+                    { label: "5. Bubble Sort", file: "5_ Bubble sort.pdf" },
+                    { label: "6. Merge Sort", file: "6_ Merge Sort.pdf" },
+                    { label: "7. Quick Sort", file: "7_ Quick_Sort.pdf" },
+                    { label: "8. Heap Sort", file: "8_Heap_Sort.pdf" },
+                    { label: "9. Lower Bound Linear Sort", file: "9_ Lower_Bound_Linear_Sort.pdf" },
+                    { label: "10. Elementary Graph Algorithms (BFS)", file: "10_Elementary Graph Algorithms_BFS.pdf" },
+                    { label: "11. Graph Algorithms (DFS)", file: "11_Graph Algorithms_DFS.pdf" }
+                ],
+                exams: [],
+                quizzes: []
+            }
+        };
+
+        // Inject the course into every major
         const materials = [
             {
-                major: "تخصصات تكنولوجيا المعلومات (All IT Majors)",
-                courses: [
-                    {
-                        name: "Linear Algebra",
-                        arabic: "الجبر الخطي",
-                        content: {
-                            slides: [
-                                { label: "1. Getting Started", file: "1_ Getting Started.pdf" },
-                                { label: "2. Characterizing Running Times", file: "2_ Characterizing Running Times.pdf" },
-                                { label: "3. Recursion", file: "3_ Recursion.pdf" },
-                                { label: "4. Insertion Sort", file: "4_ Insertion sort.pdf" },
-                                { label: "5. Bubble Sort", file: "5_ Bubble sort.pdf" },
-                                { label: "6. Merge Sort", file: "6_ Merge Sort.pdf" },
-                                { label: "7. Quick Sort", file: "7_ Quick_Sort.pdf" },
-                                { label: "8. Heap Sort", file: "8_Heap_Sort.pdf" },
-                                { label: "9. Lower Bound Linear Sort", file: "9_ Lower_Bound_Linear_Sort.pdf" },
-                                { label: "10. Elementary Graph Algorithms (BFS)", file: "10_Elementary Graph Algorithms_BFS.pdf" },
-                                { label: "11. Graph Algorithms (DFS)", file: "11_Graph Algorithms_DFS.pdf" }
-                            ],
-                            exams: [],
-                            quizzes: []
-                        }
-                    }
-                ]
+                major: "الذكاء الاصطناعي وعلم البيانات (AI & DS)",
+                courses: [linearAlgebra]
+            },
+            {
+                major: "علم الحاسوب (CS)",
+                courses: [linearAlgebra]
+            },
+            {
+                major: "الأمن السيبراني (Cybersecurity)",
+                courses: [linearAlgebra]
+            },
+            {
+                major: "هندسة البرمجيات (SE)",
+                courses: [linearAlgebra]
+            },
+            {
+                major: "الواقع الرقمي والألعاب (Gaming)",
+                courses: [linearAlgebra]
             }
         ];
 
