@@ -305,6 +305,46 @@
             .contributors-container { flex-direction: column; gap: 10px; }
             .contributor-group { border-top: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px; }
         }
+
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px 0;
+            margin-top: 30px;
+            position: relative;
+            display: flex;
+        }
+
+        .ticker-content {
+            display: inline-block;
+            white-space: nowrap;
+            padding-left: 100%;
+            animation: ticker 25s linear infinite;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            direction: ltr;
+        }
+
+        .ticker-content span {
+            margin: 0 15px 0 40px;
+            color: var(--asu-red);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .ticker-wrap:hover .ticker-content {
+            animation-play-state: paused;
+        }
+        
     </style>
 </head>
 <body>
@@ -356,7 +396,7 @@
         </div>
     </main>
 
-   <footer class="footer">
+<footer class="footer">
         <div class="footer-header">ASU Academy | Faculty of Information Technology</div>
         
         <div class="admin-credits" dir="ltr">
@@ -366,6 +406,15 @@
         </div>
 
         <div class="copyright">© 2026 ASU Support Hub. Developed for the students.</div>
+
+        <div class="ticker-wrap">
+            <div class="ticker-content">
+                <span>Data Science & AI:</span> Naheel Al-Haddad, Joud AlSabban, Ali Abufaris
+                <span>Computer Science:</span> Lina Fattash, Tala Ayman
+                <span>Software Engineering:</span> Yousef Younes, Mahmoud Alramahi
+                <span>Cybersecurity & Cloud:</span> Sara Sarhan
+            </div>
+        </div>
     </footer>
 
 </body>
