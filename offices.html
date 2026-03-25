@@ -111,26 +111,8 @@
         .subtitle {
             font-size: 1rem;
             color: var(--text-muted);
-            margin: 0 0 20px 0;
+            margin: 0 0 40px 0;
         }
-
-        .warning-box {
-            background: rgba(234, 179, 8, 0.1);
-            border: 1px solid rgba(234, 179, 8, 0.2);
-            color: #fde047;
-            padding: 15px 20px;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            backdrop-filter: blur(10px);
-            text-align: right;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .warning-icon { font-size: 1.5rem; }
 
         .search-container {
             width: 100%;
@@ -240,7 +222,6 @@
         @media (max-width: 768px) {
             .navbar { padding: 20px; }
             .blob-1 { width: 300px; height: 300px; }
-            .warning-box { text-align: right; }
         }
     </style>
 </head>
@@ -263,14 +244,6 @@
     <div class="page-header">
         <h1>ابحث عن مكتب الدكتور</h1>
         <p class="subtitle">(Search for Professor)</p>
-
-        <div class="warning-box">
-            <span class="warning-icon">⚠️</span>
-            <div>
-                <strong>ملاحظة هامة:</strong><br>
-                أرقام المكاتب والساعات المكتبية قيد التحديث للفصل الدراسي الجديد وقد تتغير قريباً.
-            </div>
-        </div>
 
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="اكتب اسم الدكتور هنا... (Type Name)" autocomplete="off">
@@ -297,11 +270,13 @@
             <h2 style="color: #fca5a5; margin-top: 0;">الساعات المكتبية</h2>
             <p id="modalProfName" style="color: var(--text-muted); margin-bottom: 25px;"></p>
             
-            <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
-                <span style="font-size: 2rem; display: block; margin-bottom: 10px;">⏳</span>
-                <strong style="color: white;">قيد التحديث</strong>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">سيتم إدراج الساعات المكتبية الجديدة فور اعتمادها للفصل الحالي.</p>
-            </div>
+            <div id="modalHoursContent" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); text-align: right; direction: rtl;">
+                </div>
+            
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 25px; border-top: 1px solid var(--glass-border); padding-top: 15px;">
+                لإضافة أو تعديل البيانات المفقودة، تواصل معنا عبر تيمز:<br>
+                <a href="mailto:202411124@students.asu.edu.jo" style="color: #fca5a5; text-decoration: none;">202411124@students.asu.edu.jo</a>
+            </p>
         </div>
     </div>
 
@@ -314,7 +289,7 @@
             { "name": "د. محمد بني دومي", "office": "21S02", "location": "علم الحاسوب", "hours": null },
             { "name": "د. عمر الشيخ سالم", "office": "1221", "location": "الواقع الرقمي وتطوير الالعاب", "hours": null },
             { "name": "د. رضوان بطيحة", "office": "1218", "location": "علم الحاسوب", "hours": null },
-            { "name": "د. نيفين حجازي", "office": "1G09", "location": "علم الحاسوب", "hours": null },
+            { "name": "د. نيفين حجازي", "office": "1G09", "location": "علم الحاسوب", "hours": { "الأحد": "12:00 - 14:00", "الإثنين": "11:30 - 12:30", "الثلاثاء": "11:00 - 13:00", "الأربعاء": "10:30 - 11:30" } },
             { "name": "د. وليد مقابلة", "office": "1205", "location": "الواقع الرقمي وتطوير الالعاب", "hours": null },
             { "name": "د.أحمد اللطيف", "office": "21S08", "location": "علم الحاسوب", "hours": null },
             { "name": "د. منصور الهلالات", "office": "1223", "location": "علم الحاسوب", "hours": null },
@@ -322,7 +297,7 @@
             { "name": "أ.براء القدومي", "office": "1208", "location": "علم الحاسوب", "hours": null },
             { "name": "أ. قيس ايمن", "office": "1208", "location": "الأمن السيبراني", "hours": null },
             { "name": "د. نور العايدي", "office": "1222", "location": "علم الحاسوب", "hours": null },
-            { "name": "أ. أسماء الموسى", "office": "1G09", "location": "علم الحاسوب", "hours": null },
+            { "name": "أ. أسماء الموسى", "office": "1G09", "location": "علم الحاسوب", "hours": { "الأحد": "10:00 - 11:00", "الإثنين": "11:00 - 12:00", "الثلاثاء": "11:00 - 12:00", "الأربعاء": "10:00 - 11:00" } },
             { "name": "د. زياد جمحاوي", "office": "1223", "location": "علم الحاسوب", "hours": null },
             { "name": "د. محمود البشايرة", "office": "1217", "location": "هندسة البرمجيات", "hours": null },
             { "name": "د. شريفة مراد", "office": "21G08", "location": "الواقع الرقمي وتطوير الالعاب", "hours": null },
@@ -339,7 +314,7 @@
             { "name": "د. محمد خضر", "office": "21S07", "location": "علم الحاسوب", "hours": null },
             { "name": "أ. حنان حردان", "office": "1209", "location": "علم الحاسوب", "hours": null },
             { "name": "أ. هديل أحمد", "office": "1106", "location": "علم الحاسوب", "hours": null },
-            { "name": "د. وريف المناصير", "office": "1G10", "location": "علم الحاسوب", "hours": null },
+            { "name": "د. وريف المناصير", "office": "1G10", "location": "علم الحاسوب", "hours": { "الأحد": "12:00 - 13:00", "الإثنين": "14:00 - 15:00", "الثلاثاء": "13:00 - 14:00", "الأربعاء": "11:00 - 12:00" } },
             { "name": "د. باسل بني إسماعيل", "office": "1207", "location": "هندسة البرمجيات", "hours": null },
             { "name": "د.لبنى بن خليفة", "office": "21G07", "location": "الذكاء الاصطناعي", "hours": null },
             { "name": "د. معتصم جراح", "office": "21G14", "location": "الذكاء الاصطناعي", "hours": null },
@@ -349,12 +324,12 @@
             { "name": "إيمان الناجي", "office": "1224", "location": "الذكاء الاصطناعي", "hours": null },
             { "name": "لهيب العبادي", "office": "21S06", "location": "هندسة البرمجيات", "hours": null },
             { "name": "د. ناجي البطاينه", "office": "21S05", "location": "الذكاء الاصطناعي", "hours": null },
-            { "name": "د. نور ابو الرب", "office": "1G10", "location": "علم الحاسوب", "hours": null },
+            { "name": "د. نور ابو الرب", "office": "1G10", "location": "علم الحاسوب", "hours": { "الأحد": "12:00 - 13:00", "الإثنين": "10:00 - 11:00", "الثلاثاء": "13:00 - 14:00", "الأربعاء": "11:00 - 12:00" } },
             { "name": "د. محمد خصاونة", "office": "1212", "location": "الذكاء الاصطناعي", "hours": null },
             { "name": "د. علاء الزعبي", "office": "1218", "location": "الواقع الرقمي وتطوير الالعاب", "hours": null },
             { "name": "د. بشار الشوحه", "office": "1207", "location": "الذكاء الاصطناعي", "hours": null },
             { "name": "د.خالد معابرة", "office": "1203", "location": "علم الحاسوب", "hours": null },
-            { "name": "أ. غدير البيساني", "office": "1214", "location": "هندسة البرمجيات", "hours": null },
+            { "name": "أ. غدير البيساني", "office": "1214", "location": "هندسة البرمجيات", "hours": { "الأحد": "9:30 - 10:30", "الإثنين": "10:00 - 12:00", "الثلاثاء": "10:00 - 11:00", "الأربعاء": "10:00 - 11:00", "الخميس": "13:00 - 15:00" } },
             { "name": "د.يوسف الشيخ", "office": "1220", "location": "هندسة البرمجيات", "hours": null },
             { "name": "أ.سهام حيمور", "office": "1105", "location": "الواقع الرقمي وتطوير الالعاب", "hours": null },
             { "name": "د.حسان الطراونه", "office": "1213", "location": "الذكاء الاصطناعي", "hours": null },
@@ -363,15 +338,15 @@
             { "name": "د.معاذ العلي", "office": "21S19", "location": "الذكاء الاصطناعي", "hours": null },
             { "name": "د. أيهم العمري", "office": "1216", "location": "علم الحاسوب", "hours": null },
             { "name": "د. جعفر عطوان", "office": "1212", "location": "علم الحاسوب", "hours": null },
-            { "name": "د. حكمت عبد الجابر", "office": "1G08", "location": "علم الحاسوب", "hours": null },
+            { "name": "د. حكمت عبد الجابر", "office": "1G08", "location": "علم الحاسوب", "hours": { "الأحد": "11:15 - 12:45", "الإثنين": "11:45 - 12:45", "الثلاثاء": "11:15 - 12:45", "الأربعاء": "11:00 - 12:45", "الخميس": "11:00 - 2:00" } },
             { "name": "د. عبدالله ابورمان", "office": "21S04", "location": "علم الحاسوب", "hours": null },
             { "name": "د. صلاح الدين صافي", "office": "1221", "location": "هندسة البرمجيات", "hours": null },
             { "name": "وليد الأحمد", "office": "1219", "location": "هندسة البرمجيات", "hours": null },
             { "name": "د. سهير الحاج حسن", "office": "1106", "location": "هندسة البرمجيات", "hours": null },
-            { "name": "د. مروان الأخرس", "office": "1226", "location": "الأمن السيبراني", "hours": null },
-            { "name": "د. أحمد العتوم", "office": "1217", "location": "الأمن السيبراني", "hours": null },
-            { "name": "د. محمود جوارنه", "office": "1215", "location": "الأمن السيبراني", "hours": null },
-            { "name": "أ. حازم أبو ادعيق", "office": "1215", "location": "الأمن السيبراني", "hours": null },
+            { "name": "د. مروان الأخرس", "office": "1226", "location": "الأمن السيبراني", "hours": { "الأحد": "11:00 - 13:00", "الإثنين": "14:00 - 15:00", "الثلاثاء": "8:30 - 9:30", "الأربعاء": "11:00 - 12:30" } },
+            { "name": "د. أحمد العتوم", "office": "1217", "location": "الأمن السيبراني", "hours": { "الأحد": "12:30 - 14:00", "الإثنين": "11:00 - 12:00", "الثلاثاء": "12:30 - 14:00", "الأربعاء": "11:00 - 12:00", "الخميس": "9:00 - 10:00" } },
+            { "name": "د. محمود جوارنه", "office": "1215", "location": "الأمن السيبراني", "hours": { "الأحد": "11:00 - 12:00", "الإثنين": "13:00 - 14:00", "الثلاثاء": "10:00 - 11:00", "الأربعاء": "12:00 - 13:00", "الخميس": "8:00 - 9:00, 16:00 - 18:00", "ملاحظات": "Research Hours" } },
+            { "name": "أ. حازم أبو ادعيق", "office": "1215", "location": "الأمن السيبراني", "hours": { "الأحد": "14:00 - 15:00", "الإثنين": "13:00 - 14:00" } },
             { "name": "د. فادي بطة", "office": "1216", "location": "الأمن السيبراني", "hours": null },
             { "name": "أ.عاكنة الشياب", "office": "1214", "location": "الأمن السيبراني", "hours": null },
             { "name": "د. موفق أبو الهيجاء", "office": "1213", "location": "الأمن السيبراني", "hours": null },
@@ -382,12 +357,13 @@
             { "name": "د. محمد شكوكاني", "office": "21S03", "location": "هندسة البرمجيات", "hours": null },
             { "name": "د. مصعود شاهين", "office": "21S07", "location": "الأمن السيبراني", "hours": null },
             { "name": "د. أيهم الوحش", "office": "21S08", "location": "الأمن السيبراني", "hours": null },
-            { "name": "أ. لينا القضاة", "office": "21S26", "location": "هندسة البرمجيات", "hours": null },
+            { "name": "أ. لينا القضاة", "office": "21S26", "location": "هندسة البرمجيات", "hours": { "الأحد": "8:00 - 9:00", "الإثنين": "15:00 - 16:00", "الثلاثاء": "10:00 - 11:00", "الأربعاء": "9:00 - 10:00", "الخميس": "8:00 - 11:30" } },
             { "name": "أ. روان جرار", "office": "21S26", "location": "هندسة البرمجيات/ علم حاسوب", "hours": null },
             { "name": "د. أسراء أبو السعود", "office": "21S27", "location": "الأمن السيبراني", "hours": null },
             { "name": "د. مها السعودى", "office": "21S27", "location": "علوم", "hours": null },
             { "name": "أ. آمنة شعبان", "office": "21S28", "location": "هندسة البرمجيات", "hours": null },
-            { "name": "د. أسماء سالم", "office": "21S28", "location": "الأمن السيبراني", "hours": null }
+            { "name": "د. أسماء سالم", "office": "21S28", "location": "الأمن السيبراني", "hours": null },
+            { "name": "د. عتيقة الشايب", "office": "غير محدد", "location": "غير محدد", "hours": { "الأحد": "12:00 - 13:00", "الإثنين": "12:00 - 13:00", "الأربعاء": "12:00 - 13:00" } }
         ];
 
         const input = document.getElementById('searchInput');
@@ -399,6 +375,7 @@
         const pOffice = document.getElementById('pOffice');
         const pLoc = document.getElementById('pLoc');
         const mName = document.getElementById('modalProfName');
+        const modalContent = document.getElementById('modalHoursContent');
 
         let currentProf = null;
 
@@ -435,6 +412,31 @@
         function openModal() {
             if (!currentProf) return;
             mName.textContent = currentProf.name;
+            
+            if (currentProf.hours) {
+                let html = '';
+                const days = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'];
+                days.forEach(day => {
+                    const time = currentProf.hours[day];
+                    if (time) {
+                        html += `<p style="margin: 8px 0; color: white; font-size: 1.1rem;"><strong>${day}:</strong> <span style="color: #fca5a5;" dir="ltr">${time}</span></p>`;
+                    }
+                });
+                
+                if (currentProf.hours['ملاحظات']) {
+                    html += `<p style="margin: 15px 0 0 0; color: #fde047; font-size: 0.95rem;"><strong>ملاحظات:</strong> ${currentProf.hours['ملاحظات']}</p>`;
+                }
+                
+                modalContent.innerHTML = html;
+            } else {
+                modalContent.innerHTML = `
+                    <div style="text-align: center;">
+                        <span style="font-size: 2rem; display: block; margin-bottom: 10px;">⏳</span>
+                        <strong style="color: white; font-size: 1.1rem;">غير متوفرة حالياً</strong>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">لم يتم إدراج الساعات المكتبية بعد.</p>
+                    </div>`;
+            }
+            
             modal.style.display = "flex";
         }
 
