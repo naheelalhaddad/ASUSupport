@@ -22,6 +22,7 @@
             --blob-red: rgba(157, 2, 8, 0.15);
         }
 
+        /* Strict boundary control for mobile scaling */
         *, *::before, *::after {
             box-sizing: border-box;
         }
@@ -31,6 +32,7 @@
             max-width: 100vw;
             margin: 0;
             padding: 0;
+            overflow-x: hidden; /* Kills any horizontal scrolling */
         }
 
         body { 
@@ -42,7 +44,6 @@
             color: var(--text-main);
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
             position: relative;
         }
 
@@ -60,29 +61,20 @@
         }
 
         .blob-1 {
-            top: -10%;
-            right: -5%;
-            width: 500px;
-            height: 500px;
+            top: -10%; right: -5%; width: 500px; height: 500px;
             background-color: var(--blob-yellow);
             border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
         }
 
         .blob-2 {
-            top: 20%;
-            left: -10%;
-            width: 600px;
-            height: 600px;
+            top: 20%; left: -10%; width: 600px; height: 600px;
             background-color: var(--blob-teal);
             border-radius: 50% 50% 30% 70% / 50% 50% 70% 50%;
             animation-delay: -3s;
         }
 
         .blob-3 {
-            bottom: -10%;
-            right: 20%;
-            width: 700px;
-            height: 500px;
+            bottom: -10%; right: 20%; width: 700px; height: 500px;
             background-color: var(--blob-red);
             border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
             animation-delay: -6s;
@@ -99,6 +91,7 @@
             align-items: center;
             padding: 30px 5vw;
             z-index: 10;
+            width: 100%;
         }
 
         .logo-box {
@@ -132,12 +125,9 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: 60%; 
-            left: 50%;
+            top: 60%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 100%; 
-            max-width: 700px; 
-            height: 400px;
+            width: 100%; max-width: 700px; height: 400px;
             background: radial-gradient(circle, rgba(157,2,8,0.15) 0%, transparent 60%);
             z-index: -1;
             animation: pulseGlow 4s alternate infinite;
@@ -158,7 +148,7 @@
         }
 
         .hero h1.ar-title {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-size: clamp(2.2rem, 6vw, 4.5rem);
             font-weight: 900;
             color: var(--text-main);
             margin: 0 0 20px 0;
@@ -167,10 +157,11 @@
         }
 
         .hero p {
-            font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
             color: var(--text-muted);
             max-width: 700px;
-            margin: 0 0 40px 0;
+            width: 100%;
+            margin: 0 auto 40px auto;
             line-height: 1.7;
         }
 
@@ -241,7 +232,7 @@
             background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(20px);
             border-top: 1px solid rgba(255, 255, 255, 0.03);
-            padding: 40px 20px;
+            padding: 40px 20px 0 20px;
             text-align: center;
             z-index: 10;
             width: 100%;
@@ -264,16 +255,9 @@
         .admin-credits span { color: var(--asu-red); font-weight: 600; }
 
         .copyright {
-            margin-top: 40px;
+            margin-top: 20px;
             font-size: 0.8rem;
             color: #475569;
-        }
-
-        @media (max-width: 768px) {
-            .navbar { justify-content: center; padding: 20px; flex-direction: column; gap: 10px; }
-            .hero { padding-top: 0; }
-            .btn-grid { flex-direction: column; align-items: stretch; }
-            .btn { justify-content: center; width: 100%; }
         }
 
         .ticker-wrap {
@@ -313,6 +297,19 @@
 
         .ticker-wrap:hover .ticker-content {
             animation-play-state: paused;
+        }
+
+        /* Mobile specific adjustments */
+        @media (max-width: 768px) {
+            .navbar { justify-content: center; padding: 20px; flex-direction: column; gap: 15px; }
+            .hero { padding-top: 10px; }
+            .btn-grid { flex-direction: column; align-items: stretch; padding: 0 10px; }
+            .btn { justify-content: center; width: 100%; margin-bottom: 5px; }
+            
+            /* Shrink blobs so they don't break the layout on small screens */
+            .blob-1 { width: 300px; height: 300px; }
+            .blob-2 { width: 350px; height: 350px; }
+            .blob-3 { width: 350px; height: 350px; }
         }
     </style>
 </head>
