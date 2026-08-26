@@ -1,13 +1,15 @@
 const professors = [
     {
         "name": "أ.د. يوسف القصراوي (عميد الكلية)",
+        "name_en": "Dr. Yousef Qasrawi",
         "office": "1229",
         "location": "إدارة الكلية",
-        "teams_email": "",
+        "teams_email": "y_alqasrawi@asu.edu.jo",
         "hours": null
     },
     {
         "name": "سكرتاريا الأمن السيبراني",
+        "name_en": "CyberSecurity Secretary",
         "office": "1225",
         "location": "إدارة الكلية",
         "teams_email": "",
@@ -15,6 +17,7 @@ const professors = [
     },
     {
         "name": "سكرتاريا علم البيانات والذكاء الاصطناعي",
+        "name_en": "DSAI Secretary",
         "office": "1228",
         "location": "إدارة الكلية",
         "teams_email": "",
@@ -22,6 +25,7 @@ const professors = [
     },
     {
         "name": "د. عصمت الضمور",
+        "name_en": "",
         "office": "1206",
         "location": "علم الحاسوب",
         "teams_email": "",
@@ -29,139 +33,143 @@ const professors = [
     },
     {
         "name": "د. محمد بني دومي",
+        "name_en": "Mohammad Banidoumi",
         "office": "21S02",
         "location": "علم الحاسوب",
-        "teams_email": "",
+        "teams_email": "m_banidoumi@asu.edu.jo",
         "hours": null
     },
     {
-        "name": "د. عمر الشيخ سالم",
+        "name": "د. عمر الشيخ",
+        "name_en": "Yousef ElSheikh",
         "office": "1221",
         "location": "الواقع الرقمي وتطوير الالعاب",
-        "teams_email": "",
+        "teams_email": "y_elsheikh@asu.edu.jo",
         "hours": null
     },
     {
         "name": "د. رضوان بطيحة",
+        "name_en": "Radwan Batiha",
         "office": "1218",
         "location": "علم الحاسوب",
-        "teams_email": "",
+        "teams_email": "r_batiha@asu.edu.jo",
         "hours": null
     },
     {
         "name": "د. نيفين حجازي",
+        "name_en": "Neveen Hijazi",
         "office": "1G09",
         "location": "علم الحاسوب",
-        "teams_email": "",
+        "teams_email": "n_hijazi@asu.edu.jo",
         "hours": null
     },
     {
         "name": "د. وليد مقابلة",
+        "name_en": "Waleed Maqableh",
         "office": "1205",
         "location": "الواقع الرقمي وتطوير الالعاب",
-        "teams_email": "",
+        "teams_email": "w_maqableh@asu.edu.jo",
         "hours": null
     },
     {
         "name": "د.أحمد اللطيف",
+        "name_en": "Ahmad Eltaif",
         "office": "21S08",
         "location": "علم الحاسوب",
-        "teams_email": "",
+        "teams_email": "a_eltaif@asu.edu.jo",
         "hours": null
     },
     {
         "name": "د. منصور الهلالات",
+        "name_en": "Mansour Alhelalat",
         "office": "1223",
         "location": "علم الحاسوب",
-        "teams_email": "",
+        "teams_email": "m_alhelalat@asu.edu.jo",
         "hours": null
     },
     {
         "name": "د. ليث الزبون",
+        "name_en": "Laith Alzboun",
         "office": "1207",
         "location": "علم الحاسوب",
-        "teams_email": "",
+        "teams_email": "l_alzboun@asu.edu.jo",
         "hours": null
     },
     {
         "name": "أ.براء القدومي",
+        "name_en": "Baraa Qaddoumi",
         "office": "1208",
         "location": "علم الحاسوب",
-        "teams_email": "",
+        "teams_email": "b_qaddoumi@asu.edu.jo",
         "hours": null
     },
     {
         "name": "أ. قيس النعامنه",
+        "name_en": "Qais Alnaamneh",
         "office": "1208",
         "location": "الأمن السيبراني",
-        "teams_email": "",
+        "teams_email": "q_naamneh@asu.edu.jo",
         "hours": null
     },
     {
         "name": "د. نور العايدي",
+        "name_en": "Noor Alaydie",
         "office": "1222",
         "location": "علم الحاسوب",
-        "teams_email": "",
+        "teams_email": "n_alaydie@asu.edu.jo",
         "hours": null
     },
     {
         "name": "أ. أسماء الموسى",
+        "name_en": "Asma Almousa",
         "office": "1G09",
         "location": "علم الحاسوب",
-        "teams_email": "",
-        "hours": null
-    },
-    {
-        "name": "د. زياد جمحاوي",
-        "office": "1223",
-        "location": "علم الحاسوب",
-        "teams_email": "",
+        "teams_email": "a_almousa@asu.edu.jo",
         "hours": null
     },
     {
         "name": "د. محمود البشايرة",
+        "name_en": "Mahmoud AlBashayreh",
         "office": "1217",
         "location": "هندسة البرمجيات",
-        "teams_email": "",
+        "teams_email": "m_albashayreh@asu.edu.jo",
         "hours": null
     },
     {
         "name": "د. شريفة مراد",
+        "name_en": "Sharefa Murad",
         "office": "21G08",
         "location": "الواقع الرقمي وتطوير الالعاب",
-        "teams_email": "",
+        "teams_email": "s_murad@asu.edu.jo",
         "hours": null
     },
     {
         "name": "د. وسام العباسي",
+        "name_en": "Wesam AlAbbasi",
         "office": "1222",
         "location": "علم الحاسوب",
-        "teams_email": "",
-        "hours": null
-    },
-    {
-        "name": "د.صبا قواس",
-        "office": "1209",
-        "location": "الواقع الرقمي وتطوير الالعاب",
-        "teams_email": "",
+        "teams_email": "w_alabbasi@asu.edu.jo",
         "hours": null
     },
     {
         "name": "د.صالح التكروري",
+        "name_en": "Saleh AlTakrouri",
         "office": "1220",
         "location": "الواقع الرقمي وتطوير الالعاب",
-        "teams_email": "",
+        "teams_email": "s_altakrouri@asu.edu.jo",
         "hours": null
     },
     {
         "name": "د. احمد العزازي",
+        "name_en": "Ahmad Azzazi",
         "office": "21S05",
         "location": "الواقع الرقمي وتطوير الالعاب",
-        "teams_email": "",
+        "teams_email": "a_azzazi@asu.edu.jo",
         "hours": null
     },
     {
         "name": "د. محمود بني عطا",
+        "name_en": "",
         "office": "1B10",
         "location": "علم الحاسوب",
         "teams_email": "",
@@ -169,13 +177,15 @@ const professors = [
     },
     {
         "name": "د. أنس شرينة",
+        "name_en": "Anas Shrinah",
         "office": "1B10",
         "location": "هندسة البرمجيات",
-        "teams_email": "",
+        "teams_email": "a_shrinah@asu.edu.jo",
         "hours": null
     },
     {
         "name": "د. ابراهيم منهراوى",
+        "name_en": "",
         "office": "21S04",
         "location": "هندسة البرمجيات",
         "teams_email": "",
@@ -183,6 +193,7 @@ const professors = [
     },
     {
         "name": "د.خالد الحشاش",
+        "name_en": "",
         "office": "1104",
         "location": "علم الحاسوب",
         "teams_email": "",
@@ -190,6 +201,7 @@ const professors = [
     },
     {
         "name": "د. احمد العناقره",
+        "name_en": "",
         "office": "21G14",
         "location": "علم الحاسوب",
         "teams_email": "",
@@ -197,6 +209,7 @@ const professors = [
     },
     {
         "name": "د. براء نزال",
+        "name_en": "",
         "office": "1G08",
         "location": "علم الحاسوب",
         "teams_email": "",
@@ -204,6 +217,7 @@ const professors = [
     },
     {
         "name": "د. محمد خضر",
+        "name_en": "",
         "office": "21S07",
         "location": "علم الحاسوب",
         "teams_email": "",
@@ -211,6 +225,7 @@ const professors = [
     },
     {
         "name": "أ. حنان حردان",
+        "name_en": "",
         "office": "1209",
         "location": "علم الحاسوب",
         "teams_email": "",
@@ -218,6 +233,7 @@ const professors = [
     },
     {
         "name": "أ. هديل أحمد",
+        "name_en": "",
         "office": "1106",
         "location": "علم الحاسوب",
         "teams_email": "",
@@ -225,6 +241,7 @@ const professors = [
     },
     {
         "name": "د. وريف المناصير",
+        "name_en": "",
         "office": "1G10",
         "location": "علم الحاسوب",
         "teams_email": "",
@@ -232,6 +249,7 @@ const professors = [
     },
     {
         "name": "د. باسل بني إسماعيل",
+        "name_en": "",
         "office": "1207",
         "location": "هندسة البرمجيات",
         "teams_email": "",
@@ -239,6 +257,7 @@ const professors = [
     },
     {
         "name": "د.لبنى بن خليفة",
+        "name_en": "",
         "office": "21G07",
         "location": "الذكاء الاصطناعي",
         "teams_email": "",
@@ -246,6 +265,7 @@ const professors = [
     },
     {
         "name": "د. معتصم جراح",
+        "name_en": "",
         "office": "21G14",
         "location": "الذكاء الاصطناعي",
         "teams_email": "",
@@ -253,6 +273,7 @@ const professors = [
     },
     {
         "name": "د. فاطمة الحاج",
+        "name_en": "",
         "office": "1227",
         "location": "الذكاء الاصطناعي",
         "teams_email": "",
@@ -260,6 +281,7 @@ const professors = [
     },
     {
         "name": "أ. هند طلافحه",
+        "name_en": "",
         "office": "1224",
         "location": "علم الحاسوب",
         "teams_email": "",
@@ -267,6 +289,7 @@ const professors = [
     },
     {
         "name": "امجاد البشايرة",
+        "name_en": "",
         "office": "21S26",
         "location": "الذكاء الاصطناعي",
         "teams_email": "",
@@ -274,6 +297,7 @@ const professors = [
     },
     {
         "name": "إيمان الناجي",
+        "name_en": "",
         "office": "1224",
         "location": "الذكاء الاصطناعي",
         "teams_email": "",
@@ -281,6 +305,7 @@ const professors = [
     },
     {
         "name": "لهيب العبادي",
+        "name_en": "",
         "office": "21S06",
         "location": "هندسة البرمجيات",
         "teams_email": "",
@@ -288,6 +313,7 @@ const professors = [
     },
     {
         "name": "د. ناجي البطاينه",
+        "name_en": "",
         "office": "21S05",
         "location": "الذكاء الاصطناعي",
         "teams_email": "",
@@ -295,6 +321,7 @@ const professors = [
     },
     {
         "name": "د. نور ابو الرب",
+        "name_en": "",
         "office": "1G10",
         "location": "علم الحاسوب",
         "teams_email": "",
@@ -302,6 +329,7 @@ const professors = [
     },
     {
         "name": "د. محمد خصاونة",
+        "name_en": "",
         "office": "1212",
         "location": "الذكاء الاصطناعي",
         "teams_email": "",
@@ -309,6 +337,7 @@ const professors = [
     },
     {
         "name": "د. علاء الزعبي",
+        "name_en": "",
         "office": "1218",
         "location": "الواقع الرقمي وتطوير الالعاب",
         "teams_email": "",
@@ -316,6 +345,7 @@ const professors = [
     },
     {
         "name": "د. بشار الشوحه",
+        "name_en": "",
         "office": "1207",
         "location": "الذكاء الاصطناعي",
         "teams_email": "",
@@ -323,6 +353,7 @@ const professors = [
     },
     {
         "name": "د.خالد معابرة",
+        "name_en": "",
         "office": "1203",
         "location": "علم الحاسوب",
         "teams_email": "",
@@ -330,6 +361,7 @@ const professors = [
     },
     {
         "name": "أ. غدير البيساني",
+        "name_en": "",
         "office": "1214",
         "location": "هندسة البرمجيات",
         "teams_email": "",
@@ -337,6 +369,7 @@ const professors = [
     },
     {
         "name": "د.يوسف الشيخ",
+        "name_en": "",
         "office": "1220",
         "location": "هندسة البرمجيات",
         "teams_email": "",
@@ -344,6 +377,7 @@ const professors = [
     },
     {
         "name": "أ.سهام حيمور",
+        "name_en": "",
         "office": "1105",
         "location": "الواقع الرقمي وتطوير الالعاب",
         "teams_email": "",
@@ -351,6 +385,7 @@ const professors = [
     },
     {
         "name": "د.حسان الطراونه",
+        "name_en": "",
         "office": "1213",
         "location": "الذكاء الاصطناعي",
         "teams_email": "",
@@ -358,6 +393,7 @@ const professors = [
     },
     {
         "name": "د. فارس الطويل",
+        "name_en": "",
         "office": "1219",
         "location": "هندسة البرمجيات",
         "teams_email": "",
@@ -365,6 +401,7 @@ const professors = [
     },
     {
         "name": "د.جبر الوديان",
+        "name_en": "",
         "office": "1104",
         "location": "الذكاء الاصطناعي",
         "teams_email": "",
@@ -372,6 +409,7 @@ const professors = [
     },
     {
         "name": "د.معاذ العلي",
+        "name_en": "",
         "office": "21S19",
         "location": "الذكاء الاصطناعي",
         "teams_email": "",
@@ -379,6 +417,7 @@ const professors = [
     },
     {
         "name": "د. أيهم العمري",
+        "name_en": "",
         "office": "1226",
         "location": "الأمن السيبراني",
         "teams_email": "",
@@ -386,6 +425,7 @@ const professors = [
     },
     {
         "name": "د. جعفر عطوان",
+        "name_en": "",
         "office": "1212",
         "location": "علم الحاسوب",
         "teams_email": "",
@@ -393,6 +433,7 @@ const professors = [
     },
     {
         "name": "د. حكمت عبد الجابر",
+        "name_en": "",
         "office": "1G08",
         "location": "علم الحاسوب",
         "teams_email": "",
@@ -400,6 +441,7 @@ const professors = [
     },
     {
         "name": "د. عبدالله ابورمان",
+        "name_en": "",
         "office": "21S04",
         "location": "الأمن السيبراني",
         "teams_email": "",
@@ -407,6 +449,7 @@ const professors = [
     },
     {
         "name": "د. صلاح الدين صافي",
+        "name_en": "",
         "office": "1221",
         "location": "هندسة البرمجيات",
         "teams_email": "",
@@ -414,6 +457,7 @@ const professors = [
     },
     {
         "name": "وليد الأحمد",
+        "name_en": "",
         "office": "1219",
         "location": "هندسة البرمجيات",
         "teams_email": "",
@@ -421,6 +465,7 @@ const professors = [
     },
     {
         "name": "د. سهير الحاج حسن",
+        "name_en": "",
         "office": "1106",
         "location": "هندسة البرمجيات",
         "teams_email": "",
@@ -428,6 +473,7 @@ const professors = [
     },
     {
         "name": "د. مروان الأخرس",
+        "name_en": "",
         "office": "1226",
         "location": "الأمن السيبراني",
         "teams_email": "",
@@ -435,6 +481,7 @@ const professors = [
     },
     {
         "name": "د. أحمد العتوم",
+        "name_en": "",
         "office": "1217",
         "location": "الأمن السيبراني",
         "teams_email": "",
@@ -442,6 +489,7 @@ const professors = [
     },
     {
         "name": "د. محمود جوارنه",
+        "name_en": "",
         "office": "1215",
         "location": "الأمن السيبراني",
         "teams_email": "",
@@ -449,6 +497,7 @@ const professors = [
     },
     {
         "name": "أ. حازم أبو ادعيق",
+        "name_en": "",
         "office": "1215",
         "location": "الأمن السيبراني",
         "teams_email": "",
@@ -456,6 +505,7 @@ const professors = [
     },
     {
         "name": "د. فادي بطة",
+        "name_en": "",
         "office": "1216",
         "location": "الأمن السيبراني",
         "teams_email": "",
@@ -463,6 +513,7 @@ const professors = [
     },
     {
         "name": "أ.عاكنة الشياب",
+        "name_en": "",
         "office": "1214",
         "location": "الأمن السيبراني",
         "teams_email": "",
@@ -470,6 +521,7 @@ const professors = [
     },
     {
         "name": "د. موفق أبو الهيجاء",
+        "name_en": "",
         "office": "1213",
         "location": "الأمن السيبراني",
         "teams_email": "",
@@ -477,6 +529,7 @@ const professors = [
     },
     {
         "name": "د. سلام حمدان",
+        "name_en": "",
         "office": "21G07",
         "location": "الأمن السيبراني",
         "teams_email": "",
@@ -484,6 +537,7 @@ const professors = [
     },
     {
         "name": "أ. حنين الزعبي",
+        "name_en": "",
         "office": "21G08",
         "location": "علوم",
         "teams_email": "",
@@ -491,6 +545,7 @@ const professors = [
     },
     {
         "name": "أ. ملاك المشابقة",
+        "name_en": "",
         "office": "21G08",
         "location": "علوم",
         "teams_email": "",
@@ -498,6 +553,7 @@ const professors = [
     },
     {
         "name": "د. عبدالله الطراد",
+        "name_en": "",
         "office": "21G14",
         "location": "الأمن السيبراني",
         "teams_email": "",
@@ -505,6 +561,7 @@ const professors = [
     },
     {
         "name": "د. محمد شكوكاني",
+        "name_en": "",
         "office": "21S03",
         "location": "هندسة البرمجيات",
         "teams_email": "",
@@ -512,6 +569,7 @@ const professors = [
     },
     {
         "name": "د. مصعود شاهين",
+        "name_en": "",
         "office": "21S07",
         "location": "الأمن السيبراني",
         "teams_email": "",
@@ -519,6 +577,7 @@ const professors = [
     },
     {
         "name": "د. أيهم الوحش",
+        "name_en": "",
         "office": "21S08",
         "location": "الأمن السيبراني",
         "teams_email": "",
@@ -526,6 +585,7 @@ const professors = [
     },
     {
         "name": "أ. لينا القضاة",
+        "name_en": "",
         "office": "21S26",
         "location": "هندسة البرمجيات",
         "teams_email": "",
@@ -533,6 +593,7 @@ const professors = [
     },
     {
         "name": "أ. روان جرار",
+        "name_en": "",
         "office": "21S26",
         "location": "هندسة البرمجيات/ علم حاسوب",
         "teams_email": "",
@@ -540,6 +601,7 @@ const professors = [
     },
     {
         "name": "د. أسراء أبو السعود",
+        "name_en": "",
         "office": "21S27",
         "location": "الأمن السيبراني",
         "teams_email": "",
@@ -547,6 +609,7 @@ const professors = [
     },
     {
         "name": "د. مها السعودى",
+        "name_en": "",
         "office": "21S27",
         "location": "علوم",
         "teams_email": "",
@@ -554,6 +617,7 @@ const professors = [
     },
     {
         "name": "أ. آمنة شعبان",
+        "name_en": "",
         "office": "21S28",
         "location": "هندسة البرمجيات",
         "teams_email": "",
@@ -561,6 +625,7 @@ const professors = [
     },
     {
         "name": "د. أسماء سالم",
+        "name_en": "",
         "office": "21S18",
         "location": "الأمن السيبراني",
         "teams_email": "",
@@ -568,6 +633,7 @@ const professors = [
     },
     {
         "name": "د. عتيقة الشايب",
+        "name_en": "",
         "office": "غير محدد",
         "location": "غير محدد",
         "teams_email": "",
@@ -575,6 +641,7 @@ const professors = [
     },
     {
         "name": "د. منال المزهر",
+        "name_en": "",
         "office": "1209",
         "location": "الأمن السيبراني",
         "teams_email": "",
@@ -582,13 +649,13 @@ const professors = [
     },
     {
         "name": "د. جمانه الخوالية",
+        "name_en": "",
         "office": "غير محدد",
         "location": "غير محدد",
         "teams_email": "",
         "hours": null
     }
 ];
-
 const input = document.getElementById('searchInput');
 const card = document.getElementById('resultCard');
 const modal = document.getElementById('hoursModal');
