@@ -610,12 +610,19 @@ input.addEventListener('input', function() {
         return;
     }
 
-    const result = professors.find(prof => normalizeText(prof.name.toLowerCase()).includes(query));
+    const result = professors.find(prof => {
+        const matchAr = normalizeText(prof.name.toLowerCase()).includes(query);
+        const matchEn = prof.name_en ? prof.name_en.toLowerCase().includes(query) : false;
+        return matchAr || matchEn;
+    });
 
     if (result) {
         currentProf = result;
         card.style.display = "block";
-        pName.textContent = result.name;
+        
+        const displayName = result.name_en ? `${result.name} | ${result.name_en}` : result.name;
+        pName.textContent = displayName;
+        
         pDetail.textContent = `مكتب: ${result.office} | القسم: ${result.location}`;
     } else {
         currentProf = null;
