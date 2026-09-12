@@ -11,13 +11,11 @@
     <meta charset="UTF-8">
     <title>ASU Support - Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
 
     <header class="navbar">
         <div class="logo-box">
@@ -26,20 +24,34 @@
         </div>
     </header>
 
+    <nav class="ribbon" aria-label="روابط سريعة">
+        <button type="button" class="ribbon-item" onclick="openPortalModal()">
+            <span class="ribbon-icon">🏛️</span>
+            <span>البوابات</span>
+        </button>
+        <a href="community.html" class="ribbon-item">
+            <span class="ribbon-icon">🤝</span>
+            <span>نقاط المجتمع</span>
+        </a>
+        <div class="ribbon-item ribbon-item--disabled" aria-disabled="true">
+            <span class="ribbon-icon">✉️</span>
+            <span>الإيميل الجامعي</span>
+            <span class="ribbon-badge">قريباً</span>
+        </div>
+    </nav>
+
     <main class="hero">
-        <h1 class="en-title" dir="ltr">The Ultimate IT Faculty Guide</h1>
         <h1 class="ar-title">دليلك الشامل لكلية الـ IT</h1>
-        <p class="hero-subtitle">
-            المنصة الموحدة لطلاب تكنولوجيا المعلومات.
-        </p>
+        <p class="en-subtitle">The Faculty of IT Guide, ASU Academy</p>
+        <p class="hero-tagline">كل ما يخص طلاب تكنولوجيا المعلومات، في مكان واحد.</p>
 
         <div class="search-section">
             <div class="semester-note">
                 ⚠️ يتم تحديث الساعات المكتبية كل فصل دراسي. الفصل الصيفي لا يشمل ساعات مكتبية، يرجى التواصل مع الدكتور مباشرة.
             </div>
-            
+
             <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن مكتب أو إيميل الدكتور..." autocomplete="off">
-            
+
             <div id="resultCard">
                 <div class="prof-name" id="pName"></div>
                 <div class="prof-detail" id="pDetail"></div>
@@ -52,7 +64,7 @@
                 <span>📁</span>
                 <span>بنك الأسئلة (OneDrive)</span>
             </a>
-            
+
             <a href="plans.html" class="btn">
                 <span>📄</span>
                 <span>الخطط الدراسية</span>
@@ -62,32 +74,72 @@
                 <span>🎓</span>
                 <span>خطوات التسجيل</span>
             </a>
-
-            <a href="advice.html" class="btn">
-                <span>💡</span>
-                <span>نصائح وإرشادات</span>
-            </a>
         </div>
     </main>
 
     <div id="hoursModal" class="modal-overlay">
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal()">✕</button>
-            <h2 style="color: #fca5a5; margin-bottom: 20px;">بيانات الدكتور</h2>
+            <h2 class="modal-title">بيانات الدكتور</h2>
             <div id="modalHoursContent" style="text-align: right; direction: rtl;"></div>
+        </div>
+    </div>
+
+    <div id="portalModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closePortalModal()">✕</button>
+            <h2 class="modal-title">بوابات الجامعة</h2>
+
+            <div class="portal-row">
+                <div class="portal-label">
+                    <span class="portal-icon">💻</span>
+                    <div>
+                        <div class="portal-name">بوابة الويب (MyASU)</div>
+                        <div class="portal-desc">ادخل للبوابة الإلكترونية أو قم بجولة افتراضية بالمرافق</div>
+                    </div>
+                </div>
+                <div class="portal-actions">
+                    <a href="#" class="mini-btn mini-btn--primary" target="_blank" rel="noopener">دخول البوابة</a>
+                    <a href="#" class="mini-btn" target="_blank" rel="noopener">ابدأ الجولة</a>
+                </div>
+            </div>
+
+            <div class="portal-row">
+                <div class="portal-label">
+                    <span class="portal-icon">📱</span>
+                    <div>
+                        <div class="portal-name">تطبيق الجامعة</div>
+                        <div class="portal-desc">حمّل التطبيق الرسمي وشاهد شرح استخدامه بالتفصيل</div>
+                    </div>
+                </div>
+                <div class="portal-actions">
+                    <a href="#" class="mini-btn" target="_blank" rel="noopener">App Store</a>
+                    <a href="#" class="mini-btn" target="_blank" rel="noopener">Google Play</a>
+                    <a href="#" class="mini-btn" target="_blank" rel="noopener">شرح الفيديو</a>
+                </div>
+            </div>
         </div>
     </div>
 
     <footer class="footer">
         <div class="footer-header">ASU Academy | Faculty of Information Technology</div>
         <div class="admin-credits" dir="ltr">
-            <span>Assistant to the President:</span> Dr. Mohammad Hijjawi &nbsp;•&nbsp; 
-            <span>Dean:</span> Dr. Yousef AlQasrawi &nbsp;•&nbsp; 
+            <span>Assistant to the President:</span> Dr. Mohammad Hijjawi &nbsp;•&nbsp;
+            <span>Dean:</span> Dr. Yousef AlQasrawi &nbsp;•&nbsp;
             <span>Supervisor:</span> Inst. Rawan Jarrar
         </div>
         <div class="copyright">© 2026 ASU Support Hub. Developed for the students.</div>
     </footer>
 
     <script src="search.js"></script>
+    <script>
+        document.querySelectorAll('.modal-overlay').forEach(function (overlay) {
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay) overlay.style.display = 'none';
+            });
+        });
+        function openPortalModal() { document.getElementById('portalModal').style.display = 'flex'; }
+        function closePortalModal() { document.getElementById('portalModal').style.display = 'none'; }
+    </script>
 </body>
 </html>
