@@ -521,138 +521,130 @@ const professors = [
     },
     {
         "name": "د. موفق أبو الهيجاء",
-        "name_en": "",
+        "name_en": "Mwaffaq Abu Al-haija",
         "office": "1213",
         "location": "الأمن السيبراني",
-        "teams_email": "",
+        "teams_email": "m_abualhaija@asu.edu.sa",
         "hours": null
     },
     {
         "name": "د. سلام حمدان",
-        "name_en": "",
+        "name_en": "Salam Hamdan",
         "office": "21G07",
         "location": "الأمن السيبراني",
-        "teams_email": "",
+        "teams_email": "sa_hamdan@asu.edu.jo",
         "hours": null
     },
     {
         "name": "أ. حنين الزعبي",
-        "name_en": "",
+        "name_en": "Haneen Al-zoubi",
         "office": "21G08",
         "location": "علوم",
-        "teams_email": "",
+        "teams_email": "h_alzoubi@asu.edu.jo",
         "hours": null
     },
     {
         "name": "أ. ملاك المشابقة",
-        "name_en": "",
+        "name_en": "Mallak Almashaqbah",
         "office": "21G08",
         "location": "علوم",
-        "teams_email": "",
+        "teams_email": "m_almashaqbeh@asu.edu.jo",
         "hours": null
     },
     {
         "name": "د. عبدالله الطراد",
-        "name_en": "",
+        "name_en": "Abdullah Trad",
         "office": "21G14",
         "location": "الأمن السيبراني",
-        "teams_email": "",
+        "teams_email": "a_altrad@asu.edu.jo",
         "hours": null
     },
     {
         "name": "د. محمد شكوكاني",
-        "name_en": "",
+        "name_en": "Mohammad Shkoukani",
         "office": "21S03",
-        "location": "هندسة البرمجيات",
-        "teams_email": "",
+        "location": "رئيس قسم الهندسة البرمجيات",
+        "teams_email": "m.shkokani@asu.edu.jo",
         "hours": null
     },
     {
         "name": "د. مصعود شاهين",
-        "name_en": "",
+        "name_en": "Masoud Shaheen",
         "office": "21S07",
         "location": "الأمن السيبراني",
-        "teams_email": "",
+        "teams_email": "m_shaheen@asu.edu.jo",
         "hours": null
     },
     {
-        "name": "د. أيهم الوحش",
-        "name_en": "",
+        "name": "د. هيثم الوحش",
+        "name_en": "Haitham ElWahsh",
         "office": "21S08",
         "location": "الأمن السيبراني",
-        "teams_email": "",
+        "teams_email": "h_elwahsh@asu.edu.jo",
         "hours": null
     },
     {
         "name": "أ. لينا القضاة",
-        "name_en": "",
+        "name_en": "Lina AlQudah",
         "office": "21S26",
         "location": "هندسة البرمجيات",
-        "teams_email": "",
+        "teams_email": "l_qudah@asu.edu.jo",
         "hours": null
     },
     {
         "name": "أ. روان جرار",
-        "name_en": "",
+        "name_en": "Rawan Jarrar",
         "office": "21S26",
         "location": "هندسة البرمجيات/ علم حاسوب",
-        "teams_email": "",
+        "teams_email": "ra_jarrar@asu.edu.jo",
         "hours": null
     },
     {
         "name": "د. أسراء أبو السعود",
-        "name_en": "",
+        "name_en": "Esraa Abu ElSoud",
         "office": "21S27",
         "location": "الأمن السيبراني",
-        "teams_email": "",
+        "teams_email": "e_abuelsoud@asu.edu.jo",
         "hours": null
     },
     {
         "name": "د. مها السعودى",
-        "name_en": "",
+        "name_en": "Maha AlSoudi",
         "office": "21S27",
         "location": "علوم",
-        "teams_email": "",
+        "teams_email": "m_alsoudi@asu.edu.jo",
         "hours": null
     },
     {
         "name": "أ. آمنة شعبان",
-        "name_en": "",
+        "name_en": "Amneh Shaban",
         "office": "21S28",
         "location": "هندسة البرمجيات",
-        "teams_email": "",
+        "teams_email": "a_shaban@asu.edu.jo",
         "hours": null
     },
     {
         "name": "د. أسماء سالم",
-        "name_en": "",
+        "name_en": "Asma Salem",
         "office": "21S18",
         "location": "الأمن السيبراني",
-        "teams_email": "",
+        "teams_email": "a_salem@asu.edu.jo",
         "hours": null
     },
     {
-        "name": "د. عتيقة الشايب",
-        "name_en": "",
-        "office": "غير محدد",
-        "location": "غير محدد",
-        "teams_email": "",
-        "hours": null
-    },
-    {
-        "name": "د. منال المزهر",
-        "name_en": "",
+        "name": "د. منال مزهر",
+        "name_en": "Manal Mizher",
         "office": "1209",
         "location": "الأمن السيبراني",
-        "teams_email": "",
+        "teams_email": "m_mizher@asu.edu.jo",
         "hours": null
     },
     {
         "name": "د. جمانه الخوالية",
-        "name_en": "",
+        "name_en": "Jumana Khwaileh",
         "office": "غير محدد",
         "location": "غير محدد",
-        "teams_email": "",
+        "teams_email": "j_khwaileh@asu.edu.jo",
         "hours": null
     }
 ];
