@@ -8,374 +8,124 @@
       gtag('js', new Date());
       gtag('config', 'G-FNTBG5RY0T');
     </script>
-    
+    <meta charset="UTF-8">
     <title>ASU Support - Study Plans</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        :root {
-            --asu-red: #9D0208;
-            --bg-dark: #0a0c10;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --blob-yellow: rgba(234, 179, 8, 0.08);
-            --blob-teal: rgba(20, 184, 166, 0.08);
-            --blob-red: rgba(157, 2, 8, 0.12);
-        }
-
-        body { 
-            margin: 0;
-            min-height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(-45deg, #0a0c10, #140505, #07080a, #11090f);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .blob {
-            position: absolute;
-            z-index: -1;
-            filter: blur(60px);
-            animation: float 10s ease-in-out infinite alternate;
-        }
-        .blob-1 { top: -5%; right: -10%; width: 500px; height: 500px; background-color: var(--blob-yellow); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
-        .blob-2 { top: 40%; left: -10%; width: 600px; height: 600px; background-color: var(--blob-teal); border-radius: 50% 50% 30% 70% / 50% 50% 70% 50%; animation-delay: -3s; }
-        .blob-3 { bottom: -10%; right: 20%; width: 700px; height: 500px; background-color: var(--blob-red); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; animation-delay: -6s; }
-
-        @keyframes float {
-            0% { transform: translateY(0) scale(1); }
-            100% { transform: translateY(-30px) scale(1.05); }
-        }
-
-        .navbar {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 30px 5vw;
-            box-sizing: border-box;
-            z-index: 10;
-            max-width: 1200px;
-        }
-
-        .logo-box img { 
-            height: 55px; 
-            object-fit: contain;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
-        }
-
-        .nav-link {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.3s;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 10px 20px;
-            border-radius: 50px;
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-        }
-        .nav-link:hover { color: white; background: rgba(255, 255, 255, 0.08); border-color: rgba(255,255,255,0.2); }
-
-        .page-header {
-            text-align: center;
-            padding: 10px 20px 40px;
-            z-index: 10;
-        }
-
-        h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 900;
-            margin: 0 0 10px 0;
-            letter-spacing: -0.5px;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin: 0;
-        }
-
-        .directory-container {
-            width: 100%;
-            max-width: 800px;
-            padding: 0 20px 60px;
-            box-sizing: border-box;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        .category-panel {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
-        }
-
-        .category-header {
-            background: rgba(157, 2, 8, 0.1);
-            padding: 20px 25px;
-            border-bottom: 1px solid var(--glass-border);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .category-header h2 {
-            margin: 0;
-            font-size: 1.25rem;
-            color: #fca5a5;
-            font-weight: 800;
-        }
-
-        .category-icon {
-            font-size: 1.5rem;
-        }
-
-        .group-list {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .group-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 25px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-            transition: 0.3s;
-            text-decoration: none;
-        }
-
-        .group-row:last-child {
-            border-bottom: none;
-        }
-
-        .group-row:hover:not(.disabled-row) {
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        .group-info-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .row-icon {
-            font-size: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            width: 50px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .row-text h3 {
-            margin: 0 0 4px 0;
-            font-size: 1.1rem;
-            color: #fff;
-            font-weight: 700;
-        }
-
-        .row-text p {
-            margin: 0;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            direction: ltr;
-            text-align: right;
-        }
-
-        .view-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            background: transparent;
-            color: #fca5a5;
-            border: 1px solid rgba(157, 2, 8, 0.5);
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: 0.3s;
-            white-space: nowrap;
-        }
-
-        .group-row:hover:not(.disabled-row) .view-btn {
-            background: rgba(157, 2, 8, 0.2);
-            border-color: var(--asu-red);
-            box-shadow: 0 0 15px rgba(157, 2, 8, 0.3);
-            transform: scale(1.05);
-        }
-
-        /* Coming Soon State */
-        .disabled-row {
-            cursor: default;
-            opacity: 0.7;
-        }
-
-        .coming-soon-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-muted);
-            border: 1px dashed rgba(255, 255, 255, 0.2);
-            border-radius: 50px;
-            font-weight: 500;
-            font-size: 0.85rem;
-            white-space: nowrap;
-        }
-
-        @media (max-width: 600px) {
-            .navbar { padding: 20px; }
-            .blob-1 { width: 300px; height: 300px; }
-            
-            .group-row {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-                padding: 20px;
-            }
-            .view-btn, .coming-soon-badge {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
-
-    <header class="navbar">
+    <header class="navbar navbar--sub">
         <div class="logo-box">
             <img src="fit_logo.png" alt="FIT Logo">
         </div>
-        <a href="index.html" class="nav-link">
-            <span>الرئيسية (Home)</span>
+        <a href="index.html" class="nav-back">
+            <span>الرئيسية</span>
             <span>🏠</span>
         </a>
     </header>
 
-    <div class="page-header">
+    <div class="page-hero">
         <h1>الخطط الدراسية</h1>
-        <p class="subtitle">اختر تخصصك الأكاديمي لعرض الخطة <br> <span dir="ltr">(Select Your Major)</span></p>
+        <p>اختر تخصصك الأكاديمي لعرض الخطة</p>
+        <p class="en-subtitle">Select Your Major</p>
     </div>
 
-    <main class="directory-container">
-        
-        <div class="category-panel">
-            <div class="category-header">
-                <span class="category-icon">🆕</span>
+    <main class="content">
+
+        <div class="panel">
+            <div class="panel-header">
+                <span class="panel-icon">🆕</span>
                 <h2>خطط الدفعات الجديدة (2025)</h2>
             </div>
-            <div class="group-list">
-                
-                <a href="https://drive.google.com/drive/u/0/folders/1CMufjmEGQ_iVvYqh5CZ8MC92xOSQDJec" target="_blank" class="group-row">
-                    <div class="group-info-wrapper">
-                        <div class="row-icon">🤖</div>
-                        <div class="row-text">
-                            <h3>علم البيانات والذكاء الاصطناعي</h3>
-                            <p>Data Science & AI</p>
-                        </div>
-                    </div>
-                    <div class="view-btn"><span>📄</span> عرض الملفات</div>
-                </a>
 
-                <a href="https://drive.google.com/drive/u/0/folders/1o-krQ7kBgeeStnBqh3OSsn5FALgMRP-g" target="_blank" class="group-row">
-                    <div class="group-info-wrapper">
-                        <div class="row-icon">💻</div>
-                        <div class="row-text">
-                            <h3>علم الحاسوب</h3>
-                            <p>Computer Science</p>
-                        </div>
+            <a href="https://drive.google.com/drive/u/0/folders/1CMufjmEGQ_iVvYqh5CZ8MC92xOSQDJec" target="_blank" rel="noopener" class="list-row">
+                <div class="list-row-info">
+                    <div class="list-icon">🤖</div>
+                    <div class="list-text">
+                        <h3>علم البيانات والذكاء الاصطناعي</h3>
+                        <p>Data Science & AI</p>
                     </div>
-                    <div class="view-btn"><span>📄</span> عرض الملفات</div>
-                </a>
+                </div>
+                <div class="list-action">📄 عرض الملفات</div>
+            </a>
 
-                <a href="https://drive.google.com/drive/u/0/folders/1_QiyokuW3ovr5Va2_aD9-kP-k3TflD1L" target="_blank" class="group-row">
-                    <div class="group-info-wrapper">
-                        <div class="row-icon">⚙️</div>
-                        <div class="row-text">
-                            <h3>هندسة البرمجيات</h3>
-                            <p>Software Engineering</p>
-                        </div>
+            <a href="https://drive.google.com/drive/u/0/folders/1o-krQ7kBgeeStnBqh3OSsn5FALgMRP-g" target="_blank" rel="noopener" class="list-row">
+                <div class="list-row-info">
+                    <div class="list-icon">💻</div>
+                    <div class="list-text">
+                        <h3>علم الحاسوب</h3>
+                        <p>Computer Science</p>
                     </div>
-                    <div class="view-btn"><span>📄</span> عرض الملفات</div>
-                </a>
+                </div>
+                <div class="list-action">📄 عرض الملفات</div>
+            </a>
 
-                <a href="https://drive.google.com/drive/u/0/folders/1hEtuAfMb6bl2JkY2BjZZ0rlmVyJzcAir" target="_blank" class="group-row">
-                    <div class="group-info-wrapper">
-                        <div class="row-icon">🔒</div>
-                        <div class="row-text">
-                            <h3>الأمن السيبراني</h3>
-                            <p>Cybersecurity</p>
-                        </div>
+            <a href="https://drive.google.com/drive/u/0/folders/1_QiyokuW3ovr5Va2_aD9-kP-k3TflD1L" target="_blank" rel="noopener" class="list-row">
+                <div class="list-row-info">
+                    <div class="list-icon">⚙️</div>
+                    <div class="list-text">
+                        <h3>هندسة البرمجيات</h3>
+                        <p>Software Engineering</p>
                     </div>
-                    <div class="view-btn"><span>📄</span> عرض الملفات</div>
-                </a>
+                </div>
+                <div class="list-action">📄 عرض الملفات</div>
+            </a>
 
-                <a href="https://drive.google.com/drive/u/0/folders/1wp48lCqJcnjJ1Jo_msUubldT-BLekgj5" target="_blank" class="group-row">
-                    <div class="group-info-wrapper">
-                        <div class="row-icon">🎮</div>
-                        <div class="row-text">
-                            <h3>الواقع الرقمي وتطوير الألعاب</h3>
-                            <p>VR & Game Development</p>
-                        </div>
+            <a href="https://drive.google.com/drive/u/0/folders/1hEtuAfMb6bl2JkY2BjZZ0rlmVyJzcAir" target="_blank" rel="noopener" class="list-row">
+                <div class="list-row-info">
+                    <div class="list-icon">🔒</div>
+                    <div class="list-text">
+                        <h3>الأمن السيبراني</h3>
+                        <p>Cybersecurity</p>
                     </div>
-                    <div class="view-btn"><span>📄</span> عرض الملفات</div>
-                </a>
+                </div>
+                <div class="list-action">📄 عرض الملفات</div>
+            </a>
 
-            </div>
+            <a href="https://drive.google.com/drive/u/0/folders/1wp48lCqJcnjJ1Jo_msUubldT-BLekgj5" target="_blank" rel="noopener" class="list-row">
+                <div class="list-row-info">
+                    <div class="list-icon">🎮</div>
+                    <div class="list-text">
+                        <h3>الواقع الرقمي وتطوير الألعاب</h3>
+                        <p>VR & Game Development</p>
+                    </div>
+                </div>
+                <div class="list-action">📄 عرض الملفات</div>
+            </a>
         </div>
 
-        <div class="category-panel">
-            <div class="category-header">
-                <span class="category-icon">⏳</span>
+        <div class="panel">
+            <div class="panel-header">
+                <span class="panel-icon">⏳</span>
                 <h2>خطط الدفعات السابقة (2024 وما قبل)</h2>
             </div>
-            <div class="group-list">
-                
-                <div class="group-row disabled-row">
-                    <div class="group-info-wrapper">
-                        <div class="row-icon">📁</div>
-                        <div class="row-text">
-                            <h3>جميع التخصصات</h3>
-                            <p>All IT Majors</p>
-                        </div>
-                    </div>
-                    <div class="coming-soon-badge">قريباً (Coming Soon)</div>
-                </div>
 
+            <div class="list-row list-row--disabled">
+                <div class="list-row-info">
+                    <div class="list-icon">📁</div>
+                    <div class="list-text">
+                        <h3>جميع التخصصات</h3>
+                        <p>All IT Majors</p>
+                    </div>
+                </div>
+                <div class="badge-soon">قريباً</div>
             </div>
         </div>
 
     </main>
+
+    <footer class="footer">
+        <div class="footer-header">ASU Academy | Faculty of Information Technology</div>
+        <div class="admin-credits" dir="ltr">
+            <span>Assistant to the President:</span> Dr. Mohammad Hijjawi &nbsp;•&nbsp;
+            <span>Dean:</span> Dr. Yousef AlQasrawi &nbsp;•&nbsp;
+            <span>Supervisor:</span> Inst. Rawan Jarrar
+        </div>
+        <div class="copyright">© 2026 ASU Support Hub. Developed for the students.</div>
+    </footer>
 
 </body>
 </html>
