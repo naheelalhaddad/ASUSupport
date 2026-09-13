@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700;800&display=swap');
 
 :root {
     --asu-red: #e63946;
@@ -17,7 +17,6 @@
     --radius-md: 16px;
     --radius-lg: 24px;
     --font: 'IBM Plex Sans Arabic', system-ui, -apple-system, 'Segoe UI', sans-serif;
-    --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 }
 
 *, *::before, *::after {
@@ -173,77 +172,6 @@ body {
     max-width: 480px;
     margin-bottom: 28px;
     line-height: 1.6;
-}
-
-/* ---------- Hero terminal (boot sequence) ---------- */
-
-.hero-terminal {
-    direction: ltr;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    background: var(--surface-element);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-sm);
-    padding: 8px 14px;
-    margin-bottom: 18px;
-}
-
-.hero-terminal .prompt {
-    color: var(--text-secondary);
-    white-space: nowrap;
-}
-
-.hero-terminal .command {
-    display: inline-block;
-    overflow: hidden;
-    white-space: nowrap;
-    width: 0;
-    color: var(--asu-red);
-    border-inline-end: 2px solid var(--asu-red);
-    animation: type-command 0.6s steps(16, end) 0.15s forwards,
-               blink-caret 0.8s step-end 0.75s infinite;
-}
-
-@keyframes type-command {
-    to { width: 16ch; }
-}
-
-@keyframes blink-caret {
-    50% { border-color: transparent; }
-}
-
-.ar-title,
-.hero > .en-subtitle,
-.hero-tagline {
-    opacity: 0;
-    transform: translateY(10px);
-    animation: hero-rise 0.5s ease forwards;
-}
-
-.ar-title { animation-delay: 0.8s; }
-.hero > .en-subtitle { animation-delay: 0.88s; }
-.hero-tagline { animation-delay: 0.96s; }
-
-@keyframes hero-rise {
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .hero-terminal .command {
-        animation: none;
-        width: 16ch;
-        border-inline-end-color: transparent;
-    }
-    .ar-title,
-    .hero > .en-subtitle,
-    .hero-tagline {
-        animation: none;
-        opacity: 1;
-        transform: none;
-    }
 }
 
 /* ---------- Search card ---------- */
