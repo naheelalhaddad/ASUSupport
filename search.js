@@ -653,6 +653,7 @@ const card = document.getElementById('resultCard');
 const modal = document.getElementById('hoursModal');
 const pName = document.getElementById('pName');
 const pDetail = document.getElementById('pDetail');
+const pEmail = document.getElementById('pEmail');
 const modalContent = document.getElementById('modalHoursContent');
 
 let currentProf = null;
@@ -683,6 +684,16 @@ input.addEventListener('input', function() {
         pName.textContent = displayName;
         
         pDetail.textContent = `مكتب: ${result.office} | القسم: ${result.location}`;
+
+        if (result.teams_email) {
+            pEmail.textContent = `✉ ${result.teams_email}`;
+            pEmail.href = `mailto:${result.teams_email}`;
+            pEmail.style.display = "inline-block";
+        } else {
+            pEmail.textContent = "";
+            pEmail.removeAttribute("href");
+            pEmail.style.display = "none";
+        }
     } else {
         currentProf = null;
         card.style.display = "none";
@@ -694,13 +705,6 @@ function openModal() {
     
     let html = '';
     
-    if (currentProf.teams_email) {
-        html += `<p style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-            <strong>إيميل تيمز:</strong> <br>
-            <a href="mailto:${currentProf.teams_email}" style="color: #60a5fa; text-decoration: none;">${currentProf.teams_email}</a>
-        </p>`;
-    }
-
     if (currentProf.hours) {
         const days = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'];
         days.forEach(day => {

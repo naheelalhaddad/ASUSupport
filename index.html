@@ -10,12 +10,29 @@
     </script>
     <meta charset="UTF-8">
     <title>ASU Support - Home</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0c0c0d">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+        <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+        <symbol id="i-folder" viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
+        <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></symbol>
+        <symbol id="i-cap" viewBox="0 0 24 24"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></symbol>
+        <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+        <symbol id="i-home" viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+        <symbol id="i-grid" viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></symbol>
+        <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+        <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
+        <symbol id="i-phone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/></symbol>
+        <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></symbol>
+        <symbol id="i-ext" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></symbol>
+    </svg>
 
     <header class="navbar">
         <div class="logo-box">
@@ -24,62 +41,86 @@
         </div>
     </header>
 
-    <nav class="ribbon" aria-label="روابط سريعة">
-        <button type="button" class="ribbon-item" onclick="openPortalModal()">
-            <span class="ribbon-icon">🏛️</span>
-            <span>البوابات</span>
-        </button>
-        <a href="community.html" class="ribbon-item">
-            <span class="ribbon-icon">🤝</span>
-            <span>نقاط المجتمع</span>
-        </a>
-        <div class="ribbon-item ribbon-item--disabled" aria-disabled="true">
-            <span class="ribbon-icon">✉️</span>
-            <span>الإيميل الجامعي</span>
-            <span class="ribbon-badge">قريباً</span>
+    <nav class="tabbar" aria-label="التنقل الرئيسي">
+        <div class="tabbar-inner">
+            <a href="index.html" class="tab" aria-current="page">
+                <svg class="icon"><use href="#i-home"/></svg><span>الرئيسية</span>
+            </a>
+            <button type="button" class="tab" onclick="openPortalModal()">
+                <svg class="icon"><use href="#i-grid"/></svg><span>البوابات</span>
+            </button>
+            <a href="community.html" class="tab">
+                <svg class="icon"><use href="#i-users"/></svg><span>نقاط المجتمع</span>
+            </a>
         </div>
     </nav>
 
     <main class="hero">
         <h1 class="ar-title">دليلك الشامل لكلية الـ IT</h1>
-        <p class="en-subtitle">The Faculty of IT Guide, ASU Academy</p>
         <p class="hero-tagline">كل ما يخص طلاب تكنولوجيا المعلومات، في مكان واحد.</p>
 
-        <div class="search-section">
-            <div class="semester-note">
-                ⚠️ يتم تحديث الساعات المكتبية كل فصل دراسي. الفصل الصيفي لا يشمل ساعات مكتبية، يرجى التواصل مع الدكتور مباشرة.
-            </div>
-
+        <div class="search-field">
+            <svg class="icon"><use href="#i-search"/></svg>
             <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن مكتب أو إيميل الدكتور..." autocomplete="off">
+        </div>
+        <p class="semester-note">
+            <svg class="icon"><use href="#i-info"/></svg>
+            <span>يتم تحديث الساعات المكتبية كل فصل دراسي. الفصل الصيفي لا يشمل ساعات مكتبية، يرجى التواصل مع الدكتور مباشرة.</span>
+        </p>
 
-            <div id="resultCard">
-                <div class="prof-name" id="pName"></div>
-                <div class="prof-detail" id="pDetail"></div>
-                <button class="hours-btn" onclick="openModal()">الساعات المكتبية</button>
-            </div>
+        <div id="resultCard">
+            <div class="prof-name" id="pName"></div>
+            <div class="prof-detail" id="pDetail"></div>
+            <a class="prof-email" id="pEmail"></a>
+            <button class="hours-btn" onclick="openModal()">الساعات المكتبية</button>
         </div>
 
-        <div class="btn-grid">
-            <a href="https://asuedujo-my.sharepoint.com/shared?listurl=https%3A%2F%2Fasuedujo-my%2Esharepoint%2Ecom%2Fpersonal%2F202310256_students_asu_edu_jo%2FDocuments&id=%2Fpersonal%2F202310256_students_asu_edu_jo%2FDocuments%2FExamss%2FExams&viewid=21b36221-d9ad-45f8-a0ee-401a843c6753&csf=1&FolderCTID=0x0120001AEF25F2617F2344A5819AD0263D05E0" target="_blank" class="btn btn-primary">
-                <span>📁</span>
-                <span>بنك الأسئلة (OneDrive)</span>
+        <h2 class="section-label">الوصول السريع</h2>
+        <div class="tile-grid">
+            <a href="https://asuedujo-my.sharepoint.com/shared?listurl=https%3A%2F%2Fasuedujo-my%2Esharepoint%2Ecom%2Fpersonal%2F202310256_students_asu_edu_jo%2FDocuments&id=%2Fpersonal%2F202310256_students_asu_edu_jo%2FDocuments%2FExamss%2FExams&viewid=21b36221-d9ad-45f8-a0ee-401a843c6753&csf=1&FolderCTID=0x0120001AEF25F2617F2344A5819AD0263D05E0" target="_blank" rel="noopener" class="tile">
+                <span class="tile-icon"><svg class="icon"><use href="#i-folder"/></svg></span>
+                <span>
+                    <span class="tile-title">بنك الأسئلة</span><br>
+                    <span class="tile-sub">OneDrive <svg class="icon"><use href="#i-ext"/></svg></span>
+                </span>
             </a>
-
-            <a href="plans.html" class="btn">
-                <span>📄</span>
-                <span>الخطط الدراسية</span>
+            <a href="plans.html" class="tile">
+                <span class="tile-icon"><svg class="icon"><use href="#i-file"/></svg></span>
+                <span>
+                    <span class="tile-title">الخطط الدراسية</span><br>
+                    <span class="tile-sub">اختر تخصصك</span>
+                </span>
             </a>
-
-            <a href="registration.html" class="btn">
-                <span>🎓</span>
-                <span>خطوات التسجيل</span>
+            <a href="registration.html" class="tile">
+                <span class="tile-icon"><svg class="icon"><use href="#i-cap"/></svg></span>
+                <span>
+                    <span class="tile-title">خطوات التسجيل</span><br>
+                    <span class="tile-sub">خطوة بخطوة</span>
+                </span>
+            </a>
+            <a href="email.html" class="tile">
+                <span class="tile-icon"><svg class="icon"><use href="#i-mail"/></svg></span>
+                <span>
+                    <span class="tile-title">الإيميل الجامعي</span><br>
+                    <span class="tile-sub">عروض للطلاب</span>
+                </span>
             </a>
         </div>
     </main>
 
+    <footer class="footer">
+        <div class="footer-header">ASU Academy | Faculty of Information Technology</div>
+        <div class="admin-credits" dir="ltr">
+            <span>Assistant to the President:</span> Dr. Mohammad Hijjawi &nbsp;•&nbsp;
+            <span>Dean:</span> Dr. Yousef AlQasrawi &nbsp;•&nbsp;
+            <span>Supervisor:</span> Inst. Rawan Jarrar
+        </div>
+        <div class="copyright">© 2026 ASU Support Hub. Developed for the students.</div>
+    </footer>
+
     <div id="hoursModal" class="modal-overlay">
         <div class="modal-content">
-            <button class="close-btn" onclick="closeModal()">✕</button>
+            <button class="close-btn" onclick="closeModal()" aria-label="إغلاق">✕</button>
             <h2 class="modal-title">بيانات الدكتور</h2>
             <div id="modalHoursContent" style="text-align: right; direction: rtl;"></div>
         </div>
@@ -87,12 +128,12 @@
 
     <div id="portalModal" class="modal-overlay">
         <div class="modal-content">
-            <button class="close-btn" onclick="closePortalModal()">✕</button>
+            <button class="close-btn" onclick="closePortalModal()" aria-label="إغلاق">✕</button>
             <h2 class="modal-title">بوابات الجامعة</h2>
 
             <div class="portal-row">
                 <div class="portal-label">
-                    <span class="portal-icon">🏛️</span>
+                    <span class="portal-icon"><svg class="icon"><use href="#i-globe"/></svg></span>
                     <div>
                         <div class="portal-name">بوابة الطالب <span class="portal-name-en">MyASU Web</span></div>
                         <div class="portal-desc">ادخل للبوابة الإلكترونية أو قم بجولة افتراضية في المرافق</div>
@@ -106,39 +147,21 @@
 
             <div class="portal-row">
                 <div class="portal-label">
-                    <span class="portal-icon">📱</span>
+                    <span class="portal-icon"><svg class="icon"><use href="#i-phone"/></svg></span>
                     <div>
                         <div class="portal-name">تطبيق الجامعة <span class="portal-name-en">MyASU App</span></div>
                         <div class="portal-desc">روابط تحميل التطبيق الرسمي وشرح استخدامه بالتفصيل</div>
                     </div>
                 </div>
-                <div class="app-actions">
-                    <a href="https://drive.google.com/drive/folders/13AtCBkkqbdaAbhxQ9QYUGQB8i4GQiYZF?usp=sharing" target="_blank" rel="noopener" class="mini-btn mini-btn--primary mini-btn--block">🎥 شرح التطبيق</a>
-                    <div class="store-row">
-                        <a href="https://play.google.com/store/apps/details?id=com.kivocsa99.asu" target="_blank" rel="noopener" class="store-icon" title="Google Play">
-                            <img src="Google Play.jfif" alt="Google Play">
-                        </a>
-                        <a href="https://apps.apple.com/app/id6745174615" target="_blank" rel="noopener" class="store-icon" title="App Store">
-                            <img src="App store.jfif" alt="App Store">
-                        </a>
-                        <a href="https://apkpure.com/my-asu-app/com.kivocsa99.asu" target="_blank" rel="noopener" class="store-icon" title="APK">
-                            <img src="APK.png" alt="APK">
-                        </a>
-                    </div>
+                <a href="https://drive.google.com/drive/folders/13AtCBkkqbdaAbhxQ9QYUGQB8i4GQiYZF?usp=sharing" target="_blank" rel="noopener" class="mini-btn mini-btn--primary"><svg class="icon"><use href="#i-play"/></svg>شرح التطبيق</a>
+                <div class="store-row">
+                    <a href="https://play.google.com/store/apps/details?id=com.kivocsa99.asu" target="_blank" rel="noopener" class="store-icon" title="Google Play"><img src="Google Play.jfif" alt="Google Play"></a>
+                    <a href="https://apps.apple.com/app/id6745174615" target="_blank" rel="noopener" class="store-icon" title="App Store"><img src="App store.jfif" alt="App Store"></a>
+                    <a href="https://apkpure.com/my-asu-app/com.kivocsa99.asu" target="_blank" rel="noopener" class="store-icon" title="APK"><img src="APK.png" alt="APK"></a>
                 </div>
             </div>
         </div>
     </div>
-
-    <footer class="footer">
-        <div class="footer-header">ASU Academy | Faculty of Information Technology</div>
-        <div class="admin-credits" dir="ltr">
-            <span>Assistant to the President:</span> Dr. Mohammad Hijjawi &nbsp;•&nbsp;
-            <span>Dean:</span> Dr. Yousef AlQasrawi &nbsp;•&nbsp;
-            <span>Supervisor:</span> Inst. Rawan Jarrar
-        </div>
-        <div class="copyright">© 2026 ASU Support Hub. Developed for the students.</div>
-    </footer>
 
     <script src="search.js"></script>
     <script>
