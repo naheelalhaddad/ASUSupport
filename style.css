@@ -260,30 +260,37 @@ a { color: inherit; }
 .list-text p.desc { direction: rtl; text-align: right; font-size: .8rem; line-height: 1.55; margin-top: 2px; }
 
 .feedback-banner {
-    background-color: #f0f7ff;
-    border: 1px solid #cce3ff;
-    border-right: 4px solid #0066cc;
-    color: #1e293b;
-    padding: 12px 16px;
-    border-radius: 8px;
+    background-color: #1e1515; /* Dark reddish-tinted background */
+    border: 1px solid #4d1a1a; /* Subtle dark red border */
+    border-right: 4px solid #ff3333; /* Vibrant red accent bar on the right (for RTL) */
+    color: #f1f5f9; /* Light text for dark mode */
+    padding: 14px 18px;
+    border-radius: 10px;
     margin: 16px auto;
-    max-width: 800px;
+    max-width: 850px;
     font-size: 0.95rem;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.feedback-banner span {
+    color: #cbd5e1;
 }
 
 .feedback-banner a {
-    color: #0066cc;
+    color: #ff4d4d; /* Bright red link matching your icons */
     font-weight: bold;
     text-decoration: none;
     direction: ltr;
+    transition: color 0.2s ease;
 }
 
 .feedback-banner a:hover {
+    color: #ff1a1a;
     text-decoration: underline;
 }
 
