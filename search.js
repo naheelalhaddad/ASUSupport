@@ -1054,7 +1054,7 @@ const professors = [
     {
         "name": "أ. ندى علاء الدين عبدالفتاح",
         "name_en": "Nada Aladdin Albdalfattah",
-        "office": "1106",
+        "office": "1214",
         "location": "علم الحاسوب",
         "teams_email": "",
         "hours": {
