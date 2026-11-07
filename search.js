@@ -1090,8 +1090,35 @@ const modalContent = document.getElementById('modalHoursContent');
 
 let currentProf = null;
 
+function isEn() {
+    return window.I18N && window.I18N.lang() === 'en';
+}
+
 function normalizeText(text) {
     return text.replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي');
+}
+
+function renderProf() {
+    if (!currentProf) return;
+    const p = currentProf;
+
+    if (isEn()) {
+        pName.textContent = p.name_en || p.name;   // Arabic name when no English name exists
+        pDetail.textContent = `${I18N.ui('office')}: ${I18N.dept(p.office)} | ${I18N.ui('department')}: ${I18N.dept(p.location)}`;
+    } else {
+        pName.textContent = p.name_en ? `${p.name} | ${p.name_en}` : p.name;
+        pDetail.textContent = `مكتب: ${p.office} | القسم: ${p.location}`;
+    }
+
+    if (p.teams_email) {
+        pEmail.textContent = `✉ ${p.teams_email}`;
+        pEmail.href = `mailto:${p.teams_email}`;
+        pEmail.style.display = "inline-block";
+    } else {
+        pEmail.textContent = "";
+        pEmail.removeAttribute("href");
+        pEmail.style.display = "none";
+    }
 }
 
 input.addEventListener('input', function() {
@@ -1111,21 +1138,7 @@ input.addEventListener('input', function() {
     if (result) {
         currentProf = result;
         card.style.display = "block";
-        
-        const displayName = result.name_en ? `${result.name} | ${result.name_en}` : result.name;
-        pName.textContent = displayName;
-        
-        pDetail.textContent = `مكتب: ${result.office} | القسم: ${result.location}`;
-
-        if (result.teams_email) {
-            pEmail.textContent = `✉ ${result.teams_email}`;
-            pEmail.href = `mailto:${result.teams_email}`;
-            pEmail.style.display = "inline-block";
-        } else {
-            pEmail.textContent = "";
-            pEmail.removeAttribute("href");
-            pEmail.style.display = "none";
-        }
+        renderProf();
     } else {
         currentProf = null;
         card.style.display = "none";
@@ -1134,20 +1147,20 @@ input.addEventListener('input', function() {
 
 function openModal() {
     if (!currentProf) return;
-    
+
     let html = '';
-    
+
     if (currentProf.hours) {
         const days = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'];
         days.forEach(day => {
             if (currentProf.hours[day]) {
-                html += `<p style="margin: 10px 0; color: white;"><strong>${day}:</strong> <span style="color: #fca5a5;" dir="ltr">${currentProf.hours[day]}</span></p>`;
+                html += `<p style="margin: 10px 0; color: white;"><strong>${I18N.day(day)}:</strong> <span style="color: #fca5a5;" dir="ltr">${currentProf.hours[day]}</span></p>`;
             }
         });
     } else {
-        html += `<p style="color: #94a3b8; text-align: center;">الساعات المكتبية غير متوفرة حالياً.</p>`;
+        html += `<p style="color: #94a3b8; text-align: center;">${I18N.ui('noHours')}</p>`;
     }
-    
+
     modalContent.innerHTML = html;
     modal.style.display = "flex";
 }
@@ -1161,3 +1174,9 @@ window.onclick = function(event) {
         closeModal();
     }
 }
+
+// Re-render dynamic content when the language is switched
+window.addEventListener('asu:langchange', function() {
+    renderProf();
+    if (modal.style.display === 'flex') openModal();
+});

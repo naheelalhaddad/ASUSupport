@@ -301,3 +301,37 @@ a { color: inherit; }
     .tile-grid { grid-template-columns: repeat(4, 1fr); }
     .info-grid { grid-template-columns: 1fr 1fr; }
 }
+
+
+/* ---------- Language switcher ---------- */
+html.i18n-pending body { visibility: hidden; }
+.nav-actions { display: flex; align-items: center; gap: 8px; }
+.lang-btn {
+    min-height: 38px; padding: 0 14px;
+    border: 1px solid var(--line-strong); border-radius: var(--r-s);
+    background: var(--surface); color: var(--ink);
+    font: 600 .85rem var(--font); cursor: pointer; white-space: nowrap;
+}
+.lang-btn:hover { border-color: var(--red); }
+.lang-btn:active { background: var(--bg); }
+
+/* English mode: hide the built-in English sub-labels (the main text is already English) */
+html[lang="en"] .en-subtitle,
+html[lang="en"] .step-note,
+html[lang="en"] .section-title p,
+html[lang="en"] .list-text p:not(.desc) { display: none; }
+
+/* English mode: flip every physical left/right rule written for RTL */
+html[dir="ltr"] .modal-content { text-align: left; }
+html[dir="ltr"] #modalHoursContent { text-align: left !important; direction: ltr !important; }
+html[dir="ltr"] .close-btn { left: auto; right: 14px; }
+html[dir="ltr"] .prof-email { text-align: left; }
+html[dir="ltr"] .list-text p.desc { direction: ltr; text-align: left; }
+html[dir="ltr"] .timeline::before { right: auto; left: 9px; }
+html[dir="ltr"] .timeline-item { padding: 0 0 20px 36px; }
+html[dir="ltr"] .timeline-item:last-child { padding-bottom: 0; }
+html[dir="ltr"] .timeline-item::before { right: auto; left: 2px; }
+html[dir="ltr"] .info-note { border-right: 0; border-left: 3px solid var(--red); }
+html[dir="ltr"] .info-note--warning { border-left-color: #c98a00; }
+html[dir="ltr"] .feedback-banner { border-right: 1px solid #4d1a1a; border-left: 4px solid #ff3333; }
+html[dir="ltr"] .nav-back .icon { transform: scaleX(-1); }
