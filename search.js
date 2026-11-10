@@ -25,7 +25,7 @@ const professors = [
     },
     {
         "name": "د. عصمت الضمور",
-        "name_en": "",
+        "name_en": "Dr. Esmat Aldmour",
         "office": "1206",
         "location": "علم الحاسوب",
         "teams_email": "",
@@ -189,7 +189,13 @@ const professors = [
         "office": "21G08",
         "location": "الواقع الرقمي وتطوير الالعاب",
         "teams_email": "s_murad@asu.edu.jo",
-        "hours": null
+        "hours": {
+            "الأحد": "12:00 - 1:00",
+            "الإثنين": "9:00 - 10:00",
+            "الثلاثاء": "1:00 - 2:00",
+            "الأربعاء": "12:00 - 1:00",
+            "الخميس": null
+        }
     },
     {
         "name": "د. وسام العباسي",
@@ -235,7 +241,7 @@ const professors = [
     },
     {
         "name": "د. محمود بني عطا",
-        "name_en": "",
+        "name_en": "Mahmoud Bani Ata",
         "office": "1B10",
         "location": "علم الحاسوب",
         "teams_email": "",
@@ -283,7 +289,13 @@ const professors = [
         "office": "21G14",
         "location": "علم الحاسوب",
         "teams_email": "a_alanaqreh@asu.edu.jo",
-        "hours": null
+        "hours": {
+            "الأحد": "10:30 - 12:30",
+            "الإثنين": "11:00 - 12:30",
+            "الثلاثاء": "9:00 - 11:00",
+            "الأربعاء": "2:00 - 4:00",
+            "الخميس": null
+        }
     },
     {
         "name": "د. براء نزال",
@@ -332,7 +344,7 @@ const professors = [
             "الإثنين": "12:00 - 1:00",
             "الثلاثاء": "12:00 - 1:00",
             "الأربعاء": "12:00 - 2:00",
-            "الخميس": null
+            "الخميس": "9:00 - 10:00"
         }
     },
     {
@@ -363,7 +375,13 @@ const professors = [
         "office": "21G07",
         "location": "الذكاء الاصطناعي",
         "teams_email": "l_benkhalifa@asu.edu.jo",
-        "hours": null
+        "hours": {
+            "الأحد": "8:30 - 9:30",
+            "الإثنين": "8:30 - 10:00",
+            "الثلاثاء": "11:00 - 12:30",
+            "الأربعاء": "10:00 - 2:00",
+            "الخميس": null
+        }
     },
     {
         "name": "د. معتصم جراح",
@@ -371,7 +389,13 @@ const professors = [
         "office": "21G14",
         "location": "الذكاء الاصطناعي",
         "teams_email": "m_jarrah@asu.edu.jo",
-        "hours": null
+        "hours": {
+            "الأحد": "12:00 - 2:00",
+            "الإثنين": "9:00 - 11:00",
+            "الثلاثاء": "12:00 - 2:00",
+            "الأربعاء": "10:00 - 12:00",
+            "الخميس": null
+        }
     },
     {
         "name": "د. فاطمة الحاج",
@@ -567,7 +591,13 @@ const professors = [
         "office": "1104",
         "location": "الذكاء الاصطناعي",
         "teams_email": "j_alwidian@asu.edu.jo",
-        "hours": null
+        "hours": {
+            "الأحد": "12:00 - 1:00",
+            "الإثنين": "10:00 - 11:00",
+            "الثلاثاء": "1:00 - 2:00",
+            "الأربعاء": "12:30 - 1:30",
+            "الخميس": "9:00 - 10:00"
+        }
     },
     {
         "name": "د.معاذ العلي",
@@ -643,7 +673,7 @@ const professors = [
     },
     {
         "name": "وليد الأحمد",
-        "name_en": "",
+        "name_en": "Waleed Al-Ahmad",
         "office": "1219",
         "location": "هندسة البرمجيات",
         "teams_email": "",
@@ -761,7 +791,13 @@ const professors = [
         "office": "21G07",
         "location": "الأمن السيبراني",
         "teams_email": "sa_hamdan@asu.edu.jo",
-        "hours": null
+        "hours": {
+            "الأحد": "8:00 - 10:00",
+            "الإثنين": "11:00 - 1:00",
+            "الثلاثاء": "12:00 - 2:00",
+            "الأربعاء": "10:00 - 11:00",
+            "الخميس": null
+        }
     },
     {
         "name": "أ. حنين الزعبي",
@@ -769,7 +805,13 @@ const professors = [
         "office": "21G08",
         "location": "علوم",
         "teams_email": "h_alzoubi@asu.edu.jo",
-        "hours": null
+        "hours": {
+            "الأحد": "12:00 - 2:00",
+            "الإثنين": "10:00 - 12:00",
+            "الثلاثاء": "1:00 - 2:00",
+            "الأربعاء": "2:00 - 3:00",
+            "الخميس": "8:00 - 12:00"
+        }
     },
     {
         "name": "أ. ملاك المشابقة",
@@ -785,7 +827,13 @@ const professors = [
         "office": "21G14",
         "location": "الأمن السيبراني",
         "teams_email": "a_altrad@asu.edu.jo",
-        "hours": null
+        "hours": {
+            "الأحد": "9:00 - 10:00, 11:00 - 12:00",
+            "الإثنين": "11:00 - 12:00, 2:00 - 3:00",
+            "الثلاثاء": "9:00 - 10:00, 11:00 - 12:00",
+            "الأربعاء": "2:00 - 3:00",
+            "الخميس": null
+        }
     },
     {
         "name": "د. محمد شكوكاني",
@@ -843,7 +891,13 @@ const professors = [
         "office": "21S17",
         "location": "هندسة البرمجيات/ علم حاسوب",
         "teams_email": "ra_jarrar@asu.edu.jo",
-        "hours": null
+        "hours": {
+            "الأحد": "10:00 - 11:00",
+            "الإثنين": "2:00 - 4:00",
+            "الثلاثاء": "11:00 - 12:00",
+            "الأربعاء": "9:00 - 10:00, 2:00 - 4:00",
+            "الخميس": "10:00 - 12:00, 2:00 - 3:00"
+        }
     },
     {
         "name": "د. أسراء أبو السعود",
@@ -901,7 +955,13 @@ const professors = [
         "office": "1209",
         "location": "الأمن السيبراني",
         "teams_email": "m_mizher@asu.edu.jo",
-        "hours": null
+        "hours": {
+            "الأحد": "12:00 - 1:00",
+            "الإثنين": "10:00 - 11:00",
+            "الثلاثاء": "12:30 - 1:30",
+            "الأربعاء": "12:30 - 1:30",
+            "الخميس": "10:30 - 12:30"
+        }
     },
     {
         "name": "د. جمانه الخوالية",
@@ -1078,8 +1138,22 @@ const professors = [
             "الأربعاء": "12:30 - 2:00",
             "الخميس": "10:30 - 12:00"
         }
+    },
+    {
+        "name": "م. رحمة المومني",
+        "name_en": "Rahmeh Almomani",
+        "office": "21S26",
+        "location": "هندسة الحاسوب",
+        "teams_email": "",
+        "hours": {
+            "الأحد": "12:00 - 2:00",
+            "الإثنين": null,
+            "الثلاثاء": "12:00 - 2:00",
+            "الأربعاء": "10:00 - 12:00",
+            "الخميس": null
+        }
     }
-];
+]
 const input = document.getElementById('searchInput');
 const card = document.getElementById('resultCard');
 const modal = document.getElementById('hoursModal');
