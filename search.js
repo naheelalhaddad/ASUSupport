@@ -1,6 +1,5 @@
 let professors = [];
 
-// 1. Fetch the JSON data from your new file
 fetch('professors.json')
     .then(response => {
         if (!response.ok) throw new Error("Network response was not ok");
@@ -14,7 +13,6 @@ fetch('professors.json')
         console.error("Failed to load professors:", error);
     });
 
-// 2. DOM Elements
 const input = document.getElementById('searchInput');
 const card = document.getElementById('resultCard');
 const modal = document.getElementById('hoursModal');
@@ -33,12 +31,11 @@ function normalizeText(text) {
     return text ? text.replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي') : '';
 }
 
-// 3. Render Professor Card
 function renderProf() {
     if (!currentProf) return;
     const p = currentProf;
 
-    // Handle Names and Details
+
     if (isEn() && window.I18N) {
         pName.textContent = p.name_en || p.name;
         // Fallback to text if I18N hasn't loaded a specific key
@@ -50,7 +47,7 @@ function renderProf() {
         pDetail.textContent = `مكتب: ${p.office || 'غير محدد'} | القسم: ${p.location || 'غير محدد'}`;
     }
 
-    // Handle Email Display Safely
+
     if (pEmail) {
         if (p.teams_email) {
             pEmail.textContent = `✉ ${p.teams_email}`;
@@ -64,7 +61,6 @@ function renderProf() {
     }
 }
 
-// 4. Search Bar Logic
 if (input) {
     input.addEventListener('input', function() {
         const query = normalizeText(input.value.toLowerCase().trim());
@@ -91,7 +87,6 @@ if (input) {
     });
 }
 
-// 5. Modal Logic
 function openModal() {
     if (!currentProf) return;
 
@@ -124,8 +119,39 @@ window.onclick = function(event) {
     }
 }
 
-// 6. Language Switch Listener
+
 window.addEventListener('asu:langchange', function() {
     renderProf();
     if (modal && modal.style.display === 'flex') openModal();
 });
+
+async function uploadImage(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const status = document.getElementById('uploadStatus');
+    status.textContent = "⏳ AI is processing the image... Please wait.";
+    status.style.display = "block";
+    status.style.color = "#fde047";
+
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+        try {
+            const response = await fetch('/.netlify/functions/extract', {
+                method: 'POST',
+                body: JSON.stringify({ imageBase64: reader.result })
+            });
+            
+            if (response.ok) {
+                status.textContent = "✅ Successfully sent to admin for approval!";
+                status.style.color = "#4ade80";
+            } else {
+                throw new Error("Failed");
+            }
+        } catch (err) {
+            status.textContent = "❌ Error processing image. Please try again.";
+            status.style.color = "#f87171";
+        }
+    };
+    reader.readAsDataURL(file);
+}
