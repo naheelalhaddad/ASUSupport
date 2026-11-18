@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Approval</title>
+    <link rel="stylesheet" href="style.css">
+    <style> body { padding: 40px; display: flex; flex-direction: column; align-items: center; } pre { background: #18181b; padding: 20px; border-radius: 12px; width: 100%; max-width: 500px; overflow-x: auto; color: #38bdf8;} input { width: 100%; max-width: 300px; margin: 20px 0; padding: 12px; text-align: center; border-radius: 8px; border: none; background: #27272a; color: white;} </style>
+</head>
+<body>
+    <h2 style="color:white;">Review AI Extraction</h2>
+    <pre id="dataPreview"></pre>
+    <input type="password" id="adminPwd" placeholder="Enter ADMIN_PASSWORD">
+    <button class="btn btn-primary" onclick="approveChanges()">Approve & Push to GitHub</button>
+    <p id="statusMsg" style="margin-top: 15px; color: #4ade80; display: none;"></p>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const dataStr = urlParams.get('data');
+        let newProfData = null;
+
+        if (dataStr) {
+            newProfData = JSON.parse(atob(dataStr));
+            document.getElementById('dataPreview').textContent = JSON.stringify(newProfData, null, 4);
+        }
+
+        async function approveChanges() {
+            const password = document.getElementById('adminPwd').value;
+            const status = document.getElementById('statusMsg');
+            status.style.display = "block";
+            status.style.color = "#fde047";
+            status.textContent = "Pushing to GitHub...";
+
+            const response = await fetch('/.netlify/functions/commit', {
+                method: 'POST',
+                body: JSON.stringify({ password, newProfData })
+            });
+
+            if (response.ok) {
+                status.style.color = "#4ade80";
+                status.textContent = "✅ Success! Changes committed. Netlify is rebuilding.";
+            } else {
+                status.style.color = "#f87171";
+                status.textContent = "❌ Failed. Wrong password or GitHub error.";
+            }
+        }
+    </script>
+</body>
+</html>
