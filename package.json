@@ -1,0 +1,7 @@
+{
+  "name": "asu-support",
+  "dependencies": {
+    "@google/generative-ai": "^0.2.1",
+    "resend": "^3.2.0"
+  }
+}
