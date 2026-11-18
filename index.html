@@ -65,13 +65,13 @@
             <svg class="icon"><use href="#i-search"/></svg>
             <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن مكتب أو إيميل الدكتور..." autocomplete="off">
         </div>
-        <div style="margin-bottom: 30px; text-align: center;">
-            <label for="hoursUpload" class="ribbon-link" style="cursor: pointer;">
-                <span>📸</span> تحديث الساعات (للطلاب)
-            </label>
-            <input type="file" id="hoursUpload" accept="image/*" style="display: none;" onchange="uploadImage(event)">
-            <div id="uploadStatus" style="color: #38bdf8; margin-top: 10px; font-size: 0.9rem; display: none;"></div>
-        </div>
+       <div style="margin: 20px auto 30px; text-align: center;">
+    <label for="hoursUpload" style="cursor: pointer; background: rgba(230, 57, 70, 0.05); border: 1px dashed #E63946; color: #E63946; padding: 12px 24px; border-radius: 8px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s ease;">
+        <span>📸</span> تحديث الساعات (رفع صورة)
+    </label>
+    <input type="file" id="hoursUpload" accept="image/*" style="display: none;" onchange="uploadImage(event)">
+    <div id="uploadStatus" style="margin-top: 12px; font-size: 0.9rem; display: none; font-weight: 600;"></div>
+</div>
         <p class="semester-note">
             <svg class="icon"><use href="#i-info"/></svg>
             <span>يتم تحديث الساعات المكتبية كل فصل دراسي. الفصل الصيفي لا يشمل ساعات مكتبية، يرجى التواصل مع الدكتور مباشرة.</span>
