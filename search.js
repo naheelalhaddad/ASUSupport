@@ -1,10 +1,19 @@
 let professors = [];
 
 fetch('professors.json')
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.json();
+    })
     .then(data => {
         professors = data;
+        console.log("Professors loaded successfully.");
+    })
+    .catch(error => {
+        console.error("Failed to load professors:", error);
     });
+
+const input = document.getElementById('searchInput');
 const input = document.getElementById('searchInput');
 const card = document.getElementById('resultCard');
 const modal = document.getElementById('hoursModal');
