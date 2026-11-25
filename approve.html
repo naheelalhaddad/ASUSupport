@@ -19,7 +19,9 @@
         let newProfData = null;
 
         if (dataStr) {
-            newProfData = JSON.parse(atob(dataStr));
+            const bytes = Uint8Array.from(atob(dataStr), c => c.charCodeAt(0));
+            const decodedText = new TextDecoder('utf-8').decode(bytes);
+            newProfData = JSON.parse(decodedText);
             document.getElementById('dataPreview').textContent = JSON.stringify(newProfData, null, 4);
         }
 
