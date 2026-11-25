@@ -125,6 +125,28 @@ window.addEventListener('asu:langchange', function() {
     if (modal && modal.style.display === 'flex') openModal();
 });
 
+function compressImage(file, maxWidth = 1600, quality = 0.85) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onerror = reject;
+        reader.onload = (e) => {
+            const img = new Image();
+            img.onerror = reject;
+            img.onload = () => {
+                const scale = Math.min(1, maxWidth / img.width);
+                const canvas = document.createElement('canvas');
+                canvas.width = img.width * scale;
+                canvas.height = img.height * scale;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                resolve(canvas.toDataURL('image/jpeg', quality));
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
 async function uploadImage(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -134,24 +156,28 @@ async function uploadImage(event) {
     status.style.display = "block";
     status.style.color = "#fde047";
 
-    const reader = new FileReader();
-    reader.onloadend = async () => {
-        try {
-            const response = await fetch('/.netlify/functions/extract', {
-                method: 'POST',
-                body: JSON.stringify({ imageBase64: reader.result })
-            });
-            
-            if (response.ok) {
-                status.textContent = "✅ Successfully sent to admin for approval!";
-                status.style.color = "#4ade80";
-            } else {
-                throw new Error("Failed");
-            }
-        } catch (err) {
-            status.textContent = "❌ Error processing image. Please try again.";
-            status.style.color = "#f87171";
+    try {
+        const compressedBase64 = await compressImage(file);
+        const response = await fetch('/.netlify/functions/extract', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ imageBase64: compressedBase64 })
+        });
+
+        const data = await response.json().catch(() => ({}));
+
+        if (response.ok) {
+            status.textContent = "✅ Successfully sent to admin for approval!";
+            status.style.color = "#4ade80";
+        } else {
+            throw new Error(data.error || `Server error (${response.status})`);
         }
-    };
-    reader.readAsDataURL(file);
+    } catch (err) {
+        console.error("Upload error:", err);
+        status.textContent = `❌ ${err.message}`;
+        status.style.color = "#f87171";
+    } finally {
+        event.target.value = "";
+    }
+}
 }
