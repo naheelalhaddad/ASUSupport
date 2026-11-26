@@ -180,4 +180,4 @@ async function uploadImage(event) {
         event.target.value = "";
     }
 }
-}
+
