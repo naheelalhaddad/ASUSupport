@@ -108,11 +108,10 @@ exports.handler = async (event) => {
             }
 
             professors[idx] = cleanEntry;
-            commitMessage = `Update ${cleanEntry.name} via AI Approval`;
+            commitMessage = `Update ${cleanEntry.name} via AI Approval [skip netlify]`;
         } else {
             professors.push(cleanEntry);
-            commitMessage = `Add ${cleanEntry.name} via AI Approval`;
-        }
+            commitMessage = `Add ${cleanEntry.name} via AI Approval [skip netlify]`;        }
 
         // 3. Commit updated JSON back to GitHub
         const newContent = Buffer.from(JSON.stringify(professors, null, 4) + "\n", "utf-8").toString("base64");

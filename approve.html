@@ -595,7 +595,7 @@
 
             // 2. Load current professors.json (bypass browser cache)
             try {
-                const res = await fetch(`professors.json?t=${Date.now()}`);
+               const res = await fetch(`https://raw.githubusercontent.com/naheelalhaddad/ASUSupport/main/professors.json?t=${Date.now()}`);
                 allProfessors = await res.json();
             } catch (err) {
                 document.getElementById('matchBadge').textContent = 'Failed to load professors.json';
