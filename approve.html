@@ -2,49 +2,686 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Approval</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Approval - ASU Support</title>
     <link rel="stylesheet" href="style.css">
-    <style> body { padding: 40px; display: flex; flex-direction: column; align-items: center; } pre { background: #18181b; padding: 20px; border-radius: 12px; width: 100%; max-width: 500px; overflow-x: auto; color: #38bdf8;} input { width: 100%; max-width: 300px; margin: 20px 0; padding: 12px; text-align: center; border-radius: 8px; border: none; background: #27272a; color: white;} </style>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            background: #0c0c0d;
+            color: #f4f4f5;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding: 24px 16px 60px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container { width: 100%; max-width: 720px; display: flex; flex-direction: column; gap: 18px; }
+        h1 { margin: 0; font-size: 1.45rem; text-align: center; }
+        .card {
+            background: #16161a;
+            border: 1px solid #27272a;
+            border-radius: 12px;
+            padding: 18px;
+        }
+        .card-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #a1a1aa;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin: 0 0 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .badge {
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+        .badge-update { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35); }
+        .badge-warn { background: rgba(250, 204, 21, 0.15); color: #fde047; border: 1px solid rgba(250, 204, 21, 0.35); }
+        .badge-new { background: rgba(74, 222, 128, 0.15); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.35); }
+
+        .mode-row { display: flex; gap: 10px; margin-bottom: 12px; }
+        .mode-btn {
+            flex: 1;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #3f3f46;
+            background: #1f1f23;
+            color: #d4d4d8;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .mode-btn.active {
+            background: rgba(230, 57, 70, 0.16);
+            border-color: #E63946;
+            color: #fff;
+        }
+        .suggestions { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 12px; }
+        .chip {
+            background: #27272a;
+            border: 1px solid #3f3f46;
+            color: #e4e4e7;
+            padding: 5px 10px;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            cursor: pointer;
+        }
+        .chip:hover { border-color: #38bdf8; color: #38bdf8; }
+        .chip-ai { border-color: rgba(250, 204, 21, 0.45); color: #fde047; }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+
+        .field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; }
+        .field label { font-size: 0.82rem; color: #a1a1aa; font-weight: 600; }
+        .field input, select {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #3f3f46;
+            background: #27272a;
+            color: #fff;
+            font-size: 0.92rem;
+        }
+        .field input:focus, select:focus { outline: none; border-color: #38bdf8; }
+        .field input.changed { border-color: #fde047; }
+        .hint {
+            font-size: 0.78rem;
+            color: #a1a1aa;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .hint button {
+            background: none;
+            border: 1px solid #3f3f46;
+            color: #38bdf8;
+            border-radius: 6px;
+            padding: 2px 8px;
+            font-size: 0.74rem;
+            cursor: pointer;
+        }
+        .hint button:hover { border-color: #38bdf8; }
+
+        .hour-row {
+            display: grid;
+            grid-template-columns: 95px 1fr;
+            gap: 10px;
+            align-items: start;
+            margin-bottom: 10px;
+        }
+        .day-label {
+            padding-top: 10px;
+            font-weight: 700;
+            color: #e4e4e7;
+            text-align: right;
+            direction: rtl;
+        }
+        .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+        .mini-action {
+            background: #27272a;
+            border: 1px solid #3f3f46;
+            color: #e4e4e7;
+            padding: 6px 10px;
+            border-radius: 7px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        .mini-action:hover { border-color: #E63946; color: #fff; }
+
+        .diff-box {
+            background: #0f0f12;
+            border: 1px solid #27272a;
+            border-radius: 8px;
+            padding: 12px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 0.84rem;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+        .diff-old { color: #f87171; text-decoration: line-through; }
+        .diff-new { color: #4ade80; font-weight: 600; }
+        .diff-none { color: #71717a; }
+
+        .submit-row { display: flex; flex-direction: column; gap: 12px; align-items: stretch; }
+        .approve-btn {
+            background: #E63946;
+            color: #fff;
+            border: none;
+            padding: 13px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .approve-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+        #statusMsg { text-align: center; font-weight: 600; margin: 4px 0 0; display: none; }
+    </style>
 </head>
 <body>
-    <h2 style="color:white;">Review AI Extraction</h2>
-    <pre id="dataPreview"></pre>
-    <input type="password" id="adminPwd" placeholder="Enter ADMIN_PASSWORD">
-    <button class="btn btn-primary" onclick="approveChanges()">Approve & Push to GitHub</button>
-    <p id="statusMsg" style="margin-top: 15px; color: #4ade80; display: none;"></p>
+    <div class="container">
+        <h1>Review, Edit & Merge Office Hours</h1>
+
+        <!-- 1. Match & Mode Selection -->
+        <div class="card">
+            <div class="card-title">
+                <span>1. Match Against Existing Faculty</span>
+                <span id="matchBadge" class="badge badge-warn">Loading professors.json...</span>
+            </div>
+
+            <div class="mode-row">
+                <button type="button" id="btnModeUpdate" class="mode-btn" onclick="setMode('update')">Update Existing Professor</button>
+                <button type="button" id="btnModeAdd" class="mode-btn" onclick="setMode('add')">+ Add as New Professor</button>
+            </div>
+
+            <div id="suggestionsWrap" style="display:none;">
+                <div style="font-size:0.8rem; color:#a1a1aa;">Closest matches in database (click to select):</div>
+                <div id="suggestions" class="suggestions"></div>
+            </div>
+
+            <div id="existingPicker" style="display:none;">
+                <div class="field">
+                    <label for="profSearch">Filter existing professors (Arabic or English)</label>
+                    <input type="text" id="profSearch" placeholder="Type to filter dropdown..." oninput="renderDropdown()">
+                </div>
+                <div class="field" style="margin-bottom:0;">
+                    <label for="profSelect">Target Professor in professors.json</label>
+                    <select id="profSelect" onchange="onSelectProfessor()"></select>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Editable Professor Details -->
+        <div class="card">
+            <div class="card-title">
+                <span>2. Professor Details</span>
+                <span style="font-size:0.78rem; color:#71717a; text-transform:none;">Edit any typos before approving</span>
+            </div>
+
+            <div class="grid-2">
+                <div class="field">
+                    <label for="fName">Arabic Name (name)</label>
+                    <input type="text" id="fName" dir="rtl" oninput="updateDiff()">
+                    <div id="hName" class="hint"></div>
+                </div>
+                <div class="field">
+                    <label for="fNameEn">English Name (name_en)</label>
+                    <input type="text" id="fNameEn" oninput="updateDiff()">
+                    <div id="hNameEn" class="hint"></div>
+                </div>
+                <div class="field">
+                    <label for="fOffice">Office (office)</label>
+                    <input type="text" id="fOffice" oninput="updateDiff()">
+                    <div id="hOffice" class="hint"></div>
+                </div>
+                <div class="field">
+                    <label for="fLocation">Department (location)</label>
+                    <input type="text" id="fLocation" dir="rtl" oninput="updateDiff()">
+                    <div id="hLocation" class="hint"></div>
+                </div>
+            </div>
+
+            <div class="field" style="margin-bottom:0;">
+                <label for="fEmail">Teams Email (teams_email)</label>
+                <input type="email" id="fEmail" placeholder="name@asu.edu.jo" oninput="updateDiff()">
+                <div id="hEmail" class="hint"></div>
+            </div>
+        </div>
+
+        <!-- 3. Editable Office Hours -->
+        <div class="card">
+            <div class="card-title">
+                <span>3. Office Hours</span>
+                <span style="font-size:0.78rem; color:#71717a; text-transform:none;">Leave blank for null</span>
+            </div>
+
+            <div class="toolbar">
+                <button type="button" class="mini-action" onclick="applyHoursStrategy('ai')">Use AI Hours</button>
+                <button type="button" class="mini-action" onclick="applyHoursStrategy('merge')">Merge (Keep existing where AI is blank)</button>
+                <button type="button" class="mini-action" onclick="applyHoursStrategy('existing')">Keep Existing Hours</button>
+                <button type="button" class="mini-action" onclick="applyHoursStrategy('clear')">Clear All Hours</button>
+            </div>
+
+            <div id="hoursEditor"></div>
+        </div>
+
+        <!-- 4. Live Diff & Commit -->
+        <div class="card">
+            <div class="card-title"><span>4. Changes Preview</span></div>
+            <div id="diffBox" class="diff-box"></div>
+        </div>
+
+        <div class="card submit-row">
+            <div class="field" style="margin-bottom:0;">
+                <label for="adminPwd">Admin Password</label>
+                <input type="password" id="adminPwd" placeholder="Enter ADMIN_PASSWORD">
+            </div>
+            <button id="approveBtn" class="approve-btn" onclick="approveChanges()">Approve & Push to GitHub</button>
+            <p id="statusMsg"></p>
+        </div>
+    </div>
 
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const dataStr = urlParams.get('data');
-        let newProfData = null;
+        const DAYS = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'];
 
-        if (dataStr) {
-            const bytes = Uint8Array.from(atob(dataStr), c => c.charCodeAt(0));
-            const decodedText = new TextDecoder('utf-8').decode(bytes);
-            newProfData = JSON.parse(decodedText);
-            document.getElementById('dataPreview').textContent = JSON.stringify(newProfData, null, 4);
+        let aiData = null;
+        let allProfessors = [];
+        let mode = 'add'; // 'update' or 'add'
+        let selectedIndex = -1;
+
+        function cleanVal(v) {
+            if (v === null || v === undefined) return '';
+            const s = String(v).trim();
+            return s.toLowerCase() === 'null' ? '' : s;
+        }
+
+        function normalizeName(str) {
+            if (!str) return '';
+            return String(str)
+                .trim()
+                .replace(/[\u064B-\u065F\u0670\u0640]/g, '')
+                .replace(/[أإآ]/g, 'ا')
+                .replace(/ة/g, 'ه')
+                .replace(/ى/g, 'ي')
+                .replace(/ڤ/g, 'ف')
+                .replace(/^(?:ا\.د\.?\s*|د\.\s*|د\s+|ا\.\s*|م\.\s*)+/, '')
+                .replace(/[()\-_]/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim()
+                .toLowerCase();
+        }
+
+        function stripAl(word) {
+            return word.length > 3 && word.startsWith('ال') ? word.slice(2) : word;
+        }
+
+        function levenshtein(a, b) {
+            const m = a.length, n = b.length;
+            if (!m) return n;
+            if (!n) return m;
+            const dp = Array.from({ length: m + 1 }, (_, i) => [i]);
+            for (let j = 1; j <= n; j++) dp[0][j] = j;
+            for (let i = 1; i <= m; i++) {
+                for (let j = 1; j <= n; j++) {
+                    const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+                    dp[i][j] = Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + cost);
+                }
+            }
+            return dp[m][n];
+        }
+
+        function similarity(aRaw, bRaw) {
+            const a = normalizeName(aRaw);
+            const b = normalizeName(bRaw);
+            if (!a || !b) return 0;
+            const aFlat = a.replace(/\s+/g, '');
+            const bFlat = b.replace(/\s+/g, '');
+            if (aFlat === bFlat) return 1;
+
+            const wholeSim = 1 - levenshtein(aFlat, bFlat) / Math.max(aFlat.length, bFlat.length);
+
+            const aTokens = a.split(' ').map(stripAl).filter(Boolean);
+            const bTokens = b.split(' ').map(stripAl).filter(Boolean);
+            let matched = 0;
+            for (const tA of aTokens) {
+                const hit = bTokens.some(tB => {
+                    if (tA === tB) return true;
+                    const maxLen = Math.max(tA.length, tB.length);
+                    return maxLen >= 4 && levenshtein(tA, tB) <= 1;
+                });
+                if (hit) matched++;
+            }
+            const tokenRecall = matched / Math.min(aTokens.length, bTokens.length);
+            const tokenScore = matched >= 2 ? (tokenRecall * 0.92) : (matched / Math.max(aTokens.length, bTokens.length)) * 0.7;
+
+            return Math.max(wholeSim, tokenScore);
+        }
+
+        function findBestMatches(queryName) {
+            return allProfessors
+                .map((prof, idx) => {
+                    const scoreAr = similarity(queryName, prof.name);
+                    const scoreEn = prof.name_en ? similarity(queryName, prof.name_en) : 0;
+                    return { idx, prof, score: Math.max(scoreAr, scoreEn) };
+                })
+                .filter(m => m.score >= 0.45)
+                .sort((a, b) => b.score - a.score)
+                .slice(0, 4);
+        }
+
+        function buildHoursEditor() {
+            const container = document.getElementById('hoursEditor');
+            container.innerHTML = DAYS.map((day, i) => `
+                <div class="hour-row">
+                    <div class="day-label">${day}</div>
+                    <div class="field" style="margin-bottom:0;">
+                        <input type="text" id="hour_${i}" dir="ltr" placeholder="e.g. 10:00 - 11:00 (or blank)" oninput="updateDiff()">
+                        <div id="hHour_${i}" class="hint"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderDropdown() {
+            const q = normalizeName(document.getElementById('profSearch').value);
+            const select = document.getElementById('profSelect');
+            const options = allProfessors
+                .map((p, idx) => ({ p, idx }))
+                .filter(({ p }) => {
+                    if (!q) return true;
+                    return normalizeName(p.name).includes(q) || (p.name_en && p.name_en.toLowerCase().includes(q));
+                });
+
+            select.innerHTML = options.map(({ p, idx }) => {
+                const label = `${p.name}${p.name_en ? ' | ' + p.name_en : ''} (${p.office || 'No office'})`;
+                return `<option value="${idx}" ${idx === selectedIndex ? 'selected' : ''}>${escapeHtml(label)}</option>`;
+            }).join('');
+
+            if (options.length > 0 && !options.some(o => o.idx === selectedIndex)) {
+                selectedIndex = options[0].idx;
+                select.value = String(selectedIndex);
+                populateForm();
+            }
+        }
+
+        function setMode(nextMode, idx = selectedIndex) {
+            mode = nextMode;
+            document.getElementById('btnModeUpdate').classList.toggle('active', mode === 'update');
+            document.getElementById('btnModeAdd').classList.toggle('active', mode === 'add');
+            document.getElementById('existingPicker').style.display = mode === 'update' ? 'block' : 'none';
+
+            if (mode === 'update') {
+                selectedIndex = idx >= 0 ? idx : 0;
+                renderDropdown();
+                document.getElementById('profSelect').value = String(selectedIndex);
+            }
+            populateForm();
+        }
+
+        function onSelectProfessor() {
+            selectedIndex = parseInt(document.getElementById('profSelect').value, 10);
+            populateForm();
+        }
+
+        function pickSuggestion(idx) {
+            document.getElementById('profSearch').value = '';
+            setMode('update', idx);
+        }
+
+        function setField(inputId, value) {
+            document.getElementById(inputId).value = value;
+            updateDiff();
+        }
+
+        function populateForm() {
+            const existing = (mode === 'update' && selectedIndex >= 0) ? allProfessors[selectedIndex] : null;
+            const aiName = cleanVal(aiData?.name);
+            const aiOffice = cleanVal(aiData?.office);
+            const aiLoc = cleanVal(aiData?.location);
+
+            const isMissing = (val) => !val || val === 'غير محدد';
+
+            // Keep vetted existing info by default; auto-fill office/location from AI if existing is blank
+            document.getElementById('fName').value = existing ? existing.name : aiName;
+            document.getElementById('fNameEn').value = existing ? (existing.name_en || '') : '';
+            document.getElementById('fEmail').value = existing ? (existing.teams_email || '') : '';
+            document.getElementById('fOffice').value = existing
+                ? (isMissing(existing.office) && aiOffice ? aiOffice : (existing.office || ''))
+                : aiOffice;
+            document.getElementById('fLocation').value = existing
+                ? (isMissing(existing.location) && !isMissing(aiLoc) ? aiLoc : (existing.location || ''))
+                : (aiLoc || 'غير محدد');
+
+            // Hints with 1-click buttons to swap between Existing and AI values
+            renderHint('hName', existing?.name, aiName, 'fName');
+            renderHint('hNameEn', existing?.name_en, '', 'fNameEn');
+            renderHint('hOffice', existing?.office, aiOffice, 'fOffice');
+            renderHint('hLocation', existing?.location, aiLoc, 'fLocation');
+            renderHint('hEmail', existing?.teams_email, '', 'fEmail');
+
+            applyHoursStrategy('ai');
+        }
+
+        function renderHint(hintId, existingVal, aiVal, inputId) {
+            const el = document.getElementById(hintId);
+            const parts = [];
+            if (mode === 'update' && existingVal !== undefined) {
+                parts.push(`<span>Current: <b>${escapeHtml(existingVal || 'empty')}</b></span>`);
+            }
+            if (aiVal && aiVal !== existingVal) {
+                const safeAi = aiVal.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+                parts.push(`<button type="button" onclick="setField('${inputId}', '${safeAi}')">Use AI: ${escapeHtml(aiVal)}</button>`);
+            }
+            if (mode === 'update' && existingVal && existingVal !== aiVal) {
+                const safeEx = existingVal.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+                parts.push(`<button type="button" onclick="setField('${inputId}', '${safeEx}')">Keep current</button>`);
+            }
+            el.innerHTML = parts.join(' ');
+        }
+
+        function applyHoursStrategy(strategy) {
+            const existing = (mode === 'update' && selectedIndex >= 0) ? allProfessors[selectedIndex] : null;
+            DAYS.forEach((day, i) => {
+                const exH = cleanVal(existing?.hours?.[day]);
+                const aiH = cleanVal(aiData?.hours?.[day]);
+                let val = '';
+
+                if (strategy === 'ai') val = aiH;
+                else if (strategy === 'existing') val = exH;
+                else if (strategy === 'merge') val = aiH || exH;
+                else if (strategy === 'clear') val = '';
+
+                document.getElementById(`hour_${i}`).value = val;
+
+                const hintEl = document.getElementById(`hHour_${i}`);
+                const btns = [];
+                if (mode === 'update') {
+                    btns.push(`<span>Current: <b dir="ltr">${escapeHtml(exH || 'null')}</b></span>`);
+                    if (exH !== aiH) {
+                        const safeEx = exH.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+                        const safeAi = aiH.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+                        btns.push(`<span>
+                            <button type="button" onclick="setField('hour_${i}', '${safeEx}')">Keep current</button>
+                            <button type="button" onclick="setField('hour_${i}', '${safeAi}')">Use AI</button>
+                        </span>`);
+                    }
+                }
+                hintEl.innerHTML = btns.join(' ');
+            });
+            updateDiff();
+        }
+
+        function getEditedData() {
+            const hoursObj = {};
+            let hasAnyHour = false;
+            DAYS.forEach((day, i) => {
+                const val = cleanVal(document.getElementById(`hour_${i}`).value);
+                hoursObj[day] = val || null;
+                if (val) hasAnyHour = true;
+            });
+
+            return {
+                name: document.getElementById('fName').value.trim(),
+                name_en: document.getElementById('fNameEn').value.trim(),
+                office: document.getElementById('fOffice').value.trim(),
+                location: document.getElementById('fLocation').value.trim() || 'غير محدد',
+                teams_email: document.getElementById('fEmail').value.trim(),
+                hours: hasAnyHour ? hoursObj : null
+            };
+        }
+
+        function updateDiff() {
+            const edited = getEditedData();
+            const existing = (mode === 'update' && selectedIndex >= 0) ? allProfessors[selectedIndex] : null;
+            const box = document.getElementById('diffBox');
+
+            if (!existing) {
+                box.innerHTML = `<div style="color:#4ade80; font-weight:700; margin-bottom:6px;">+ ADDING NEW ENTRY</div>` +
+                    `<pre style="margin:0; white-space:pre-wrap; color:#e4e4e7;">${escapeHtml(JSON.stringify(edited, null, 2))}</pre>`;
+                return;
+            }
+
+            const lines = [];
+            const fields = [
+                ['name', 'fName'],
+                ['name_en', 'fNameEn'],
+                ['office', 'fOffice'],
+                ['location', 'fLocation'],
+                ['teams_email', 'fEmail']
+            ];
+
+            fields.forEach(([key, inputId]) => {
+                const oldV = existing[key] || '';
+                const newV = edited[key] || '';
+                const changed = oldV !== newV;
+                document.getElementById(inputId).classList.toggle('changed', changed);
+                if (changed) {
+                    lines.push(`${key}: <span class="diff-old">${escapeHtml(oldV || 'empty')}</span> → <span class="diff-new">${escapeHtml(newV || 'empty')}</span>`);
+                }
+            });
+
+            DAYS.forEach((day, i) => {
+                const oldH = cleanVal(existing.hours?.[day]);
+                const newH = cleanVal(edited.hours?.[day]);
+                const changed = oldH !== newH;
+                document.getElementById(`hour_${i}`).classList.toggle('changed', changed);
+                if (changed) {
+                    lines.push(`${day}: <span class="diff-old">${escapeHtml(oldH || 'null')}</span> → <span class="diff-new">${escapeHtml(newH || 'null')}</span>`);
+                }
+            });
+
+            if (lines.length === 0) {
+                box.innerHTML = `<span class="diff-none">No changes compared to existing entry for ${escapeHtml(existing.name)}.</span>`;
+            } else {
+                box.innerHTML = `<div style="color:#38bdf8; font-weight:700; margin-bottom:6px;">UPDATING: ${escapeHtml(existing.name)}</div>` +
+                    lines.join('<br>');
+            }
+        }
+
+        function escapeHtml(str) {
+            return String(str).replace(/[&<>"']/g, c => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[c]));
+        }
+
+        async function init() {
+            buildHoursEditor();
+
+            // 1. Decode URL data safely
+            const urlParams = new URLSearchParams(window.location.search);
+            const dataStr = urlParams.get('data');
+            if (dataStr) {
+                try {
+                    const normalizedB64 = dataStr.replace(/ /g, '+');
+                    const bytes = Uint8Array.from(atob(normalizedB64), c => c.charCodeAt(0));
+                    aiData = JSON.parse(new TextDecoder('utf-8').decode(bytes));
+                } catch (err) {
+                    document.getElementById('matchBadge').textContent = 'Invalid approval link data';
+                    document.getElementById('matchBadge').className = 'badge badge-warn';
+                }
+            }
+
+            // 2. Load current professors.json (bypass browser cache)
+            try {
+                const res = await fetch(`professors.json?t=${Date.now()}`);
+                allProfessors = await res.json();
+            } catch (err) {
+                document.getElementById('matchBadge').textContent = 'Failed to load professors.json';
+                return;
+            }
+
+            // 3. Auto-match against existing faculty
+            const matches = aiData?.name ? findBestMatches(aiData.name) : [];
+            const badge = document.getElementById('matchBadge');
+
+            if (matches.length > 0) {
+                document.getElementById('suggestionsWrap').style.display = 'block';
+                document.getElementById('suggestions').innerHTML = matches.map(m =>
+                    `<button type="button" class="chip" onclick="pickSuggestion(${m.idx})">${escapeHtml(m.prof.name)} (${Math.round(m.score * 100)}%)</button>`
+                ).join('');
+            }
+
+            if (matches.length > 0 && matches[0].score >= 0.70) {
+                badge.textContent = `Existing Match (${Math.round(matches[0].score * 100)}%)`;
+                badge.className = 'badge badge-update';
+                setMode('update', matches[0].idx);
+            } else if (matches.length > 0) {
+                badge.textContent = `Possible Match (${Math.round(matches[0].score * 100)}%) — Verify`;
+                badge.className = 'badge badge-warn';
+                setMode('add');
+            } else {
+                badge.textContent = 'No Existing Match — New Entry';
+                badge.className = 'badge badge-new';
+                setMode('add');
+            }
         }
 
         async function approveChanges() {
             const password = document.getElementById('adminPwd').value;
             const status = document.getElementById('statusMsg');
-            status.style.display = "block";
-            status.style.color = "#fde047";
-            status.textContent = "Pushing to GitHub...";
+            const btn = document.getElementById('approveBtn');
+            const newProfData = getEditedData();
 
-            const response = await fetch('/.netlify/functions/commit', {
-                method: 'POST',
-                body: JSON.stringify({ password, newProfData })
-            });
+            if (!newProfData.name) {
+                status.style.display = 'block';
+                status.style.color = '#f87171';
+                status.textContent = '❌ Arabic name cannot be empty.';
+                return;
+            }
+            if (!password) {
+                status.style.display = 'block';
+                status.style.color = '#f87171';
+                status.textContent = '❌ Please enter ADMIN_PASSWORD.';
+                return;
+            }
 
-            if (response.ok) {
-                status.style.color = "#4ade80";
-                status.textContent = "✅ Success! Changes committed. Netlify is rebuilding.";
-            } else {
-                status.style.color = "#f87171";
-                status.textContent = "❌ Failed. Wrong password or GitHub error.";
+            btn.disabled = true;
+            status.style.display = 'block';
+            status.style.color = '#fde047';
+            status.textContent = '⏳ Pushing changes to GitHub...';
+
+            const payload = {
+                password,
+                mode,
+                targetIndex: mode === 'update' ? selectedIndex : -1,
+                expectedName: (mode === 'update' && selectedIndex >= 0) ? allProfessors[selectedIndex].name : null,
+                newProfData
+            };
+
+            try {
+                const response = await fetch('/.netlify/functions/commit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json().catch(() => ({}));
+
+                if (response.ok) {
+                    status.style.color = '#4ade80';
+                    status.textContent = `✅ ${result.message || 'Changes committed to GitHub! Netlify is rebuilding.'}`;
+                } else {
+                    throw new Error(result.error || `Server error (${response.status})`);
+                }
+            } catch (err) {
+                status.style.color = '#f87171';
+                status.textContent = `❌ ${err.message}`;
+                btn.disabled = false;
             }
         }
+
+        init();
     </script>
 </body>
 </html>
